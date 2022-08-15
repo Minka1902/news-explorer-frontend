@@ -1,0 +1,46 @@
+.nav-bar{
+	display: flex;
+	width: 239px;
+	height: inherit;
+	justify-content: space-between;
+	margin: 0 64px 0 617px;
+}
+
+.nav-bar__button_showen{
+	display: none;
+}
+
+.nav-bar__button{
+	background-color: transparent;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 24px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #FFFFFF;
+	border: none;
+	padding: 0;
+	height: inherit;
+}
+
+.nav-bar__button:hover{
+	border-bottom: 3px solid white;
+	cursor: pointer;
+}
+
+.nav-bar_reduced{
+	width: 44px;
+	margin: 0 64px 0 812px;
+}
+
+.nav-bar__button_theme_dark{
+	color: #1A1B22;
+}
+
+.nav-bar__button_theme_dark:hover{
+	border-bottom: 3px solid black;
+	cursor: pointer;	
+}
