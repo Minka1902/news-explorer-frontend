@@ -22,7 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({ savedArticles: [], name: 'Michael', _id: 'asdasdasd', email: 'minka.scharff@gmail.com', password: 'm19023012' });
   const [articlesArray, setArticlesArray] = React.useState([]);
 	const [showLessArray, setShowLessArray] = React.useState([]);
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
   const [selectedArticle, setSelectedArticle] = React.useState(null);
