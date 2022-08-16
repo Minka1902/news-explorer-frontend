@@ -36,7 +36,7 @@ export default function Article(props) {
   	return (
   	  <li className="article" id={article.url} onMouseUp={onArticleClick}>
 			<button className={`${isSaved?"article__delete":"article__saved"}${isSaved?'_active':''}`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} onClick={onSaveClicked} />
-			<h3 className={`article__save-massage ${isHovering?'article__save-massage_active':''}${isLoggedIn?'':'_not'}`}>{isSaved?'Remove from saved':'Sign in to save article'}</h3>
+			<h3 className={`article__save-massage ${isHovering?'article__save-massage_active':''}${isLoggedIn?'_not':''}`}>{isSaved?'Remove from saved':'Sign in to save article'}</h3>
 			{isSaved ? <h3 className='article__saved_keyword'>{article.keyword}</h3> : <></>}
 			<img className="article__image" src={article.urlToImage} alt={article.source.name} />
 			<div className="article__container">

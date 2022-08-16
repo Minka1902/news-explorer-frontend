@@ -23,7 +23,7 @@ export default function Main(props) {
 			{isPreloader? <Preloader />: <></>}
 			<ul className={`main__list${isPreloader?'_closed':''}`}>
 				{(isShowenMore?articles:showLessArray).map((article) => {
-					return <Article key={article.source._id} isLoggedIn={isLoggedIn} toggleSave={onArticleSave} article={article} />;
+					return <Article key={article.url} isLoggedIn={isLoggedIn} toggleSave={onArticleSave} article={article} />;
 				})}
 			</ul>
 			<button className={`main__button${isPreloader?'_closed':''}`} onClick={handleButtonClick}>{buttonText}</button>

@@ -1,7 +1,7 @@
 .search-bar{
 	display: flex;
 	flex-direction: column;
-	width: 1440px;
+	width: 100%;
 	z-index: 1;
 	margin-top: -506px;
 }
