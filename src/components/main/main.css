@@ -61,3 +61,26 @@
 	justify-content: center;
 	align-items: center;
 }
+
+@media screen and (min-width: 580px) and (max-width: 879.5px) {
+	.main__list {
+		grid-template-columns: 282px 282px;
+	}
+  }
+  
+@media screen and (max-width: 579.5px) {
+	.main__list {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	  padding: 0;
+	}
+	.main{
+		width: 100%;
+	}
+
+	.main__title{
+		margin: 0 0 58px 0;
+	}
+}

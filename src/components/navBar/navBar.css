@@ -10,6 +10,16 @@
 	display: none;
 }
 
+/* .nav-bar-menu{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #000000;
+	opacity: 0.5;
+} */
+
 .nav-bar__button{
 	background-color: transparent;
 	font-family: 'Roboto';

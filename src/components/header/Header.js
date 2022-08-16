@@ -9,6 +9,15 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 export default function Header(props) {
 	const { handleButtonClick, handleLogout, savedArticleClick, homeClick, isLoggedIn, theme } = props;
 	const currentUser = React.useContext(CurrentUserContext);
+	const [isNavBar, setIsNavBar] = React.useState(true);
+
+	React.useEffect(()=>{
+		if (window.innerWidth < 579.5) {
+			setIsNavBar(true);
+		} else {
+			setIsNavBar(false);
+		}
+	}, []);
 
 	return (
 		<div className={`header${theme?' header_theme_dark':''}`}>

@@ -6,6 +6,36 @@
 	justify-content: center;
 }
 
+@media screen and (max-width: 579.5px) {
+	.about-the-author{
+		flex-direction: column !important;
+		height: 752px !important;
+		justify-content: center;
+		align-items: center;
+	}
+	.about-the-author__image{
+		width: 272px !important;
+		height: 272px !important;
+	}
+
+	.about-the-author__title{
+		font-size: 30px !important;
+		line-height: 40px !important;
+		margin: 24px 0 16px 0 !important;
+	}
+
+	.about-the-author__text{
+		width: 288px !important;
+		margin: 0 auto !important;
+	}
+
+	.about-the-author__container{
+		margin: 0 !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+
 .about-the-author__container{
 	display: flex;
 	flex-direction: column;
@@ -22,7 +52,6 @@
 
 .about-the-author__text{
 	width: 600px;
-	height: min-content;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 400;

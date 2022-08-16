@@ -13,6 +13,40 @@
 	cursor: pointer;
 }
 
+/* @media screen and (min-width: 579.5px) and (min-width: 879.5px) {
+    .article {
+        width: 224px;
+		height: 420px;
+    }
+}
+
+@media screen and (max-width: 579.5px) {
+    .article {
+        width: 288px;
+		height: 440px;
+    }
+
+	.article__container{
+		width: 240px;
+		flex-direction: column;
+		align-items: left;
+		margin: 0 0 24px 0;
+	}
+
+	.article__text{
+		margin: 0 0 8px 0;
+	}
+
+	.article__date{
+
+	}
+
+	.article__image{
+		width: 288px;
+		height: 196px;
+	}
+} */
+
 .article__author{
 	font-family: 'Roboto Slab';
 	font-style: normal;
