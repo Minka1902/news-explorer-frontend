@@ -1,13 +1,40 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* TODO this page imports all the CSS files needed for the final project */
+/* ! vendor */
+@import url("./vendor/normalize.css");
+@import url("./vendor/font.css");
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* ! app */
+@import url('./components/app/app.css');
+
+/* ! article */
+@import url('./components/article/article.css');
+
+/* ! main */
+@import url('./components/main/main.css');
+
+/* ! preloader */
+@import url('./components/preloader/preloader.css');
+
+/* ! not-found */
+@import url('./components/notFound/notFound.css');
+
+/* ! saved-articles */
+@import url('./components/savedArticles/savedArticles.css');
+
+/* ! about the author */
+@import url('./components/aboutTheAuthor/aboutTheAuthor.css');
+
+/* ! footer */
+@import url('./components/footer/footer.css');
+
+/* ! header */
+@import url('./components/header/header.css');
+
+/* ! nav bar */
+@import url('./components/navBar/navBar.css');
+
+/* ! search bar */
+@import url('./components/searchBar/searchBar.css');
+
+/* ! popup */
+@import url("./components/popup/popup.css");

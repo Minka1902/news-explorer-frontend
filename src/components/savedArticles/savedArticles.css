@@ -1,0 +1,58 @@
+.saved-articles{
+	width: 1440px;
+}
+
+.saved-articles__by{
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 24px;
+	color: #1A1B22;
+	margin-left: 104px;
+}
+
+.saved-articles_zero{
+	border: 2px solid red;
+}
+
+.saved-articles__br_keywords{
+	font-weight: 700;
+}
+
+.saved-articles__list{
+	background: #F5F6F7;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 400px 400px 400px;
+	grid-template-rows: auto;
+	justify-content: center;
+	grid-gap: 16px;
+	margin-bottom: 64px;
+	padding: 62px;
+}
+
+.saved-articles__list_closed{
+	display: none !important;
+}
+
+.saved-articles__subtitle{
+	font-family: 'Roboto Slab';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 46px;
+	color: #1A1B22;
+	width: 530px;
+	margin-left: 104px;
+}
+
+.saved-articles__title{
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 24px;
+	color: rgba(26, 27, 34, 0.5);
+	margin: 120px 0 28px 104px;
+}
