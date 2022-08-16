@@ -230,7 +230,7 @@ function App() {
         </Route>
       </Switch>
 
-      {/* <Footer /> */}
+      <Footer />
     </CurrentUserContext.Provider>
   );
 }
