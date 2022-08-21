@@ -6,20 +6,6 @@
 	margin: 0 64px 0 617px;
 }
 
-/* .nav-bar__button_showen{
-	display: none;
-} */
-
-/* .nav-bar-menu{
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background: #000000;
-	opacity: 0.5;
-} */
-
 @media screen and (min-width: 704px) and (max-width: 1149.5px) {
 	.nav-bar{
 		margin: 0 16px 0 30%;
@@ -75,8 +61,6 @@
 	padding: 0;
 	height: inherit;
 }
-
-.nav-bar_
 
 .nav-bar__button:hover{
 	border-bottom: 3px solid white;

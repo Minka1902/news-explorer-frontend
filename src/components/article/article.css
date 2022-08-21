@@ -13,37 +13,6 @@
 	cursor: pointer;
 }
 
-@media screen and (min-width: 703.5px) and (max-width: 1149.5px) {
-    .article {
-        width: 224px !important;
-		height: 420px !important;
-    }
-
-	.article__title{
-		font-size: 22px !important;
-		line-height: 24px !important;
-		height: 48px !important;
-		margin-bottom: 10px !important;
-	}
-	
-	.article__container{
-		width: 192px !important;
-	}
-
-	.article__text{
-		margin: 0 0 8px 0 !important;
-	}
-
-	.article__image{
-		width: 224px !important;
-		height: 150px !important;
-	}
-
-	.article__author{
-		margin-bottom: 16px !important;
-	}
-}
-
 @media screen and (max-width: 703.5px) {
     .article {
         width: 288px;
@@ -82,8 +51,45 @@
 	}
 }
 
+@media screen and (min-width: 704px) and (max-width: 1149.5px) {
+    .article {
+        width: 224px !important;
+		height: 420px !important;
+    }
+
+	.article__title{
+		font-size: 22px !important;
+		line-height: 24px !important;
+		height: 48px !important;
+		margin-bottom: 10px !important;
+	}
+	
+	.article__container{
+		width: 192px !important;
+	}
+
+	.article__text{
+		margin: 0 0 8px 0 !important;
+	}
+
+	.article__image{
+		width: 224px !important;
+		height: 150px !important;
+	}
+
+	.article__author{
+		margin-bottom: 16px !important;
+	}
+}
+
+@media screen and (min-width: 1150px) and (max-width: 1231.5px) {
+	.article{
+		width: 370px !important;
+	}
+}
+
 .article__author{
-	font-family: 'Roboto Slab';
+	font-family: 'Roboto-slab';
 	font-style: normal;
 	font-weight: 700;
 	font-size: 16px;
@@ -112,7 +118,6 @@
 	display: flex;
 	align-items: center;
 	color: #B6BCBF;
-	text-transform: uppercase;
 	margin: 0 0 12px 0;
 }
 
@@ -190,7 +195,7 @@
 }
 
 .article__title{
-	font-family: 'Roboto Slab';
+	font-family: 'Roboto-slab';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 26px;

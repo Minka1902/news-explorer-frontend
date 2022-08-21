@@ -57,6 +57,13 @@
 	}
 }
 
+@media screen and (min-width: 1150px) and (max-width: 1231.5px) {
+	.saved-articles__list{
+		grid-template-columns: 370px 370px 370px !important;
+		padding: 0 !important;
+	}
+}
+
 .saved-articles__by{
 	font-family: 'Roboto';
 	font-style: normal;
@@ -67,11 +74,7 @@
 	margin-left: 104px;
 }
 
-.saved-articles_zero{
-	border: 2px solid red;
-}
-
-.saved-articles__br_keywords{
+.saved-articles__by_keywords{
 	font-weight: 700;
 }
 
@@ -92,7 +95,7 @@
 }
 
 .saved-articles__subtitle{
-	font-family: 'Roboto Slab';
+	font-family: 'Roboto-slab';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 40px;

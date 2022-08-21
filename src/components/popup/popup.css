@@ -21,7 +21,7 @@
     border-radius: 2px;
     border: none;
     padding: 0;
-    font-family: Inter, Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -133,7 +133,7 @@
     margin: 5px 0 13px 0;
     padding: 0;
     color: black;
-    font-family: Inter, Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
@@ -185,7 +185,7 @@
 
 .popup__input {
     width: 358px;
-    font-family: Inter, Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -224,7 +224,7 @@
 }
 
 .popup__text {
-    font-family: Inter, Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     color: white;
     font-style: normal;
     font-weight: normal;

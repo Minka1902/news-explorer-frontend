@@ -42,8 +42,8 @@ export default function Article(props) {
 			<div className="article__container">
 				<h3 className="article__date">{article.publishedAt}</h3>
 				<h2 className="article__title">{article.title}</h2>
-				<p className="article__text text-hiding">{article.content}</p>
-				<p className="article__author">{article.author?article.author:"No author found"}</p>
+				<p className="article__text">{article.content}</p>
+				<p className="article__author text-hiding">{article.author?article.author:"No author found"}</p>
 			</div>
 		</li>
   	);

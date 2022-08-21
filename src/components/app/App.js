@@ -226,8 +226,8 @@ function App() {
           <SignUpPopup
             isOpen={isSignUpPopupOpen}
             onClose={closeAllPopups}
-            linkText="Sign in"
-            buttonText="Sign in"
+            linkText="Sign up"
+            buttonText="Sign up"
             handleSwitchPopup={handleLoginClick}
           />
           <LoginPopup
