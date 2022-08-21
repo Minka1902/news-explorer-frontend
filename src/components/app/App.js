@@ -23,6 +23,7 @@ function App() {
   const [articlesArray, setArticlesArray] = React.useState([]);
 	const [showLessArray, setShowLessArray] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(true);
+  const [isResultsOpen, setIsResultsOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
   const [selectedArticle, setSelectedArticle] = React.useState(null);
@@ -57,7 +58,14 @@ function App() {
     newsApi
       .getInitialArticles()
       .then((data) => {
-        setArticlesArray(data.articles);
+        if(data.totalResults !== 0){
+          setArticlesArray(data.articles);
+          setIsResultsOpen(true);
+        } else {
+          setArticlesArray(data.articles);
+          setShowLessArray(data.articles);
+          setIsResultsOpen(false);
+        }
         // localStorage.setItem("user", JSON.stringify(user));
       })
       .catch((err) => setIsNotFound(true))
@@ -120,9 +128,11 @@ function App() {
         .then((data) => {
           if(data.totalResults !== 0){
             setArticlesArray(data.articles);
+            setIsResultsOpen(true);
           } else {
             setArticlesArray(data.articles);
             setShowLessArray(data.articles);
+            setIsResultsOpen(false);
           }
         })
         .finally(() => { setIsPreloader(false) });
@@ -189,22 +199,22 @@ function App() {
         </ProtectedRoute>
 
         <Route path="/">
-          <img className='app__image' src={searchBarImage} alt='phone in the hand of a woman' />
           <Header
             isLoggedIn={loggedIn}
             handleButtonClick={setIsLoginPopupOpen}
             handleLogout={handleLogout}
             savedArticleClick={savedArticleClick}
             homeClick={homeClick}
-          />
-          <SearchBar
-            onSubmit={handleSearch}
-          />
-          
+          >
+            <SearchBar
+              onSubmit={handleSearch}
+            />
+          </Header>
           {isNotFound ?
             <NotFound />
             :
             <Main
+              isOpen={isResultsOpen}
               isLoggedIn={loggedIn}
               onArticleSave={toggleSaveArticle}
               articles={articlesArray}

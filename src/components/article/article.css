@@ -13,39 +13,74 @@
 	cursor: pointer;
 }
 
-/* @media screen and (min-width: 579.5px) and (min-width: 879.5px) {
+@media screen and (min-width: 703.5px) and (max-width: 1149.5px) {
     .article {
-        width: 224px;
-		height: 420px;
+        width: 224px !important;
+		height: 420px !important;
     }
+
+	.article__title{
+		font-size: 22px !important;
+		line-height: 24px !important;
+		height: 48px !important;
+		margin-bottom: 10px !important;
+	}
+	
+	.article__container{
+		width: 192px !important;
+	}
+
+	.article__text{
+		margin: 0 0 8px 0 !important;
+	}
+
+	.article__image{
+		width: 224px !important;
+		height: 150px !important;
+	}
+
+	.article__author{
+		margin-bottom: 16px !important;
+	}
 }
 
-@media screen and (max-width: 579.5px) {
+@media screen and (max-width: 703.5px) {
     .article {
         width: 288px;
 		height: 440px;
     }
 
+	.article__title{
+		width: 275px !important;
+		font-size: 22px !important;
+		line-height: 24px !important;
+		height: 48px !important;
+	}
+
 	.article__container{
-		width: 240px;
+		width: 256px !important;
 		flex-direction: column;
 		align-items: left;
 		margin: 0 0 24px 0;
 	}
 
+	.article__author{
+		width: 256px !important;
+	}
+
 	.article__text{
-		margin: 0 0 8px 0;
+		margin: 0 0 8px 0 !important;
+		height: 66px !important;
 	}
 
 	.article__date{
-
+		margin: 0 0 10px 0 !important;
 	}
 
 	.article__image{
-		width: 288px;
-		height: 196px;
+		height: 196px !important;
 	}
-} */
+}
 
 .article__author{
 	font-family: 'Roboto Slab';
@@ -57,6 +92,7 @@
 	text-transform: uppercase;
 	color: #B6BCBF;
 	margin: 0;
+	overflow: hidden;
 }
 
 .article__container{
@@ -116,7 +152,7 @@
 }
 
 .article__image{
-	width: 400px;
+	width: 100%;
 	height: 272px;
 	margin: 0 0 20px 0;
 }
@@ -149,6 +185,8 @@
 	line-height: 22px;
 	color: #1A1B22;
 	margin: 0 0 18px 0;
+    height: 88px;
+	overflow: hidden;
 }
 
 .article__title{
@@ -159,6 +197,8 @@
 	line-height: 30px;
 	color: #1A1B22;
 	margin: 0 0 16px 0;
+    height: 60px;
+	overflow: hidden;
 }
 
 .article__saved_active{

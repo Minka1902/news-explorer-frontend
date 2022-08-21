@@ -12,8 +12,7 @@
 	text-align: center;
 	background: #FFFFFF;
 	color: #1A1B22;
-	padding: auto;
-	margin-bottom: 80px;
+	margin: 0 auto 80px;
 }
 
 .main__button:hover{
@@ -37,10 +36,6 @@
 	margin-bottom: 64px;
 }
 
-.main__list_closed{
-	display: none;
-}
-
 .main__title{
 	font-family: 'Roboto Slab';
 	font-style: normal;
@@ -49,38 +44,59 @@
 	line-height: 46px;
 	color: #1A1B22;
 	height: 46px;
-	margin: 80px 0 64px 104px;
+	width: 1232px;
+	margin: 80px auto 64px calc(50% - 600px);
 }
 
 .main{
 	width: 100%;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	position: relative;
 	background-color: #F5F6F7;
 	justify-content: center;
-	align-items: center;
 }
 
-@media screen and (min-width: 580px) and (max-width: 879.5px) {
+.main__opened{
+	display: flex;
+}
+
+@media screen and (min-width: 704px) and (max-width: 1149.5px) {
 	.main__list {
-		grid-template-columns: 282px 282px;
-	}
-  }
-  
-@media screen and (max-width: 579.5px) {
-	.main__list {
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: center;
-	  align-items: center;
-	  padding: 0;
-	}
-	.main{
-		width: 100%;
+		grid-template-columns: 224px 224px 224px;
+		grid-template-rows: 420px;
+		padding: 0;
 	}
 
 	.main__title{
-		margin: 0 0 58px 0;
+		width: 80% !important;
+		margin: 40px auto;
+	}
+}
+  
+@media screen and (max-width: 703.5px) {
+	.main__list {
+	  display: flex !important;
+	  flex-direction: column !important;
+	  justify-content: center !important;
+	  align-items: center !important;
+	  padding: 0 !important;
+	}
+
+	.main__title{
+		width: 256px !important;
+		margin: 40px auto !important;
+	}
+
+	.main{
+		width: 100% !important;
+	}
+
+	.main__title{
+		margin: 32px auto 0 auto !important;
+	}
+
+	.main__button{
+		margin-bottom: 16px;
 	}
 }

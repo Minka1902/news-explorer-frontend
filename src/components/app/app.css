@@ -21,19 +21,21 @@
 }
 
 
-@media screen and (max-width: 579.5px) {
+@media screen and (max-width: 703.5px) {
     .app__image{
         height: 536px;
+    }
+}
+
+@media screen and (max-width: 704px) and (max-width: 1149.5px) {
+    .app__image{
+        height: 400px !important;
     }
 }
 
 .app{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-
-.app__image{
-    z-index: -1;
-    width: 100%;
 }

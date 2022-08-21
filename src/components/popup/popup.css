@@ -102,7 +102,7 @@
     left: 100%;
 }
 
-@media screen and (max-width:579.5px) {
+@media screen and (max-width:703.5px) {
     .popup__close-button_image {
         size: 30px 30px;
     }

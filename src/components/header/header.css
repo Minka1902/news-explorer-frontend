@@ -1,26 +1,60 @@
 .header{
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 80px;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
 	border-bottom: rgba(196, 196, 196, 0.01) solid ;
 	box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
 	align-items: center;
+	justify-content: center;
 }
 
-@media screen and (max-width: 579.5px) {
+.h-sb__container{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	background-image: url('../../images/search-bar-image.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	margin: 0 auto;
+}
+
+.h-sb__container_no-background{
+	background-image: none;
+}
+
+@media screen and (max-width: 703.5px) {
+	.h-sb__container{
+		background-size: auto !important;
+	}
+
 	.header{
-		max-width: 579.5px !important;
-		justify-content: space-around !important;
+		height: 56px;
 	}
 
 	.header__logo{
 		width: 117px !important;
-		margin: 16px 0 16px 16px;
+		margin: 16px 0 16px 16px !important;
+	}
+
+	.header__button{
+		margin: auto 20px auto 0 !important;
+	}
+}
+
+@media screen and (min-width: 704px) and (max-width: 1149.5px) {
+	.header{
+		height: 66px;
+		padding: 0 40px;
+		box-sizing: border-box;
+	}
+
+	.header__logo{
+		margin-left: 0 !important;
+	}
+
+	.header__button{
+		margin: 0 !important;
 	}
 }
 
@@ -60,7 +94,12 @@
 	margin-right: 104px;
 	width: 112px;
 	height: 48px;
+	box-sizing: border-box;
 	justify-content: space-around;
+}
+
+.header__button_menu{
+	width: min-content;
 }
 
 .header__button_theme_dark{
