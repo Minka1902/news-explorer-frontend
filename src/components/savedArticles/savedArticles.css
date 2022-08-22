@@ -76,6 +76,7 @@
 
 .saved-articles__by_keywords{
 	font-weight: 700;
+	text-transform: capitalize;
 }
 
 .saved-articles__list{
@@ -95,7 +96,7 @@
 }
 
 .saved-articles__subtitle{
-	font-family: 'Roboto-slab';
+	font-family: 'Roboto Slab';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 40px;

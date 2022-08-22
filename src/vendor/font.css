@@ -59,7 +59,7 @@
   }
   
   @font-face {
-    font-family: 'Roboto-slab';
+    font-family: 'Roboto Slab';
     font-style: normal;
     font-weight: 400;
     src: url('./fonts/roboto-slab-400-regular.woff'); 
@@ -69,7 +69,7 @@
   }
   
   @font-face {
-    font-family: 'Roboto-slab-bold';
+    font-family: 'Roboto Slab Bold';
     font-style: normal;
     font-weight: 700;
     src: url('./fonts/roboto-slab-700.woff'); 

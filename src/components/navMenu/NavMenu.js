@@ -1,23 +1,34 @@
 import * as React from 'react';
-import CurrentUserContext from "../../contexts/CurrentUserContext";
-import signOutLogo from "../../images/sign-out-icon.svg";
-import signOutLogoThemeDark from "../../images/sign-out-icon-theme-dark.svg";
 
 export default function NavMenu(props) {
-	const { handleButtonClick, handleLogout, isLoggedIn, theme } = props;
-	const currentUser = React.useContext(CurrentUserContext);
+	const { isOpen, setIsOpen, isLoggedIn, homeClick, savedArticlesClick, children } = props;
+
+	const handleHomeClick = () =>{
+		homeClick();
+		setIsOpen(false);
+	}
+
+	const handleSavedArticlesClick = () =>{
+		savedArticlesClick();
+		setIsOpen(false);
+	}
 
 	return (
 		<>
-			{ isLoggedIn ?
-				<button className={`header__button${theme?' header__button_theme_dark':''}`} onClick={handleLogout}>
-					{currentUser.name}<img src={theme?signOutLogoThemeDark:signOutLogo} alt="Sign out icon" />
-				</button>	
-				: 
-				<button className={`header__button${theme?' header__button_theme_dark':''}`} onClick={handleButtonClick}>
-					Sign in
-				</button>
-			}
+			<div className={`nav-menu${isOpen?' nav-menu_opened':''}`}>
+				<div className="nav-menu__container">
+					<button className='nav-menu__button' onClick={handleHomeClick}>Home</button>
+					{ 
+					isLoggedIn ?
+					<button className='nav-menu__button' onClick={handleSavedArticlesClick}>Saved articles</button>
+					:
+					<></>	
+					}
+				</div>
+				{ children }
+			</div>
+
+			<div className={`overlay${isOpen?' nav-menu_opened':''}`}></div>
 		</>
 	);
   }

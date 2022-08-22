@@ -6,7 +6,7 @@ export default function SavedArticles(props) {
 	const currentUser = React.useContext(CurrentUserContext);
 	let savedArticles = currentUser.savedArticles;
 	const { onArticleSave } = props;
-	const [isSavedArticles, setIsSavedArticles] = React.useState(savedArticles.length > 0);
+	const [isSavedArticles] = React.useState(savedArticles.length > 0);
 	const keywordsArray = [];
 	let needToAdd = true;
 
@@ -47,16 +47,16 @@ export default function SavedArticles(props) {
 	}
 
 	return (
-		<div className="saved-articles">
+		<section className="saved-articles">
 			<h1 className='saved-articles__title'>Saved articles</h1>
-			<h1 className='saved-articles__subtitle'>{currentUser.name}, you have {savedArticles.length} saved articles</h1>
-			<h2 className='saved-articles__by'>By keywords: <span className='saved-articles__by_keywords'>{checkAuthors()}</span></h2>
+			<h2 className='saved-articles__subtitle'>{currentUser.name}, you have {savedArticles.length} saved articles</h2>
+			<p className='saved-articles__by'>By keywords: <span className='saved-articles__by_keywords'>{checkAuthors()}</span></p>
 			<ul className={`saved-articles__list${isSavedArticles?'':'_closed'}`}>
 				{savedArticles.map((article) => 
-					<Article key={article._id} toggleSave={onArticleSave} isSaved={true} isLoggedIn={true} article={article} />
+					<Article key={article._id} toggleSave={onArticleSave} isSaved={true} article={article} />
 				)}
 			</ul>
-	  	</div>
+	  	</section>
 	);
   }
   

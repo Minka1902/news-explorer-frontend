@@ -87,6 +87,10 @@
 	height: 24px;
 }
 
+.footer__icon:hover{
+	cursor: pointer;
+}
+
 .footer__link{
 	height: 22px;
 	width: min-content;

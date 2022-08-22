@@ -1,4 +1,4 @@
-import { newsApi, userApi } from '../../utils/api';
+import { newsApi } from '../../utils/api';
 import monthArray from '../../constants/constants';
 import * as React from 'react'
 import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
@@ -13,21 +13,21 @@ import Main from '../main/Main';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import SavedArticles from '../savedArticles/SavedArticles';
 import SearchBar from '../searchBar/SearchBar';
-import searchBarImage from '../../images/search-bar-image.png';
 import NotFound from '../notFound/NotFound';
 
 function App() {
-  const currentUserContext = React.useContext(CurrentUserContext);
+  // const currentUserContext = React.useContext(CurrentUserContext);
   const history = useHistory();
-  const [currentUser, setCurrentUser] = React.useState({ savedArticles: [], name: 'Michael', _id: 'asdasdasd', email: 'minka.scharff@gmail.com', password: 'm19023012' });
+  const [currentUser] = React.useState({ savedArticles: [], name: 'Michael', _id: 'asdasdasd', email: 'minka.scharff@gmail.com', password: 'm19023012' });
   const [articlesArray, setArticlesArray] = React.useState([]);
 	const [showLessArray, setShowLessArray] = React.useState([]);
+	const [isHomePage, setIsHomePage] = React.useState(true);
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [isResultsOpen, setIsResultsOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
-  const [selectedArticle, setSelectedArticle] = React.useState(null);
-  const [canDeleteCard, setCanDeleteCard] = React.useState(false);
+  const [, setSelectedArticle] = React.useState(null);
+  // const [canDeleteCard, setCanDeleteCard] = React.useState(false);
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('news');
@@ -42,11 +42,11 @@ function App() {
     setSelectedArticle(null);
   };
 
-  const handleLogin = (jwt) => {
-    setLoggedIn(true);
-    localStorage.setItem('token', jwt);
-    history.push("/signup");
-  }
+  // const handleLogin = (jwt) => {
+  //   setLoggedIn(true);
+  //   localStorage.setItem('token', jwt);
+  //   history.push("/signup");
+  // }
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -60,11 +60,9 @@ function App() {
       .then((data) => {
         if(data.totalResults !== 0){
           setArticlesArray(data.articles);
-          setIsResultsOpen(true);
         } else {
           setArticlesArray(data.articles);
           setShowLessArray(data.articles);
-          setIsResultsOpen(false);
         }
         // localStorage.setItem("user", JSON.stringify(user));
       })
@@ -92,34 +90,34 @@ function App() {
     return () => document.removeEventListener('click', closeByClick);
   });
 
-  const handleLoginSubmit = () => {
-    const inputEmail = document.getElementById('login-email-input').value;
-    const inputPassword = document.getElementById('login-password-input').value;
+  // const handleLoginSubmit = () => {
+  //   const inputEmail = document.getElementById('login-email-input').value;
+  //   const inputPassword = document.getElementById('login-password-input').value;
 
-  }
+  // }
 
-  const isAutoLogin = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth.checkToken(jwt)
-        .then(() => {
-          handleLogin(jwt);
-          history.push('/');
-        });
-    }
-  }
+  // const isAutoLogin = () => {
+  //   const jwt = localStorage.getItem('jwt');
+  //   if (jwt) {
+  //     auth.checkToken(jwt)
+  //       .then(() => {
+  //         handleLogin(jwt);
+  //         history.push('/');
+  //       });
+  //   }
+  // }
 
-  const onArticleDelete = (evt) => {
-    if (evt.target.parentElement.owner._id === currentUser._id) {
-      // TODO Delete card
-    } else {
-      setCanDeleteCard(true);
-    }
-  }
+  // const onArticleDelete = (evt) => {
+  //   if (evt.target.parentElement.owner._id === currentUser._id) {
+  //     // TODO Delete card
+  //   } else {
+  //     setCanDeleteCard(true);
+  //   }
+  // }
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const qInput = document.getElementById('search-bar-input');
+    let qInput = document.getElementById('search-bar-input');
     if (qInput && (qInput.value.length > 2)) {
       setIsPreloader(true);
       setQ(qInput.value);
@@ -155,10 +153,12 @@ function App() {
 
   const savedArticleClick = () => {
     history.push("/saved-articles");
+    setIsHomePage(false);
   }
 
   const homeClick = () => {
     history.push("/");
+    setIsHomePage(true);
   }
 
   const toggleSaveArticle = (evt) => {
@@ -187,11 +187,12 @@ function App() {
       <Switch>
         <ProtectedRoute exact path="/saved-articles" loggedIn={loggedIn}>
           <Header
+            isLoggedIn={loggedIn}
             handleLogout={handleLogout}
-            isLoggedIn={true}
-            savedArticleClick={savedArticleClick}
+            savedArticlesClick={savedArticleClick}
             homeClick={homeClick}
             theme={true}
+            isHomePage={isHomePage}
           />
           <SavedArticles 
             onArticleSave={toggleSaveArticle}
@@ -203,8 +204,9 @@ function App() {
             isLoggedIn={loggedIn}
             handleButtonClick={setIsLoginPopupOpen}
             handleLogout={handleLogout}
-            savedArticleClick={savedArticleClick}
+            savedArticlesClick={savedArticleClick}
             homeClick={homeClick}
+            isHomePage={isHomePage}
           >
             <SearchBar
               onSubmit={handleSearch}

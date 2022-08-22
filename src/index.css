@@ -33,6 +33,9 @@
 /* ! nav bar */
 @import url('./components/navBar/navBar.css');
 
+/* ! nav menu */
+@import url('./components/navMenu/navMenu.css');
+
 /* ! search bar */
 @import url('./components/searchBar/searchBar.css');
 

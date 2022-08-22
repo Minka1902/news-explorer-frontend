@@ -7,6 +7,7 @@
 	border-radius: 16px;
 	overflow: hidden;
 	align-items: center;
+	background-color: #FFFFFF;
 }
 
 .article:hover{
@@ -89,7 +90,7 @@
 }
 
 .article__author{
-	font-family: 'Roboto-slab';
+	font-family: 'Roboto Slab';
 	font-style: normal;
 	font-weight: 700;
 	font-size: 16px;
@@ -195,7 +196,7 @@
 }
 
 .article__title{
-	font-family: 'Roboto-slab';
+	font-family: 'Roboto Slab';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 26px;
@@ -261,4 +262,5 @@
 	border-radius: 10px;
 	padding: 11px 22px;
 	margin: 0;
+	text-transform: capitalize;
 }

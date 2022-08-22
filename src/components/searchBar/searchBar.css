@@ -116,6 +116,10 @@
 	left: calc(100% - 168px);
 }
 
+.search-bar__button_active{
+	background: #2A65CC;
+}
+
 .search-bar__button:hover{
 	cursor: pointer;
 	background: #347EFF;
@@ -135,7 +139,7 @@
 }
 
 .search-bar__title{
-	font-family: 'Roboto-slab';
+	font-family: 'Roboto Slab';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 60px;

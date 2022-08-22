@@ -18,7 +18,7 @@ export default function Main(props) {
 	}
 	
 	return (
-		<section className={`main ${isOpen? 'main__opened' : ''}`}>
+		<main className={`main ${isOpen? 'main__opened' : ''}`}>
 			<h3 className="main__title">Search results</h3>
 			{isPreloader? <Preloader />: <></>}
 			<ul className={`main__list${isPreloader?'_closed':''}`}>
@@ -27,6 +27,6 @@ export default function Main(props) {
 				})}
 			</ul>
 			<button className={`main__button${isPreloader?'_closed':''}`} onClick={handleButtonClick}>{buttonText}</button>
-		</section>
+		</main>
 	);
   }

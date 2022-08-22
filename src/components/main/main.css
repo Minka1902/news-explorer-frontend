@@ -18,6 +18,7 @@
 .main__button:hover{
 	background: #E8E8E8;
 	opacity: 0.9;
+	cursor: pointer;
 	border-radius: 80px;
 }
 
