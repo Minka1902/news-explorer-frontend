@@ -94,7 +94,7 @@
 .footer__link{
 	height: 22px;
 	width: min-content;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 18px;
@@ -113,7 +113,7 @@
 }
 
 .footer__text{
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 16px;

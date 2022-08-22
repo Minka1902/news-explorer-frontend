@@ -65,7 +65,7 @@
 }
 
 .saved-articles__by{
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 18px;
@@ -96,7 +96,7 @@
 }
 
 .saved-articles__subtitle{
-	font-family: 'Roboto Slab';
+	font-family: 'Roboto Slab', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 40px;
@@ -107,7 +107,7 @@
 }
 
 .saved-articles__title{
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 18px;

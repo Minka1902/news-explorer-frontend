@@ -8,7 +8,7 @@
 
 .nav-bar__button{
 	background-color: transparent;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
@@ -29,7 +29,7 @@
 
 .nav-bar__button_active{
 	background-color: transparent;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
@@ -54,7 +54,7 @@
 
 .nav-bar__button_theme_dark{
 	background-color: transparent;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
@@ -75,7 +75,7 @@
 
 .nav-bar__button_active_theme_dark{
 	background-color: transparent;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;

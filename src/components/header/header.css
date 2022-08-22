@@ -68,7 +68,7 @@
 .header__button{
 	border: 1px solid #FFFFFF;
 	border-radius: 100px;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
@@ -94,7 +94,7 @@
 .header__button_modified{
 	border: 1px solid #FFFFFF;
 	border-radius: 100px;
-	font-family: 'Roboto';
+	font-family: 'Roboto', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
