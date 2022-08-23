@@ -7,11 +7,21 @@ export default function HeaderButton(props) {
 	const { handleButtonClick, handleLogout, isLoggedIn, theme, isNavMenu } = props;
 	const currentUser = React.useContext(CurrentUserContext);
 
+	const determineSrc = () => {
+		if(theme){
+			if(isNavMenu){
+				return signOutLogo;
+			}
+			return signOutLogoThemeDark;
+		}
+		return signOutLogo;
+	}
+
 	return (
 		<>
 			{ isLoggedIn ?
 				<button className={`header__button${theme?' header__button_theme_dark':''}${isNavMenu?'_modified':''}`} onClick={handleLogout}>
-					{currentUser.name}<img src={theme?signOutLogoThemeDark:signOutLogo} alt="Sign out icon" />
+					{currentUser.name}<img src={determineSrc()} alt="Sign out icon" />
 				</button>	
 				: 
 				<button className={`header__button${theme?' header__button_theme_dark':''}${isNavMenu?'_modified':''}`} onClick={handleButtonClick}>
