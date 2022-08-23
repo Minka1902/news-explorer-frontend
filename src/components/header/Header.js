@@ -20,10 +20,14 @@ export default function Header(props) {
 			setIsNavBar(false);
 		}
 	};
+
+	React.useEffect(() => {
+		checkWindowDimensions();
+	}, [isHomePage])
 	
-	 React.useEffect(() => {
-		 window.addEventListener('resize', checkWindowDimensions);
-	 }, []);
+	React.useEffect(() => {
+		window.addEventListener('resize', checkWindowDimensions);
+	}, []);
 
 	const toggleNavMenu = () => setIsNavMenuOpen(!isNavMenuOpen);
 
@@ -33,6 +37,10 @@ export default function Header(props) {
 				return headerCloseIcon;
 			} else {
 				return openMenuIconThemeDark;
+			}
+		} else {
+			if(isNavMenuOpen){
+				return headerCloseIcon;
 			}
 		}
 		return openMenuIcon;
@@ -57,7 +65,6 @@ export default function Header(props) {
 					</button>
 				}
 			</header>
-			<div className={`overlay${isNavMenuOpen?' overlay_opened':''}`}></div>
 			{children}
 		</div>
 	);

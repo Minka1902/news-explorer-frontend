@@ -12,6 +12,7 @@ export default function SavedArticles(props) {
 
 	function checkAuthors(){
 		if(savedArticles[0]){
+			// eslint-disable-next-line
 			savedArticles.map((article) => { 
 				for(let i = 0; i < keywordsArray.length; i++){
 					if(article.keyword === keywordsArray[i]){
@@ -23,7 +24,7 @@ export default function SavedArticles(props) {
 				} else {
 					needToAdd = true;
 				}
-			})
+			});
 			let finalText = '';
 			if(keywordsArray.length <= 3){
 				if(keywordsArray.length === 3){

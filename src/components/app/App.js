@@ -7,7 +7,7 @@ import AboutTheAuthor from '../aboutTheAuthor/AboutTheAuthor';
 import Footer from '../footer/Footer';
 import SignUpPopup from '../popup/SignUpPopup';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import * as auth from '../../utils/auth';
+// import * as auth from '../../utils/auth';
 import LoginPopup from '../popup/LoginPopup';
 import Main from '../main/Main';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
@@ -30,7 +30,7 @@ function App() {
   // const [canDeleteCard, setCanDeleteCard] = React.useState(false);
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
-  const [q, setQ] = React.useState('news');
+  const [q, setQ] = React.useState('israel');
 
   const handleSignUpClick = () => setIsSignUpPopupOpen(true);
 
@@ -60,6 +60,10 @@ function App() {
       .then((data) => {
         if(data.totalResults !== 0){
           setArticlesArray(data.articles);
+          currentUser.savedArticles[0] = data.articles[0];
+          currentUser.savedArticles[0].keyword = 'news';
+          currentUser.savedArticles[1] = data.articles[1];
+          currentUser.savedArticles[1].keyword = 'news';
         } else {
           setArticlesArray(data.articles);
           setShowLessArray(data.articles);
@@ -88,7 +92,7 @@ function App() {
 
     document.addEventListener('click', closeByClick);
     return () => document.removeEventListener('click', closeByClick);
-  });
+  }, []);
 
   // const handleLoginSubmit = () => {
   //   const inputEmail = document.getElementById('login-email-input').value;
@@ -151,7 +155,7 @@ function App() {
     }
   }, [articlesArray]);
 
-  const savedArticleClick = () => {
+  const savedArticlesClick = () => {
     history.push("/saved-articles");
     setIsHomePage(false);
   }
@@ -189,7 +193,7 @@ function App() {
           <Header
             isLoggedIn={loggedIn}
             handleLogout={handleLogout}
-            savedArticlesClick={savedArticleClick}
+            savedArticlesClick={savedArticlesClick}
             homeClick={homeClick}
             theme={true}
             isHomePage={isHomePage}
@@ -204,7 +208,7 @@ function App() {
             isLoggedIn={loggedIn}
             handleButtonClick={setIsLoginPopupOpen}
             handleLogout={handleLogout}
-            savedArticlesClick={savedArticleClick}
+            savedArticlesClick={savedArticlesClick}
             homeClick={homeClick}
             isHomePage={isHomePage}
           >

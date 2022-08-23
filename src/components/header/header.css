@@ -14,22 +14,6 @@
 	background-color: #1A1B22;
 }
 
-.overlay{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	opacity: 0.5;
-	display: none;
-	z-index: -1;
-}
-
-.overlay_opened{
-	display: flex;
-}
-
 .h-sb__container{
 	width: 100%;
 	display: flex;
@@ -119,6 +103,10 @@
 	color: #1A1B22;
 }
 
+.header__button_theme_dark_modified:hover{
+	cursor: pointer;
+}
+
 .header__button:hover{
 	cursor: pointer;
 }
@@ -140,6 +128,10 @@
 
 	.header__button{
 		margin: auto 20px auto 0 !important;
+	}
+
+	.header__button_theme_dark_modified{
+		margin-bottom: 24px !important;
 	}
 }
 
