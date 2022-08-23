@@ -81,6 +81,7 @@ function App() {
 
     document.addEventListener('keydown', closeByEscape);
     return () => document.removeEventListener('keydown', closeByEscape);
+    // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {

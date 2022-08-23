@@ -18,12 +18,12 @@
 		flex-direction: column !important;
 	}
 
-	.footer__container_links{
+	.footer__container-links{
 		flex-direction: column !important;
 		margin-left: 16px !important;
 	}
 
-	.footer__container_icons{
+	.footer__container-icons{
 		margin-right: 18px !important;
 	}
 
@@ -53,7 +53,7 @@
 		margin: auto 0 auto auto !important;
 	}
 
-	.footer__container_icons{
+	.footer__container-icons{
 		width: 60px !important;
 		margin: auto 26px auto 41px !important;
 	}
@@ -69,14 +69,14 @@
 	flex-direction: row;
 }
 
-.footer__container_icons{
+.footer__container-icons{
 	width: 73.89px;
 	display: flex;
 	margin: auto 104px auto 40px;
 	justify-content: space-between;
 }
 
-.footer__container_links{
+.footer__container-links{
 	margin: auto 0 auto auto;
 	display: flex;
 	flex-direction: row;

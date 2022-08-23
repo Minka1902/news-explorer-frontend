@@ -18,11 +18,11 @@ export default function Footer() {
   		<footer className="footer">
   			<p className="footer__text">&copy; 2021 Supersite, Powered by News API</p>
 			<div className='footer__container'>
-  				<div className="footer__container_links">
+  				<div className="footer__container-links">
 					  <a className="footer__link" href='/'>Home</a>
 					  <a className="footer__link" href="https://practicum.com/en-isr/" rel="noopener noreferrer" target="_blank">Practicum</a>
   				</div>
-  				<div className="footer__container_icons">
+  				<div className="footer__container-icons">
 					  <img className="footer__icon" src={GHLogo} alt="Git-Hub icon" onClick={githubClick} />
 					  <img className="footer__icon" src={FBLogo} alt="Facebook icon" onClick={facebookClick} />
   				</div>

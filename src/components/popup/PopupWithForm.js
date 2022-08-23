@@ -13,12 +13,12 @@ export default function PopupWithForm(props) {
 		<div className="popup__content">
 		  <button className="popup__close-button" type="button" aria-label="close" onClick={onClose}></button>
 		  <h2 className="popup__title">{title}</h2>
-		  <form onSubmit={onSubmit} className={`form form_${name}`} name={name}>
+		  <form onSubmit={onSubmit} className={`form form-${name}`} name={name}>
 			{children}
 			<button type="submit" className="popup__button">
 			  {buttonText}
 			</button>
-			<h3 className="popup__link">or <Link onClick={handleLinkClick} to={isOpen?"/signup":"/signin"} className="popup__link_blue">{linkText}</Link> </h3>
+			<h3 className="popup__link">or <Link onClick={handleLinkClick} to={isOpen?"/signup":"/signin"} className="popup__link_acticelue">{linkText}</Link> </h3>
 		  </form>
 		</div>
 	  </div>
