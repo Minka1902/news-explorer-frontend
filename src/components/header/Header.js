@@ -9,7 +9,7 @@ import openMenuIconThemeDark from '../../images/open-menu-theme-dark.svg';
 import headerCloseIcon from '../../images/header-close-icon.svg';
 
 export default function Header(props) {
-	const { handleButtonClick, isHomePage, handleLogout, handleNavBarClick, savedArticlesClick, homeClick, isLoggedIn, theme, children } = props;
+	const { handleButtonClick, isHomePage, toggleNoScroll, handleLogout, handleNavBarClick, savedArticlesClick, homeClick, isLoggedIn, theme, children } = props;
 	const [isNavBar, setIsNavBar] = React.useState(true);
 	const [isNavMenuOpen, setIsNavMenuOpen] = React.useState(false);
 
@@ -29,7 +29,10 @@ export default function Header(props) {
 		window.addEventListener('resize', checkWindowDimensions);
 	}, []);
 
-	const toggleNavMenu = () => setIsNavMenuOpen(!isNavMenuOpen);
+	const toggleNavMenu = () => {
+		setIsNavMenuOpen(!isNavMenuOpen);
+		toggleNoScroll();
+	}
 
 	const determineSrc = () => {
 		if(theme){
@@ -58,7 +61,7 @@ export default function Header(props) {
 					</NavMenu>
 				}
 				{ isNavBar?
-					<HeaderButton isLoggedIn={!isNavBar} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
+					<HeaderButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 					:
 					<button className={`header__button ${!isNavBar?'header__button_menu':''} ${theme?' header__logo_theme_dark':''}`} onClick={toggleNavMenu}>
 						<img src={determineSrc()} alt="Menu icon" />

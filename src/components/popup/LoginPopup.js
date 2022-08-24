@@ -19,7 +19,7 @@ export default function LoginPopup(props) {
   return (
     <div onMouseDown={onPopupClick}>
       <PopupWithForm onSubmit={handleSubmit} handleSwitchPopup={handleSwitchPopup} linkText={linkText} name="login" title="Sign in" isOpen={isOpen} onClose={onClose} buttonText={buttonText}>
-      <h3 className='popup__input_title'>Email</h3>
+      <h3 className='popup__input-title'>Email</h3>
           <input
             className="popup__input"
             placeholder="Enter email"
@@ -30,7 +30,7 @@ export default function LoginPopup(props) {
             minLength="2"
             maxLength="40"
           />
-         <h3 className='popup__input_title'>Password</h3>
+         <h3 className='popup__input-title'>Password</h3>
           <input
             className="popup__input"
             placeholder="Enter password"

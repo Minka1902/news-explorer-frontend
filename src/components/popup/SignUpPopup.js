@@ -25,7 +25,7 @@ export default function SignUpPopup(props) {
   return (
       <div onMouseDown={onPopupClick}>
         <PopupWithForm name="signup" title="Sign up" onSubmit={handleSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={onClose} linkText="Sign in" buttonText={buttonText}>
-          <h3 className='popup__input_title'>Email</h3>
+          <h3 className='popup__input-title'>Email</h3>
           <input
             className="popup__input"
             onChange={(event) => setEmail(event.target.value)}
@@ -37,7 +37,7 @@ export default function SignUpPopup(props) {
             minLength="2"
             maxLength="40"
           />
-          <h3 className='popup__input_title'>Password</h3>
+          <h3 className='popup__input-title'>Password</h3>
           <input
             className="popup__input"
             onChange={(event) => setPassword(event.target.value)}
@@ -49,7 +49,7 @@ export default function SignUpPopup(props) {
             minLength="2"
             maxLength="200"
           />
-          <h3 className='popup__input_title'>Username</h3>
+          <h3 className='popup__input-title'>Username</h3>
           <input
             className="popup__input"
             onChange={(event) => setName(event.target.value)}

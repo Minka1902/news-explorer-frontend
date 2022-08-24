@@ -26,15 +26,14 @@ section footer header div h1 h2 h3 h4 h5 h6 p a img span button li ul input form
 
 
 @media screen and (max-width: 703.5px) {
-    .app__image{
-        height: 536px;
-    }
 }
 
 @media screen and (max-width: 704px) and (max-width: 1149.5px) {
-    .app__image{
-        height: 400px !important;
-    }
+}
+
+.no-scroll{
+    overflow: hidden;
+    position: relative;
 }
 
 .app{

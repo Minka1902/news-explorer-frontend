@@ -2,6 +2,58 @@
 	width: 100%;
 }
 
+.saved-articles__by{
+	font-family: 'Roboto', Arial, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 24px;
+	color: #1A1B22;
+	margin: 0 0 54px 104px;
+}
+
+.saved-articles__by_keywords{
+	font-weight: 700;
+	text-transform: capitalize;
+}
+
+.saved-articles__list{
+	background: #F5F6F7;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 400px 400px 400px;
+	grid-template-rows: auto;
+	justify-content: center;
+	grid-gap: 16px;
+	margin-bottom: 64px;
+	padding: 62px;
+}
+
+.saved-articles__list_closed{
+	display: none !important;
+}
+
+.saved-articles__subtitle{
+	font-family: 'Roboto Slab', Arial, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 46px;
+	color: #1A1B22;
+	width: 530px;
+	margin: 0 0 30px 104px;
+}
+
+.saved-articles__title{
+	font-family: 'Roboto', Arial, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 24px;
+	color: rgba(26, 27, 34, 0.5);
+	margin: 40px 0 28px 104px;
+}
+
 @media screen and (max-width: 703.5px) {
 	.saved-articles__list{
 		display: flex !important;
@@ -14,7 +66,7 @@
 	.saved-articles__title{
 		max-width: 288px !important;
 		margin: 8px auto 16px auto !important;
-		font-size: 12px;
+		font-size: 12px !important;
 	}
 
 	.saved-articles__subtitle{
@@ -62,56 +114,4 @@
 		grid-template-columns: 370px 370px 370px !important;
 		padding: 0 !important;
 	}
-}
-
-.saved-articles__by{
-	font-family: 'Roboto', Arial, sans-serif;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 18px;
-	line-height: 24px;
-	color: #1A1B22;
-	margin-left: 104px;
-}
-
-.saved-articles__by_keywords{
-	font-weight: 700;
-	text-transform: capitalize;
-}
-
-.saved-articles__list{
-	background: #F5F6F7;
-	list-style: none;
-	display: grid;
-	grid-template-columns: 400px 400px 400px;
-	grid-template-rows: auto;
-	justify-content: center;
-	grid-gap: 16px;
-	margin-bottom: 64px;
-	padding: 62px;
-}
-
-.saved-articles__list_closed{
-	display: none !important;
-}
-
-.saved-articles__subtitle{
-	font-family: 'Roboto Slab', Arial, sans-serif;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 40px;
-	line-height: 46px;
-	color: #1A1B22;
-	width: 530px;
-	margin-left: 104px;
-}
-
-.saved-articles__title{
-	font-family: 'Roboto', Arial, sans-serif;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 18px;
-	line-height: 24px;
-	color: rgba(26, 27, 34, 0.5);
-	margin: 120px 0 28px 104px;
 }

@@ -16,7 +16,9 @@ import SearchBar from '../searchBar/SearchBar';
 import NotFound from '../notFound/NotFound';
 
 function App() {
-  // const currentUserContext = React.useContext(CurrentUserContext);
+  // const currentUserContext = React.useContext(CurrentUserContext);  
+	const safeDocument = typeof document !== 'undefined' ? document : {};
+	const html = safeDocument.documentElement;
   const history = useHistory();
   const [currentUser] = React.useState({ savedArticles: [], name: 'Michael', _id: 'asdasdasd', email: 'minka.scharff@gmail.com', password: 'm19023012' });
   const [articlesArray, setArticlesArray] = React.useState([]);
@@ -41,6 +43,8 @@ function App() {
     setIsLoginPopupOpen(false);
     setSelectedArticle(null);
   };
+
+  const toggleNoScroll = () => html.classList.toggle('no-scroll');
 
   // const handleLogin = (jwt) => {
   //   setLoggedIn(true);
@@ -156,14 +160,27 @@ function App() {
     }
   }, [articlesArray]);
 
+  const generateKey = (article) => {
+		let tempKey = '';
+		if(article){
+			tempKey += article.url;
+			tempKey += (Math.random(0, 9) * Math.random(0, 9)).toString();
+			tempKey += article.title;
+			tempKey += article.urlToImage;
+		}
+		return tempKey.replace(/ /g, '');
+	}
+
   const savedArticlesClick = () => {
     history.push("/saved-articles");
     setIsHomePage(false);
+    toggleNoScroll();
   }
 
   const homeClick = () => {
     history.push("/");
     setIsHomePage(true);
+    toggleNoScroll();
   }
 
   const toggleSaveArticle = (evt) => {
@@ -198,9 +215,11 @@ function App() {
             homeClick={homeClick}
             theme={true}
             isHomePage={isHomePage}
+            toggleNoScroll={toggleNoScroll}
           />
           <SavedArticles 
             onArticleSave={toggleSaveArticle}
+            generateKey={generateKey}
             />
         </ProtectedRoute>
 
@@ -212,6 +231,7 @@ function App() {
             savedArticlesClick={savedArticlesClick}
             homeClick={homeClick}
             isHomePage={isHomePage}
+            toggleNoScroll={toggleNoScroll}
           >
             <SearchBar
               onSubmit={handleSearch}
@@ -227,6 +247,7 @@ function App() {
               articles={articlesArray}
               showLessArray={showLessArray}
               isPreloader={isPreloader}
+              generateKey={generateKey}
             />
           }
           <AboutTheAuthor />

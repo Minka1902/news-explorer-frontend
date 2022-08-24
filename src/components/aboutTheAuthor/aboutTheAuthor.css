@@ -6,64 +6,6 @@
 	justify-content: center;
 }
 
-@media screen and (min-width: 704px) and (max-width: 1149.5px) {
-	.about-the-author{
-		height: 354px !important;
-	}
-	.about-the-author__image{
-		width: 232px !important;
-		height: 232px !important;
-	}
-
-	.about-the-author__title{
-		font-size: 30px !important;
-		line-height: 40px !important;
-		margin: 0 0 16px 0 !important;
-	}
-
-	.about-the-author__text{
-		margin-left: auto !important;
-		margin-right: auto !important;
-	}
-
-	.about-the-author__container{
-		width: 55.2% !important;
-		margin-left: 32px !important;
-		margin-top: 40px !important;
-	}
-}
-
-@media screen and (max-width: 703.5px) {
-	.about-the-author{
-		flex-direction: column !important;
-		height: 752px !important;
-		justify-content: center;
-		align-items: center;
-	}
-	.about-the-author__image{
-		width: 272px !important;
-		height: 272px !important;
-		margin-top: 0 !important;
-	}
-
-	.about-the-author__title{
-		font-size: 30px !important;
-		line-height: 40px !important;
-		margin: 24px 0 16px 0 !important;
-	}
-
-	.about-the-author__text{
-		width: 288px !important;
-		margin: 0 !important;
-	}
-
-	.about-the-author__container{
-		margin: 0 auto !important;
-		justify-content: center !important;
-		align-items: center !important;
-	}
-}
-
 .about-the-author__container{
 	display: flex;
 	flex-direction: column;
@@ -99,4 +41,62 @@
 	line-height: 46px;	
 	color: #1A1B22;
 	margin: 0 0 24px 0;
+}
+
+@media screen and (max-width: 703.5px) {
+	.about-the-author{
+		flex-direction: column !important;
+		height: 752px !important;
+		justify-content: center;
+		align-items: center;
+	}
+	.about-the-author__image{
+		width: 272px !important;
+		height: 272px !important;
+		margin-top: 0 !important;
+	}
+
+	.about-the-author__title{
+		font-size: 30px !important;
+		line-height: 40px !important;
+		margin: 24px 0 16px 0 !important;
+	}
+
+	.about-the-author__text{
+		width: 288px !important;
+		margin: 0 !important;
+	}
+
+	.about-the-author__container{
+		margin: 0 auto !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+
+@media screen and (min-width: 704px) and (max-width: 1149.5px) {
+	.about-the-author{
+		height: 354px !important;
+	}
+	.about-the-author__image{
+		width: 232px !important;
+		height: 232px !important;
+	}
+
+	.about-the-author__title{
+		font-size: 30px !important;
+		line-height: 40px !important;
+		margin: 0 0 16px 0 !important;
+	}
+
+	.about-the-author__text{
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	.about-the-author__container{
+		width: 55.2% !important;
+		margin-left: 32px !important;
+		margin-top: 40px !important;
+	}
 }

@@ -88,7 +88,7 @@
 	color: #FFFFFF;
 	background-color: transparent;
 	margin: 0 auto 24px auto;
-	width: 176px;
+	width: 90.5%;
 	height: 48px;
 	box-sizing: border-box;
 	justify-content: space-around;
@@ -130,8 +130,13 @@
 		margin: auto 20px auto 0 !important;
 	}
 
+	.header__button_menu{
+
+	}
+
 	.header__button_theme_dark_modified{
 		margin-bottom: 24px !important;
+		width: 90.5%;
 	}
 }
 
