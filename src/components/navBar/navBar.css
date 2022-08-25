@@ -97,7 +97,7 @@
 
 @media screen and (min-width: 704px) and (max-width: 1149.5px) {
 	.nav-bar{
-		margin: 0 16px 0 30%;
+		margin: 0 16px 0 auto;
 		width: min-content;
 	}
 

@@ -36,3 +36,23 @@
 	color: #B6BCBF;
 	margin: 0;
 }
+
+@media screen and (max-width: 703.5px) {
+	.not-found{
+		width: 100%;
+	}
+
+	.not-found__subtitle{
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 704px) and (max-width: 1149.5px) {
+	.not-found{
+		width: 100%;
+	}
+
+	.not-found__subtitle{
+		width: 100%;
+	}
+}

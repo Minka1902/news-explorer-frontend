@@ -203,7 +203,7 @@
     }
 }
 
-.popup__link{
+.popup__link-text{
 	font-family: 'Inter', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
@@ -214,11 +214,11 @@
 	margin: 0 0 28px 0;
 }
 
-.popup__link:hover{
+.popup__link-text:hover{
 	cursor: pointer;
 }
 
-.popup__link_active{
+.popup__link{
 	color: #2F71E5;
 	text-decoration: none;
 }

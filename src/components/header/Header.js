@@ -34,7 +34,7 @@ export default function Header(props) {
 		toggleNoScroll();
 	}
 
-	const determineSrc = () => {
+	const determineButtonSrc = () => {
 		if(theme){
 			if(isNavMenuOpen){
 				return headerCloseIcon;
@@ -49,22 +49,34 @@ export default function Header(props) {
 		return openMenuIcon;
 	}
 
+	const determineLogoSrc = () => {
+		if(theme){
+			if(isNavMenuOpen){
+				return logo;
+			} else {
+				return logoThemeDark;
+			}
+		} else {
+			return logo;
+		}
+	}
+
 	return (
 		<div className={`h-sb__container${theme? ' h-sb__container_no-background': ''}`}>
 			<header className={`header${theme?' header_theme_dark':''}${isNavMenuOpen?' header_darker':''}`}>
-				<img className={`header__logo ${theme?'header__logo_theme_dark':''}${isNavMenuOpen?'_not':''}`} src={theme?logoThemeDark:logo} alt="News explorer logo" />
+				<img className={`header__logo ${theme?'header__logo_theme_dark':''}${isNavMenuOpen?'_not':''}`} src={determineLogoSrc()} alt="News explorer logo" />
 				{ isNavBar ?
 					<NavBar isHomePage={isHomePage} handleNavBarClick={handleNavBarClick} theme={theme} savedArticlesClick={savedArticlesClick} homeClick={homeClick} isLoggedIn={isLoggedIn} />
 					:
 					<NavMenu isOpen={isNavMenuOpen} setIsOpen={setIsNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={savedArticlesClick} homeClick={homeClick}>
-						<HeaderButton isNavMenu={true} isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
+						<HeaderButton isNavMenu={true} toggleNavMenu={toggleNavMenu} isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 					</NavMenu>
 				}
 				{ isNavBar?
 					<HeaderButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 					:
 					<button className={`header__button ${!isNavBar?'header__button_menu':''} ${theme?' header__logo_theme_dark':''}`} onClick={toggleNavMenu}>
-						<img src={determineSrc()} alt="Menu icon" />
+						<img src={determineButtonSrc()} alt="Menu icon" />
 					</button>
 				}
 			</header>

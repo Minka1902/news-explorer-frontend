@@ -7,7 +7,7 @@ import AboutTheAuthor from '../aboutTheAuthor/AboutTheAuthor';
 import Footer from '../footer/Footer';
 import SignUpPopup from '../popup/SignUpPopup';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-// import * as auth from '../../utils/auth';
+import * as auth from '../../utils/auth';
 import LoginPopup from '../popup/LoginPopup';
 import Main from '../main/Main';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
@@ -42,15 +42,20 @@ function App() {
     setIsSignUpPopupOpen(false);
     setIsLoginPopupOpen(false);
     setSelectedArticle(null);
+    noScroll();
   };
 
   const toggleNoScroll = () => html.classList.toggle('no-scroll');
 
-  // const handleLogin = (jwt) => {
-  //   setLoggedIn(true);
-  //   localStorage.setItem('token', jwt);
-  //   history.push("/signup");
-  // }
+  // const scroll = () => html.classList.remove('no-scroll');
+
+  const noScroll = () => html.classList.add('no-scroll');
+
+  const handleLogin = (jwt) => {
+    setLoggedIn(true);
+    localStorage.setItem('token', jwt);
+    history.push("/signup");
+  }
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -102,7 +107,14 @@ function App() {
   // const handleLoginSubmit = () => {
   //   const inputEmail = document.getElementById('login-email-input').value;
   //   const inputPassword = document.getElementById('login-password-input').value;
+  //   auth
+  //     .authorize({inputPassword, inputEmail})
+  //     .then((data) => {
+  //       if(data.token){
 
+  //       }
+  //     })
+  //     .catch((err)=>{});
   // }
 
   // const isAutoLogin = () => {
