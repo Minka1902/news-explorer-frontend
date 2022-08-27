@@ -21,6 +21,7 @@
 	grid-column-gap: 16px;
 	width: min-content;
 	margin: 0 auto 64px;
+	padding: 0;
 }
 
 .main__title{

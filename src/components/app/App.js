@@ -7,7 +7,7 @@ import AboutTheAuthor from '../aboutTheAuthor/AboutTheAuthor';
 import Footer from '../footer/Footer';
 import SignUpPopup from '../popup/SignUpPopup';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import * as auth from '../../utils/auth';
+// import * as auth from '../../utils/auth';
 import LoginPopup from '../popup/LoginPopup';
 import Main from '../main/Main';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
@@ -51,11 +51,11 @@ function App() {
 
   const noScroll = () => html.classList.add('no-scroll');
 
-  const handleLogin = (jwt) => {
-    setLoggedIn(true);
-    localStorage.setItem('token', jwt);
-    history.push("/signup");
-  }
+  // const handleLogin = (jwt) => {
+  //   setLoggedIn(true);
+  //   localStorage.setItem('token', jwt);
+  //   history.push("/signup");
+  // }
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -102,7 +102,7 @@ function App() {
 
     document.addEventListener('click', closeByClick);
     return () => document.removeEventListener('click', closeByClick);
-  }, []);
+  });
 
   // const handleLoginSubmit = () => {
   //   const inputEmail = document.getElementById('login-email-input').value;
@@ -186,13 +186,17 @@ function App() {
   const savedArticlesClick = () => {
     history.push("/saved-articles");
     setIsHomePage(false);
-    toggleNoScroll();
+    if(window.innerWidth < 520){
+      toggleNoScroll();
+    }
   }
 
   const homeClick = () => {
     history.push("/");
     setIsHomePage(true);
-    toggleNoScroll();
+    if(window.innerWidth < 520){
+      toggleNoScroll();
+    }
   }
 
   const toggleSaveArticle = (evt) => {
