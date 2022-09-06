@@ -1,0 +1,8 @@
+{
+    "app_id": "michaelscharff-final-nseit",
+    "config_version": 20210101,
+    "name": "michaelscharff-final",
+    "location": "DE-FF",
+    "provider_region": "azure-westeurope",
+    "deployment_model": "LOCAL"
+}
