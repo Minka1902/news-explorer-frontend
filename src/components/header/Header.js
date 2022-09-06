@@ -31,7 +31,9 @@ export default function Header(props) {
 
 	const toggleNavMenu = () => {
 		setIsNavMenuOpen(!isNavMenuOpen);
-		toggleNoScroll();
+		if(window.innerWidth < 520){
+			toggleNoScroll();
+		}
 	}
 
 	const determineButtonSrc = () => {

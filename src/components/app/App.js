@@ -16,11 +16,12 @@ import SearchBar from '../searchBar/SearchBar';
 import NotFound from '../notFound/NotFound';
 
 function App() {
+  const tempUser = { savedArticles: [], name: 'Michael', _id: '211716956', email: 'minka.scharff@gmail.com', password: 'm19023012' };
   // const currentUserContext = React.useContext(CurrentUserContext);  
 	const safeDocument = typeof document !== 'undefined' ? document : {};
 	const html = safeDocument.documentElement;
   const history = useHistory();
-  const [currentUser] = React.useState({ savedArticles: [], name: 'Michael', _id: 'asdasdasd', email: 'minka.scharff@gmail.com', password: 'm19023012' });
+  const [currentUser, setCurrentUser] = React.useState(tempUser);
   const [articlesArray, setArticlesArray] = React.useState([]);
 	const [showLessArray, setShowLessArray] = React.useState([]);
 	const [isHomePage, setIsHomePage] = React.useState(true);
@@ -29,7 +30,6 @@ function App() {
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
   const [, setSelectedArticle] = React.useState(null);
-  // const [canDeleteCard, setCanDeleteCard] = React.useState(false);
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('israel');
@@ -42,7 +42,9 @@ function App() {
     setIsSignUpPopupOpen(false);
     setIsLoginPopupOpen(false);
     setSelectedArticle(null);
-    noScroll();
+    if(window.innerWidth < 520){
+      noScroll();
+    }
   };
 
   const toggleNoScroll = () => html.classList.toggle('no-scroll');
@@ -51,17 +53,12 @@ function App() {
 
   const noScroll = () => html.classList.add('no-scroll');
 
-  // const handleLogin = (jwt) => {
-  //   setLoggedIn(true);
-  //   localStorage.setItem('token', jwt);
-  //   history.push("/signup");
-  // }
-
   const handleLogout = () => {
     setLoggedIn(false);
+    setIsHomePage(true);
     localStorage.removeItem('jwt');
     history.push("/");
-  }
+  };
 
   React.useEffect(() => {
     newsApi
@@ -69,17 +66,18 @@ function App() {
       .then((data) => {
         if(data.totalResults !== 0){
           setArticlesArray(data.articles);
-          currentUser.savedArticles[0] = data.articles[0];
-          currentUser.savedArticles[0].keyword = 'news';
-          currentUser.savedArticles[1] = data.articles[1];
-          currentUser.savedArticles[1].keyword = 'news';
         } else {
           setArticlesArray(data.articles);
           setShowLessArray(data.articles);
         }
-        // localStorage.setItem("user", JSON.stringify(user));
       })
-      .catch((err) => setIsNotFound(true))
+      .catch((err) => {
+        if(err.message === 'Failed to fetch'){
+          if(isResultsOpen){
+            setIsNotFound(true);
+          }
+        }
+      })
       .finally(() => setIsPreloader(false));
 
     const closeByEscape = (evt) => {
@@ -104,37 +102,52 @@ function App() {
     return () => document.removeEventListener('click', closeByClick);
   });
 
-  // const handleLoginSubmit = () => {
-  //   const inputEmail = document.getElementById('login-email-input').value;
-  //   const inputPassword = document.getElementById('login-password-input').value;
-  //   auth
-  //     .authorize({inputPassword, inputEmail})
-  //     .then((data) => {
-  //       if(data.token){
+  const handleLoginSubmit = (evt) => {
+    evt.preventDefault();
+    const inputEmail = document.getElementById('login-email-input').value;
+    const inputPassword = document.getElementById('login-password-input').value;
 
-  //       }
-  //     })
-  //     .catch((err)=>{});
-  // }
+    // auth
+    //   .authorize({inputPassword, inputEmail})
+    //   .then((data) => {
+    //     if(data.token){
+    //       localStorage.setItem('jwt', data.token);
+    //       setLoggedIn(true);
+    //     }
+    //   })
+    //   .catch((err)=>{
+    //     return (err.message);
+    //   });
+
+    if(tempUser.email === inputEmail){
+      if(tempUser.password === inputPassword){
+        setLoggedIn(true);
+        setCurrentUser(tempUser);
+        closeAllPopups();
+      }
+    }
+  };
+
+  const handleSignupSubmit = (evt) => {
+    evt.preventDefault();
+    // TODO signup with auth and api
+
+    closeAllPopups();
+  };
 
   // const isAutoLogin = () => {
   //   const jwt = localStorage.getItem('jwt');
   //   if (jwt) {
   //     auth.checkToken(jwt)
   //       .then(() => {
-  //         handleLogin(jwt);
   //         history.push('/');
   //       });
   //   }
   // }
-
-  // const onArticleDelete = (evt) => {
-  //   if (evt.target.parentElement.owner._id === currentUser._id) {
-  //     // TODO Delete card
-  //   } else {
-  //     setCanDeleteCard(true);
-  //   }
-  // }
+  
+  // React.useEffect(() => {
+  //   isAutoLogin()
+  // }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -154,16 +167,17 @@ function App() {
             setIsResultsOpen(false);
           }
         })
+        .catch(() => setIsResultsOpen(true) )
         .finally(() => { setIsPreloader(false) });
     }
-  }
+  };
 
   const createDateText = (date) => {
     const day = Number(`${date[8]}${date[9]}`);
     const month = monthArray[Number(`${date[5]}${date[6]}`) - 1];
     const year = Number(`${date[0]}${date[1]}${date[2]}${date[3]}`);
     return `${month} ${day}, ${year}`;
-  }
+  };
 
   React.useEffect(() => {
     if(articlesArray[2]){
@@ -181,7 +195,7 @@ function App() {
 			tempKey += article.urlToImage;
 		}
 		return tempKey.replace(/ /g, '');
-	}
+	};
 
   const savedArticlesClick = () => {
     history.push("/saved-articles");
@@ -189,7 +203,7 @@ function App() {
     if(window.innerWidth < 520){
       toggleNoScroll();
     }
-  }
+  };
 
   const homeClick = () => {
     history.push("/");
@@ -197,7 +211,7 @@ function App() {
     if(window.innerWidth < 520){
       toggleNoScroll();
     }
-  }
+  };
 
   const toggleSaveArticle = (evt) => {
     const parent = evt.target.parentElement;
@@ -218,7 +232,7 @@ function App() {
       currentUser.savedArticles.splice(index, 1);
       // TODO remove article from finalDB
     }
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser} className="app">
@@ -270,6 +284,7 @@ function App() {
           <SignUpPopup
             isOpen={isSignUpPopupOpen}
             onClose={closeAllPopups}
+            onSubmit={handleSignupSubmit}
             linkText="Sign up"
             buttonText="Sign up"
             handleSwitchPopup={handleLoginClick}
@@ -280,6 +295,7 @@ function App() {
             linkText="Sign up"
             buttonText="Sign in"
             handleSwitchPopup={handleSignUpClick}
+            handleLogin={handleLoginSubmit}
           />
         </Route>
       </Switch>

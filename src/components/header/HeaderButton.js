@@ -19,7 +19,9 @@ export default function HeaderButton(props) {
 
 	const handleLogoutClick = () => {
 		handleLogout();
-		toggleNavMenu();
+		if(toggleNavMenu){
+			toggleNavMenu();
+		}
 	}
 
 	return (
@@ -27,7 +29,7 @@ export default function HeaderButton(props) {
 			{ isLoggedIn ?
 				<button className={`header__button${theme?' header__button_theme_dark':''}${isNavMenu?'_modified':''}`} onClick={handleLogoutClick}>
 					{currentUser.name}<img src={determineSrc()} alt="Sign out icon" />
-				</button>	
+				</button>
 				: 
 				<button className={`header__button${theme?' header__button_theme_dark':''}${isNavMenu?'_modified':''}`} onClick={handleButtonClick}>
 					Sign in
