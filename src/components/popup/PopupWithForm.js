@@ -2,18 +2,20 @@ import {Link} from 'react-router-dom';
 import * as React from 'react';
 
 export default function PopupWithForm(props) {
-	const { linkText, name, title, onSubmit, children, isValid, handleSwitchPopup, buttonText, isOpen, onClose } = props;
+	const { linkText, name, title, onSubmit, children, isValid, setIsValid, handleSwitchPopup, buttonText, isOpen, onClose } = props;
 
+	// ! Switching between popups
 	const handleLinkClick = () =>{
 		onClose();
 		handleSwitchPopup();
 	}
 
+	// ! Reseting the form
 	React.useEffect(() => {
 		const form = document.querySelector(`.form-${name}`);
 		form.reset();
 	}, [isOpen, name]);
-
+	
 	return (
 	  <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}>
 		<div className="popup__content">

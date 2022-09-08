@@ -25,7 +25,7 @@ function App() {
   const [articlesArray, setArticlesArray] = React.useState([]);
 	const [showLessArray, setShowLessArray] = React.useState([]);
 	const [isHomePage, setIsHomePage] = React.useState(true);
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isResultsOpen, setIsResultsOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
@@ -53,6 +53,8 @@ function App() {
 
   const noScroll = () => html.classList.add('no-scroll');
 
+  // ! Header handling
+  // * Handling the logout click
   const handleLogout = () => {
     setLoggedIn(false);
     setIsHomePage(true);
@@ -60,6 +62,7 @@ function App() {
     history.push("/");
   };
 
+  // * getting articles
   React.useEffect(() => {
     newsApi
       .getInitialArticles()
@@ -91,6 +94,8 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  // ! Adding event listener for the page
+  // ! Escape click
   React.useEffect(() => {
     const closeByClick = (evt) => {
       if(evt.target.classList.contains("popup")){
@@ -98,15 +103,12 @@ function App() {
       }
     }
 
-    document.addEventListener('click', closeByClick);
-    return () => document.removeEventListener('click', closeByClick);
+    document.addEventListener('mouseup', closeByClick);
+    return () => document.removeEventListener('mouseup', closeByClick);
   });
 
-  const handleLoginSubmit = (evt) => {
-    evt.preventDefault();
-    const inputEmail = document.getElementById('login-email-input').value;
-    const inputPassword = document.getElementById('login-password-input').value;
-
+  // * Handling login form submit
+  const handleLoginSubmit = (email, password) => {
     // auth
     //   .authorize({inputPassword, inputEmail})
     //   .then((data) => {
@@ -119,8 +121,8 @@ function App() {
     //     return (err.message);
     //   });
 
-    if(tempUser.email === inputEmail){
-      if(tempUser.password === inputPassword){
+    if(tempUser.email === email){
+      if(tempUser.password === password){
         setLoggedIn(true);
         setCurrentUser(tempUser);
         closeAllPopups();
@@ -128,6 +130,7 @@ function App() {
     }
   };
 
+  // * Handling signup form submit
   const handleSignupSubmit = (evt) => {
     evt.preventDefault();
     // TODO signup with auth and api
@@ -135,6 +138,7 @@ function App() {
     closeAllPopups();
   };
 
+  // * checing if you should auto-login
   // const isAutoLogin = () => {
   //   const jwt = localStorage.getItem('jwt');
   //   if (jwt) {
@@ -149,6 +153,7 @@ function App() {
   //   isAutoLogin()
   // }, []);
 
+  // * Handling the serch form submit
   const handleSearch = (e) => {
     e.preventDefault();
     let qInput = document.getElementById('search-bar-input');
@@ -167,11 +172,19 @@ function App() {
             setIsResultsOpen(false);
           }
         })
-        .catch(() => setIsResultsOpen(true) )
+        .catch((err) => {
+          if(err.message === 'Failed to fetch'){
+            if(isResultsOpen){
+              setIsNotFound(true);
+            }
+          }
+          setIsResultsOpen(true);
+        } )
         .finally(() => { setIsPreloader(false) });
     }
   };
 
+  // * Handling the article date creation
   const createDateText = (date) => {
     const day = Number(`${date[8]}${date[9]}`);
     const month = monthArray[Number(`${date[5]}${date[6]}`) - 1];
@@ -179,13 +192,20 @@ function App() {
     return `${month} ${day}, ${year}`;
   };
 
+  // * Setting the partial articles array
   React.useEffect(() => {
     if(articlesArray[2]){
       articlesArray.map((article)=> article.publishedAt = createDateText(article.publishedAt));
       setShowLessArray([articlesArray[0], articlesArray[1], articlesArray[2]]);
+    } else {
+      if(articlesArray[1]){
+        articlesArray.map((article)=> article.publishedAt = createDateText(article.publishedAt));
+        setShowLessArray([articlesArray[0], articlesArray[1]]);
+      }
     }
   }, [articlesArray]);
 
+  // * Generating key for article
   const generateKey = (article) => {
 		let tempKey = '';
 		if(article){
@@ -197,6 +217,8 @@ function App() {
 		return tempKey.replace(/ /g, '');
 	};
 
+  // ! Nav bar handling
+  // * Handling the logout click
   const savedArticlesClick = () => {
     history.push("/saved-articles");
     setIsHomePage(false);
@@ -205,6 +227,7 @@ function App() {
     }
   };
 
+  // * Handling home click
   const homeClick = () => {
     history.push("/");
     setIsHomePage(true);
@@ -213,7 +236,9 @@ function App() {
     }
   };
 
-  const toggleSaveArticle = (evt) => {
+  // ! Article handling
+  // * Handling save article click
+  const saveArticleClick = (evt) => {
     const parent = evt.target.parentElement;
     if (evt.target.classList.contains('article__saved')) {
       currentUser.savedArticles.push({
@@ -248,7 +273,7 @@ function App() {
             toggleNoScroll={toggleNoScroll}
           />
           <SavedArticles 
-            onArticleSave={toggleSaveArticle}
+            onArticleSave={saveArticleClick}
             generateKey={generateKey}
             />
         </ProtectedRoute>
@@ -273,7 +298,7 @@ function App() {
             <Main
               isOpen={isResultsOpen}
               isLoggedIn={loggedIn}
-              onArticleSave={toggleSaveArticle}
+              onArticleSave={saveArticleClick}
               articles={articlesArray}
               showLessArray={showLessArray}
               isPreloader={isPreloader}

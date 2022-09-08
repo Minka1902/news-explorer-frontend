@@ -120,23 +120,26 @@
 }
 
 .popup__error-massage {
-    margin: 5px 0 13px 0;
-    padding: 0;
-    color: black;
     font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 12px;
     line-height: 15px;
+    color: #FF0000;
+    margin: 0 0 13px 0;
+    padding: 0;
     visibility: hidden;
 }
 
-.popup__error-massage:nth-child(4) {
-    margin: 5px 0 18px 0;
-}
-
 .popup__error-massage_visible {
-    visibility: visible;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    margin: 0 0 13px 0;
+    padding: 0;
 }
 
 .popup__form {
@@ -184,7 +187,7 @@
     border: none;
     border-bottom: solid 1px rgba(0, 0, 0, 0.2);
     margin: 0;
-    margin-bottom: 31px;
+    margin-bottom: 3px;
 }
 
 @media screen and (max-width:500px) {
