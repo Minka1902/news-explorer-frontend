@@ -13,9 +13,8 @@ export default function SignUpPopup(props) {
   const [passwordErrorText, setPasswordErrorText] = React.useState('Password incorrect');
   const [isNameCorrect, setIsNameCorrect] = React.useState(true);
 
-  // ! Closing the popup
-  const closeClick = () => {
-    onClose();
+  // ! Reseting the popup when closing
+  React.useEffect(() => {
     setIsEmailCorrect(true);
     setIsPasswordCorrect(true);
     setIsNameCorrect(true);
@@ -23,13 +22,18 @@ export default function SignUpPopup(props) {
     setPassword('');
     setName('');
     setIsValid(false);
-  }
+    setShouldAddSSign(false);
+  }, [isOpen]);
 
   // ! Validating the email input
   const checkEmailValid = () => {
     const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (emailRegExp.test(email)) {
-      setIsEmailCorrect(true);
+      if (email.length >= 8) {
+        setIsEmailCorrect(true);
+      } else {
+        setIsEmailCorrect(false);
+      }
     } else {
       if (email === '') {
         setIsEmailCorrect(true);
@@ -44,10 +48,10 @@ export default function SignUpPopup(props) {
     const passwordRegExp = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     const passwordSpecialSignRegExp = /(?=.*[!@#$%^&*])/;
     if (passwordRegExp.test(password)) {
-      if(!passwordSpecialSignRegExp.test(password)){
+      if (!passwordSpecialSignRegExp.test(password)) {
         setPasswordErrorText('It`s better to add a special sign ( ! @ # $ % ^ & * ).');
         setShouldAddSSign(true);
-      } else{
+      } else {
         setShouldAddSSign(false);
         setPasswordErrorText('Password incorrect.');
       }
@@ -95,7 +99,7 @@ export default function SignUpPopup(props) {
 
   return (
     <div onMouseDown={onPopupClick}>
-      <PopupWithForm name="signup" isValid={isValid} title="Sign up" onSubmit={onSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={closeClick} linkText="Sign in" buttonText={buttonText}>
+      <PopupWithForm name="signup" isValid={isValid} title="Sign up" onSubmit={onSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={onClose} linkText="Sign in" buttonText={buttonText}>
         <h3 className='popup__input-title'>Email</h3>
         <input
           className="popup__input"
@@ -107,6 +111,7 @@ export default function SignUpPopup(props) {
           required
           minLength="2"
           maxLength="40"
+          autoComplete="off"
         />
         <p className={`popup__error-massage${isEmailCorrect ? '' : '_visible'}`}>Email incorrect.</p>
         <h3 className='popup__input-title'>Password</h3>
@@ -120,6 +125,7 @@ export default function SignUpPopup(props) {
           required
           minLength="2"
           maxLength="200"
+          autoComplete="off"
         />
         <p className={`popup__error-massage${isPasswordCorrect ? '' : '_visible'}${shouldAddSSign ? '_visible' : ''}`}>{passwordErrorText}</p>
         <h3 className='popup__input-title'>Username</h3>
@@ -133,6 +139,7 @@ export default function SignUpPopup(props) {
           required
           minLength="2"
           maxLength="200"
+          autoComplete="off"
         />
         <p className={`popup__error-massage${isNameCorrect ? '' : '_visible'}`}>Name incorrect.</p>
       </PopupWithForm>

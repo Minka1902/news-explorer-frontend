@@ -20,15 +20,15 @@ export default function LoginPopup(props) {
     }
   };
 
-  // ! Closing the popup
-  const closeClick = () => {
-    onClose();
+  // ! Reseting the popup when closing
+  React.useEffect(() => {
     setIsEmailCorrect(true);
     setIsPasswordCorrect(true);
     setEmail('');
     setPassword('');
     setIsValid(false);
-  }
+    setShouldAddSSign(false);
+  }, [isOpen]);
 
   // ! Validating the email input
   const checkEmailValid = () => {
@@ -47,13 +47,13 @@ export default function LoginPopup(props) {
 
   // ! Validating the password input
   const checkPasswordValid = () => {
-    const passwordRegExp = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    const passwordRegExp = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,50}$/;
     const passwordSpecialSignRegExp = /(?=.*[!@#$%^&*])/;
     if (passwordRegExp.test(password)) {
-      if(!passwordSpecialSignRegExp.test(password)){
+      if (!passwordSpecialSignRegExp.test(password)) {
         setPasswordErrorText('It`s better to add a special sign ( ! @ # $ % ^ & * ).');
         setShouldAddSSign(true);
-      } else{
+      } else {
         setShouldAddSSign(false);
         setPasswordErrorText('Password incorrect.');
       }
@@ -71,9 +71,15 @@ export default function LoginPopup(props) {
 
   // ! Validating the form
   React.useEffect(() => {
-    if (checkEmailValid() || checkPasswordValid()) {
-      if (checkEmailValid() && checkPasswordValid()) {
-        setIsValid(true);
+    checkEmailValid();
+    checkPasswordValid();
+    if (isPasswordCorrect || isEmailCorrect) {
+      if (isPasswordCorrect && isEmailCorrect) {
+        if(email.length > 1 && password.length > 6){
+          setIsValid(true);
+        } else {
+          setIsValid(false);
+        }
       } else {
         setIsValid(false);
       }
@@ -85,7 +91,7 @@ export default function LoginPopup(props) {
 
   return (
     <div onMouseDown={onPopupClick}>
-      <PopupWithForm onSubmit={handleSubmit} isValid={isValid} handleSwitchPopup={handleSwitchPopup} linkText={linkText} name="login" title="Sign in" isOpen={isOpen} onClose={closeClick} buttonText={buttonText}>
+      <PopupWithForm onSubmit={handleSubmit} isValid={isValid} handleSwitchPopup={handleSwitchPopup} linkText={linkText} name="login" title="Sign in" isOpen={isOpen} onClose={onClose} buttonText={buttonText}>
         <h3 className='popup__input-title'>Email</h3>
         <input
           className="popup__input"
@@ -97,6 +103,7 @@ export default function LoginPopup(props) {
           minLength="2"
           maxLength="40"
           onChange={(evt) => setEmail(evt.currentTarget.value)}
+          autoComplete="off"
         />
         <p className={`popup__error-massage${isEmailCorrect ? '' : '_visible'}`}>Email incorrect</p>
         <h3 className='popup__input-title'>Password</h3>
@@ -110,7 +117,7 @@ export default function LoginPopup(props) {
           minLength="8"
           maxLength="200"
           onChange={(evt) => setPassword(evt.currentTarget.value)}
-        />        
+        />
         <p className={`popup__error-massage${isPasswordCorrect ? '' : '_visible'}${shouldAddSSign ? '_visible' : ''}`}>{passwordErrorText}</p>
       </PopupWithForm>
     </div>

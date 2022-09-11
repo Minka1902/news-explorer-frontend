@@ -23,7 +23,7 @@ export default function Header(props) {
 
 	React.useEffect(() => {
 		checkWindowDimensions();
-	}, [isHomePage])
+	}, [isHomePage]);
 	
 	React.useEffect(() => {
 		window.addEventListener('resize', checkWindowDimensions);
