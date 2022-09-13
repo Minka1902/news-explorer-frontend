@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://register.nomoreparties.co';
+export const BASE_URL = 'https://data.mongodb-api.com/app/data-siulj/endpoint/data/v1';
 
 export const register = ( password, email ) => {
   return fetch(`${BASE_URL}/signup`, {

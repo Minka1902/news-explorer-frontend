@@ -27,6 +27,7 @@ export default function SignUpPopup(props) {
 
   // ! Validating the email input
   const checkEmailValid = () => {
+    // eslint-disable-next-line
     const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (emailRegExp.test(email)) {
       if (email.length >= 8) {
@@ -95,6 +96,7 @@ export default function SignUpPopup(props) {
     } else {
       setIsValid(false);
     }
+    // eslint-disable-next-line
   }, [email, password, name]);
 
   return (
@@ -133,7 +135,7 @@ export default function SignUpPopup(props) {
           className="popup__input"
           onChange={(evt) => setName(evt.currentTarget.value)}
           placeholder="Enter your username"
-          id="username-confirm-input"
+          id="signup-username-input"
           type="text"
           name="usernameInput"
           required

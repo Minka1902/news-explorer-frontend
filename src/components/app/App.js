@@ -1,4 +1,5 @@
-import { newsApi } from '../../utils/api';
+import newsApiOBJ from '../../utils/newsApi';
+import usersApiOBJ from '../../utils/usersApi';
 import monthArray from '../../constants/constants';
 import * as React from 'react'
 import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
@@ -7,7 +8,7 @@ import AboutTheAuthor from '../aboutTheAuthor/AboutTheAuthor';
 import Footer from '../footer/Footer';
 import SignUpPopup from '../popup/SignUpPopup';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-// import * as auth from '../../utils/auth';
+import * as auth from '../../utils/auth';
 import LoginPopup from '../popup/LoginPopup';
 import Main from '../main/Main';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
@@ -17,14 +18,16 @@ import NotFound from '../notFound/NotFound';
 
 function App() {
   const tempUser = { savedArticles: [], name: 'Michael', _id: '211716956', email: 'minka.scharff@gmail.com', password: 'm19023012' };
-  // const currentUserContext = React.useContext(CurrentUserContext);  
-	const safeDocument = typeof document !== 'undefined' ? document : {};
-	const html = safeDocument.documentElement;
+  // eslint-disable-next-line
+  const currentUserContext = React.useContext(CurrentUserContext);
+  const safeDocument = typeof document !== 'undefined' ? document : {};
+  const html = safeDocument.documentElement;
   const history = useHistory();
+  localStorage.setItem('history', history);
   const [currentUser, setCurrentUser] = React.useState(tempUser);
   const [articlesArray, setArticlesArray] = React.useState([]);
-	const [showLessArray, setShowLessArray] = React.useState([]);
-	const [isHomePage, setIsHomePage] = React.useState(true);
+  const [showLessArray, setShowLessArray] = React.useState([]);
+  const [isHomePage, setIsHomePage] = React.useState(true);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isResultsOpen, setIsResultsOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
@@ -42,9 +45,10 @@ function App() {
     setIsSignUpPopupOpen(false);
     setIsLoginPopupOpen(false);
     setSelectedArticle(null);
-    if(window.innerWidth < 520){
+    if (window.innerWidth < 520) {
       noScroll();
     }
+    history.push('/');
   };
 
   const toggleNoScroll = () => html.classList.toggle('no-scroll');
@@ -64,10 +68,10 @@ function App() {
 
   // * getting articles
   React.useEffect(() => {
-    newsApi
+    newsApiOBJ
       .getInitialArticles()
       .then((data) => {
-        if(data.totalResults !== 0){
+        if (data.totalResults !== 0) {
           setArticlesArray(data.articles);
         } else {
           setArticlesArray(data.articles);
@@ -75,13 +79,25 @@ function App() {
         }
       })
       .catch((err) => {
-        if(err.message === 'Failed to fetch'){
-          if(isResultsOpen){
+        if (err.message === 'Failed to fetch') {
+          if (isResultsOpen) {
             setIsNotFound(true);
           }
         }
       })
       .finally(() => setIsPreloader(false));
+
+    usersApiOBJ
+      ._getUserInfo()
+      .then((data) => {
+        if(data.document){
+          alert(data.document._id);
+          setCurrentUser(data.document);
+        }
+      })
+      .catch((err) => {
+        console.log(`Error: ${err.message}`);
+      });
 
     const closeByEscape = (evt) => {
       if (evt.key === 'Escape') {
@@ -95,10 +111,10 @@ function App() {
   }, []);
 
   // ! Adding event listener for the page
-  // ! Escape click
+  // ! Mouse event
   React.useEffect(() => {
     const closeByClick = (evt) => {
-      if(evt.target.classList.contains("popup")){
+      if (evt.target.classList.contains("popup")) {
         closeAllPopups();
       }
     }
@@ -109,49 +125,44 @@ function App() {
 
   // * Handling login form submit
   const handleLoginSubmit = (email, password) => {
-    // auth
-    //   .authorize({inputPassword, inputEmail})
-    //   .then((data) => {
-    //     if(data.token){
-    //       localStorage.setItem('jwt', data.token);
-    //       setLoggedIn(true);
-    //     }
-    //   })
-    //   .catch((err)=>{
-    //     return (err.message);
-    //   });
+    usersApiOBJ
+      .init()
+      .then((data) => {
+        if (data) {
+          setCurrentUser(data);
+        }
+      });
 
-    if(tempUser.email === email){
-      if(tempUser.password === password){
-        setLoggedIn(true);
-        setCurrentUser(tempUser);
-        closeAllPopups();
-      }
-    }
+    alert(email);
+
   };
 
   // * Handling signup form submit
   const handleSignupSubmit = (evt) => {
     evt.preventDefault();
+    // const email = document.getElementById('signup-email-input').value;
+    // const password = document.getElementById('signup-password-input').value;
+    // const username = document.getElementById('signup-email-input').value;
+
     // TODO signup with auth and api
 
     closeAllPopups();
   };
 
-  // * checing if you should auto-login
-  // const isAutoLogin = () => {
-  //   const jwt = localStorage.getItem('jwt');
-  //   if (jwt) {
-  //     auth.checkToken(jwt)
-  //       .then(() => {
-  //         history.push('/');
-  //       });
-  //   }
-  // }
-  
-  // React.useEffect(() => {
-  //   isAutoLogin()
-  // }, []);
+  // * checking if should auto-login
+  const isAutoLogin = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth.checkToken(jwt)
+        .then(() => {
+          history.push('/');
+        });
+    }
+  }
+
+  React.useEffect(() => {
+    isAutoLogin()
+  });
 
   // * Handling the serch form submit
   const handleSearch = (e) => {
@@ -160,10 +171,10 @@ function App() {
     if (qInput && (qInput.value.length > 2)) {
       setIsPreloader(true);
       setQ(qInput.value);
-      newsApi
+      newsApiOBJ
         .searchNewTopic(qInput.value)
         .then((data) => {
-          if(data.totalResults !== 0){
+          if (data.totalResults !== 0) {
             setArticlesArray(data.articles);
             setIsResultsOpen(true);
           } else {
@@ -173,13 +184,13 @@ function App() {
           }
         })
         .catch((err) => {
-          if(err.message === 'Failed to fetch'){
-            if(isResultsOpen){
+          if (err.message === 'Failed to fetch') {
+            if (isResultsOpen) {
               setIsNotFound(true);
             }
           }
           setIsResultsOpen(true);
-        } )
+        })
         .finally(() => { setIsPreloader(false) });
     }
   };
@@ -194,12 +205,12 @@ function App() {
 
   // * Setting the partial articles array
   React.useEffect(() => {
-    if(articlesArray[2]){
-      articlesArray.map((article)=> article.publishedAt = createDateText(article.publishedAt));
+    if (articlesArray[2]) {
+      articlesArray.map((article) => article.publishedAt = createDateText(article.publishedAt));
       setShowLessArray([articlesArray[0], articlesArray[1], articlesArray[2]]);
     } else {
-      if(articlesArray[1]){
-        articlesArray.map((article)=> article.publishedAt = createDateText(article.publishedAt));
+      if (articlesArray[1]) {
+        articlesArray.map((article) => article.publishedAt = createDateText(article.publishedAt));
         setShowLessArray([articlesArray[0], articlesArray[1]]);
       }
     }
@@ -207,22 +218,22 @@ function App() {
 
   // * Generating key for article
   const generateKey = (article) => {
-		let tempKey = '';
-		if(article){
-			tempKey += article.url;
-			tempKey += (Math.random(0, 9) * Math.random(0, 9)).toString();
-			tempKey += article.title;
-			tempKey += article.urlToImage;
-		}
-		return tempKey.replace(/ /g, '');
-	};
+    let tempKey = '';
+    if (article) {
+      tempKey += article.url;
+      tempKey += (Math.random(0, 9) * Math.random(0, 9)).toString();
+      tempKey += article.title;
+      tempKey += article.urlToImage;
+    }
+    return tempKey.replace(/ /g, '');
+  };
 
   // ! Nav bar handling
   // * Handling the logout click
   const savedArticlesClick = () => {
     history.push("/saved-articles");
     setIsHomePage(false);
-    if(window.innerWidth < 520){
+    if (window.innerWidth < 520) {
       toggleNoScroll();
     }
   };
@@ -231,7 +242,7 @@ function App() {
   const homeClick = () => {
     history.push("/");
     setIsHomePage(true);
-    if(window.innerWidth < 520){
+    if (window.innerWidth < 520) {
       toggleNoScroll();
     }
   };
@@ -272,16 +283,16 @@ function App() {
             isHomePage={isHomePage}
             toggleNoScroll={toggleNoScroll}
           />
-          <SavedArticles 
+          <SavedArticles
             onArticleSave={saveArticleClick}
             generateKey={generateKey}
-            />
+          />
         </ProtectedRoute>
 
         <Route path="/">
           <Header
             isLoggedIn={loggedIn}
-            handleButtonClick={setIsLoginPopupOpen}
+            handleButtonClick={handleLoginClick}
             handleLogout={handleLogout}
             savedArticlesClick={savedArticlesClick}
             homeClick={homeClick}
@@ -305,7 +316,6 @@ function App() {
               generateKey={generateKey}
             />
           }
-          <AboutTheAuthor />
           <SignUpPopup
             isOpen={isSignUpPopupOpen}
             onClose={closeAllPopups}
@@ -322,10 +332,11 @@ function App() {
             handleSwitchPopup={handleSignUpClick}
             handleLogin={handleLoginSubmit}
           />
+          <AboutTheAuthor />
         </Route>
       </Switch>
 
-      <Footer />
+      <Footer homeClick={homeClick} />
     </CurrentUserContext.Provider>
   );
 }
