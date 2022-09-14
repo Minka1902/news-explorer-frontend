@@ -6,12 +6,6 @@
 	margin: 0 64px 0 auto;
 }
 
-@media screen and (min-width: 1150px) and (max-width: 1350px) {
-	.nav-bar{
-		margin: 0 64px 0 580px;
-	}
-}
-
 .nav-bar__button{
 	background-color: transparent;
 	font-family: 'Roboto', Arial, sans-serif;
@@ -101,6 +95,38 @@
 	height: inherit;
 }
 
+@media screen and (min-width: 520px) and (max-width: 703.5px) {
+	.nav-bar{
+		margin: 0;
+		width: min-content;
+	}
+
+	.nav-bar_reduced {
+		width: 44px;
+		margin: 0;
+	}
+
+	.nav-bar__button:nth-child(2){
+		margin: 0;
+	}
+
+	.nav-bar__button{
+		margin-right: 16px;
+	}
+
+	.nav-bar__button_active{
+		margin-right: 16px;
+	}
+
+	.nav-bar__button_theme_dark{
+		margin-right: 16px;
+	}
+
+	.nav-bar__button_active_theme_dark{
+		margin-right: 16px;
+	}
+}
+
 @media screen and (min-width: 704px) and (max-width: 1149.5px) {
 	.nav-bar{
 		margin: 0 16px 0 auto;
@@ -145,34 +171,12 @@
 	}
 }
 
-@media screen and (min-width: 520px) and (max-width: 703.5px) {
+@media screen and (min-width: 1150px) and (max-width: 1350px) {
 	.nav-bar{
-		margin: 0 16px 0 10%;
-		width: min-content;
+		margin: 0 64px 0 312px;
 	}
 
-	.nav-bar_reduced {
-		width: 44px;
-		margin: 0 64px 0 150px !important;
-	}
-
-	.nav-bar__button:nth-child(2){
-		width: 120px;
-	}
-
-	.nav-bar__button{
-		margin-right: 16px;
-	}
-
-	.nav-bar__button_active{
-		margin-right: 16px;
-	}
-
-	.nav-bar__button_theme_dark{
-		margin-right: 16px;
-	}
-
-	.nav-bar__button_active_theme_dark{
-		margin-right: 16px;
+	.nav-bar_reduced{
+		margin: 0 64px 0 506px;
 	}
 }
