@@ -24,10 +24,16 @@ export default function Header(props) {
 	React.useEffect(() => {
 		checkWindowDimensions();
 	}, [isHomePage]);
+
+	React.useEffect(()=>{
+		if (window.innerWidth < 520 && isLoggedIn == true) {
+			toggleNavMenu();
+		}
+	}, [isLoggedIn]);
 	
 	React.useEffect(() => {
 		window.addEventListener('resize', checkWindowDimensions);
-	}, []);
+	});
 
 	const toggleNavMenu = () => {
 		setIsNavMenuOpen(!isNavMenuOpen);
