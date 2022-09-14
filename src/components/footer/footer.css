@@ -1,67 +1,9 @@
 .footer{
 	height: 80px;
-	width: 100%;
+	width: 1440px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-}
-
-@media screen and (max-width: 703.5px) {
-	.footer__container{
-		flex-direction: row !important;
-		justify-content: space-around !important;
-		margin-bottom: 62px !important;
-	}
-
-	.footer{
-		height: 176px !important;
-		flex-direction: column !important;
-	}
-
-	.footer__container-links{
-		flex-direction: column !important;
-		margin-left: 16px !important;
-	}
-
-	.footer__container-icons{
-		margin-right: 18px !important;
-	}
-
-	.footer__link{
-		text-align: left !important;
-	}
-
-	.footer__link:nth-child(1){
-		margin-bottom: 26px !important;
-	}
-
-	.footer__text{
-		width: 288px;
-		margin: auto !important;
-		margin-top: 162px !important;
-		margin-bottom: -162px !important;
-	}
-}
-
-@media screen and (min-width: 704px) and (max-width: 1149.5px) {
-	.footer{
-		height: 64px !important;
-	}
-
-	.footer__text{
-		width: 300px !important;
-		margin: auto 0 auto auto !important;
-	}
-
-	.footer__container-icons{
-		width: 60px !important;
-		margin: auto 26px auto 41px !important;
-	}
-
-	.footer__text{
-		margin-left: 40px !important;
-		margin-top: 24px !important;
-	}
 }
 
 .footer__container{
@@ -120,4 +62,70 @@
 	line-height: 22px;
 	color: #B6BCBF;
 	margin: 32px auto 0 104px;
+}
+
+@media screen and (max-width: 703.5px) {
+	.footer__container{
+		flex-direction: row !important;
+		justify-content: space-around !important;
+		margin-bottom: 62px !important;
+	}
+
+	.footer{
+		width: 100%;
+		height: 176px !important;
+		flex-direction: column !important;
+	}
+
+	.footer__container-links{
+		flex-direction: column !important;
+		margin-left: 16px !important;
+	}
+
+	.footer__container-icons{
+		margin-right: 18px !important;
+	}
+
+	.footer__link{
+		text-align: left !important;
+	}
+
+	.footer__link:nth-child(1){
+		margin-bottom: 26px !important;
+	}
+
+	.footer__text{
+		width: 288px;
+		margin: auto !important;
+		margin-top: 162px !important;
+		margin-bottom: -162px !important;
+	}
+}
+
+@media screen and (min-width: 704px) and (max-width: 1149.5px) {
+	.footer{
+		height: 64px !important;
+		width: 100%;
+	}
+
+	.footer__text{
+		width: 300px !important;
+		margin: auto 0 auto auto !important;
+	}
+
+	.footer__container-icons{
+		width: 60px !important;
+		margin: auto 26px auto 41px !important;
+	}
+
+	.footer__text{
+		margin-left: 40px !important;
+		margin-top: 24px !important;
+	}
+}
+
+@media screen and (min-width: 1150px) and (max-width: 1350px) {
+	.footer{
+		width: 100%;
+	}
 }

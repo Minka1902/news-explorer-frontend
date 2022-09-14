@@ -6,6 +6,12 @@
 	margin: 0 64px 0 auto;
 }
 
+@media screen and (min-width: 1150px) and (max-width: 1350px) {
+	.nav-bar{
+		margin: 0 64px 0 580px;
+	}
+}
+
 .nav-bar__button{
 	background-color: transparent;
 	font-family: 'Roboto', Arial, sans-serif;

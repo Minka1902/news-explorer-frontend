@@ -48,24 +48,21 @@ export default function LoginPopup(props) {
   // ! Validating the password input
   const checkPasswordValid = () => {
     const passwordRegExp = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,50}$/;
-    const passwordSpecialSignRegExp = /(?=.*[!@#$%^&*])/;
-    if (passwordRegExp.test(password)) {
-      if (!passwordSpecialSignRegExp.test(password)) {
-        setPasswordErrorText('It`s better to add a special sign ( ! @ # $ % ^ & * ).');
-        setShouldAddSSign(true);
-      } else {
-        setShouldAddSSign(false);
-        setPasswordErrorText('Password incorrect.');
-      }
-      setIsPasswordCorrect(true);
-    } else {
-      setShouldAddSSign(false);
-      setPasswordErrorText('Password incorrect.');
-      if (password === '') {
+    if (password.length >= 6 || password === '') {
+      if (passwordRegExp.test(password)) {
         setIsPasswordCorrect(true);
       } else {
-        setIsPasswordCorrect(false);
+        setShouldAddSSign(false);
+        setPasswordErrorText('Password must contain letters and numbers!');
+        if (password === '') {
+          setIsPasswordCorrect(true);
+        } else {
+          setIsPasswordCorrect(false);
+        }
       }
+    } else {
+      setIsPasswordCorrect(false);
+      setPasswordErrorText('Password to short!');
     }
   };
 
@@ -75,7 +72,7 @@ export default function LoginPopup(props) {
     checkPasswordValid();
     if (isPasswordCorrect || isEmailCorrect) {
       if (isPasswordCorrect && isEmailCorrect) {
-        if(email.length > 1 && password.length > 6){
+        if (email.length > 1 && password.length > 6) {
           setIsValid(true);
         } else {
           setIsValid(false);

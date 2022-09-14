@@ -48,29 +48,34 @@ export default function SignUpPopup(props) {
   const checkPasswordValid = () => {
     const passwordRegExp = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     const passwordSpecialSignRegExp = /(?=.*[!@#$%^&*])/;
-    if (passwordRegExp.test(password)) {
-      if (!passwordSpecialSignRegExp.test(password)) {
-        setPasswordErrorText('It`s better to add a special sign ( ! @ # $ % ^ & * ).');
-        setShouldAddSSign(true);
-      } else {
-        setShouldAddSSign(false);
-        setPasswordErrorText('Password incorrect.');
-      }
-      setIsPasswordCorrect(true);
-    } else {
-      setShouldAddSSign(false);
-      setPasswordErrorText('Password incorrect.');
-      if (password === '') {
+    if (password.length >= 6 || password === '') {
+      if (passwordRegExp.test(password)) {
+        if (!passwordSpecialSignRegExp.test(password)) {
+          setPasswordErrorText('It`s better to add a special sign ( ! @ # $ % ^ & * ).');
+          setShouldAddSSign(true);
+        } else {
+          setShouldAddSSign(false);
+          setPasswordErrorText('Password incorrect. Must contain numbers and letters!');
+        }
         setIsPasswordCorrect(true);
       } else {
-        setIsPasswordCorrect(false);
+        setShouldAddSSign(false);
+        setPasswordErrorText('Password incorrect. Must contain numbers and letters!');
+        if (password === '') {
+          setIsPasswordCorrect(true);
+        } else {
+          setIsPasswordCorrect(false);
+        }
       }
+    } else{
+      setIsPasswordCorrect(false);
+      setPasswordErrorText('Password to short!');
     }
   };
 
   // ! Validating the name input
   const checkNameValid = () => {
-    var nameRegExp = /^[a-zA-Z ]{2,40}$/;
+    var nameRegExp = /^[a-zA-Z0-9 ]{2,40}$/;
     if (nameRegExp.test(name)) {
       setIsNameCorrect(true);
     } else {
@@ -122,7 +127,7 @@ export default function SignUpPopup(props) {
           onChange={(evt) => setPassword(evt.currentTarget.value)}
           placeholder="Enter password"
           id="signup-password-input"
-          type="text"
+          type="password"
           name="passwordInput"
           required
           minLength="2"

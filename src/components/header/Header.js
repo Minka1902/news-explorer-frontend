@@ -26,9 +26,10 @@ export default function Header(props) {
 	}, [isHomePage]);
 
 	React.useEffect(()=>{
-		if (window.innerWidth < 520 && isLoggedIn == true) {
+		if (window.innerWidth < 520 && isLoggedIn === true) {
 			toggleNavMenu();
 		}
+    // eslint-disable-next-line
 	}, [isLoggedIn]);
 	
 	React.useEffect(() => {

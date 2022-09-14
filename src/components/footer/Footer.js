@@ -3,14 +3,14 @@ import GHLogo from '../../images/github_icon.svg';
 
 export default function Footer(props) {
 	const githubClick = (evt) => {
-		if((!evt.target.classList.contains("article__saved")) && (!evt.target.classList.contains("article__delete_active"))){
+		if(evt.target.classList.contains("footer__icon")){
 			window.open("https://github.com/Minka1902", '_blank', 'noopener,noreferrer');
 		}
 	};
 
 	const facebookClick = (evt) => {
-		if(!evt.target.classList.contains("footer__icon")){
-			window.open("https://facebook.com", '_blank', 'noopener,noreferrer');
+		if(evt.target.classList.contains("footer__icon")){
+			window.open("https://www.facebook.com/login", '_blank', 'noopener,noreferrer');
 		}
 	};
 	
