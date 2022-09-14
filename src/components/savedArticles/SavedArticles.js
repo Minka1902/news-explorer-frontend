@@ -50,7 +50,7 @@ export default function SavedArticles(props) {
 	return (
 		<section className="saved-articles">
 			<h1 className='saved-articles__title'>Saved articles</h1>
-			<h2 className='saved-articles__subtitle'>{currentUser.name}, you have {savedArticles.length} saved articles</h2>
+			<h2 className='saved-articles__subtitle'>{currentUser.username}, you have {savedArticles.length} saved articles</h2>
 			<p className='saved-articles__by'>By keywords: <span className='saved-articles__by_keywords'>{checkAuthors()}</span></p>
 			<ul className={`saved-articles__list${isSavedArticles?'':'_closed'}`}>
 				{savedArticles.map((article) => 
