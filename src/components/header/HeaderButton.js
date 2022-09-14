@@ -28,7 +28,7 @@ export default function HeaderButton(props) {
 		<>
 			{ isLoggedIn ?
 				<button className={`header__button${theme?' header__button_theme_dark':''}${isNavMenu?'_modified':''}`} onClick={handleLogoutClick}>
-					{currentUser.name}<img src={determineSrc()} alt="Sign out icon" />
+					{currentUser.username}<img src={determineSrc()} alt="Sign out icon" />
 				</button>
 				: 
 				<button className={`header__button${theme?' header__button_theme_dark':''}${isNavMenu?'_modified':''}`} onClick={handleButtonClick}>

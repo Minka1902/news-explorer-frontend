@@ -17,14 +17,13 @@ import SearchBar from '../searchBar/SearchBar';
 import NotFound from '../notFound/NotFound';
 
 function App() {
-  const tempUser = { savedArticles: [], name: 'Michael', _id: '211716956', email: 'minka.scharff@gmail.com', password: 'm19023012' };
   // eslint-disable-next-line
   const currentUserContext = React.useContext(CurrentUserContext);
   const safeDocument = typeof document !== 'undefined' ? document : {};
   const html = safeDocument.documentElement;
   const history = useHistory();
   localStorage.setItem('history', history);
-  const [currentUser, setCurrentUser] = React.useState(tempUser);
+  const [currentUser, setCurrentUser] = React.useState();
   const [articlesArray, setArticlesArray] = React.useState([]);
   const [showLessArray, setShowLessArray] = React.useState([]);
   const [isHomePage, setIsHomePage] = React.useState(true);
@@ -87,18 +86,6 @@ function App() {
       })
       .finally(() => setIsPreloader(false));
 
-    usersApiOBJ
-      ._getUserInfo()
-      .then((data) => {
-        if(data.document){
-          alert(data.document._id);
-          setCurrentUser(data.document);
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err.message}`);
-      });
-
     const closeByEscape = (evt) => {
       if (evt.key === 'Escape') {
         closeAllPopups();
@@ -126,15 +113,20 @@ function App() {
   // * Handling login form submit
   const handleLoginSubmit = (email, password) => {
     usersApiOBJ
-      .init()
+      .login({email, password})
       .then((data) => {
-        if (data) {
-          setCurrentUser(data);
+        if(data.email === email){
+          setCurrentUser({username: data.username, email: data.email, id: data._id, savedArticles: []});
         }
+      })
+      .catch((err) => {
+        console.log(`Error type: ${err.message}`);
+        setLoggedIn(false);
+      })
+      .finally(() => {
+        closeAllPopups();
+        setLoggedIn(true);
       });
-
-    alert(email);
-
   };
 
   // * Handling signup form submit
