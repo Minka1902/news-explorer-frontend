@@ -3,17 +3,11 @@ import * as React from 'react';
 
 export default function PopupWithForm(props) {
 	const { linkText, name, title, onSubmit, children, isValid, handleSwitchPopup, buttonText, isOpen, onClose } = props;
-	const history = localStorage.getItem('history');
 	
 	// ! Switching between popups
 	const handleLinkClick = () => {
 		onClose();
 		handleSwitchPopup();
-		if (buttonText === 'Sign in') {
-			history.push("/signup");
-		} else {
-			history.push('/signin');
-		}
 	}
 
 	// ! Reseting the form
@@ -32,7 +26,7 @@ export default function PopupWithForm(props) {
 					<button type="submit" className={`popup__button${isValid ? '' : '_invalid'}`}>
 						{buttonText}
 					</button>
-					<h3 className="popup__link-text">or <Link onClick={handleLinkClick} to={isOpen ? "/signup" : "/signin"} className="popup__link">{linkText}</Link> </h3>
+					<h3 className="popup__link-text">or <Link onClick={handleLinkClick} to={buttonText === 'Sign in' ? "/signup" : "/signin"} className="popup__link">{linkText}</Link> </h3>
 				</form>
 			</div>
 		</div>

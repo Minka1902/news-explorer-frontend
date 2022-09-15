@@ -113,10 +113,12 @@ function App() {
   // * Handling login form submit
   const handleLoginSubmit = (email, password) => {
     usersApiOBJ
-      .login({email, password})
+      .login({ email, password })
       .then((data) => {
-        if(data.email === email){
-          setCurrentUser({username: data.username, email: data.email, id: data._id, savedArticles: []});
+        if (data.email === email) {
+          setCurrentUser({ username: data.username, email: data.email, id: data._id, savedArticles: [] });
+        } else {
+          //open error message
         }
       })
       .catch((err) => {
@@ -130,15 +132,16 @@ function App() {
   };
 
   // * Handling signup form submit
-  const handleSignupSubmit = (evt) => {
-    evt.preventDefault();
-    // const email = document.getElementById('signup-email-input').value;
-    // const password = document.getElementById('signup-password-input').value;
-    // const username = document.getElementById('signup-email-input').value;
-
-    // TODO signup with auth and api
-
-    closeAllPopups();
+  const handleSignupSubmit = (email, password, username) => {
+    usersApiOBJ
+      .signUp({ email, password, username })
+      .catch((err) => {
+        console.log(`Error type: ${err.message}`)
+      })
+      .finally(() => {
+        closeAllPopups();
+        setIsLoginPopupOpen(true);
+      })
   };
 
   // * checking if should auto-login
@@ -311,7 +314,7 @@ function App() {
           <SignUpPopup
             isOpen={isSignUpPopupOpen}
             onClose={closeAllPopups}
-            onSubmit={handleSignupSubmit}
+            handleSignup={handleSignupSubmit}
             linkText="Sign up"
             buttonText="Sign up"
             handleSwitchPopup={handleLoginClick}

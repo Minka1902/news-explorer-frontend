@@ -2,25 +2,25 @@ import PopupWithForm from './PopupWithForm';
 import React from 'react';
 
 export default function SignUpPopup(props) {
-  const { isOpen, onClose, handleSwitchPopup, onSubmit, buttonText, onPopupClick } = props;
+  const { isOpen, onClose, handleSwitchPopup, handleSignup, buttonText, onPopupClick } = props;
   const [isValid, setIsValid] = React.useState(false);
-  const [name, setName] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [isEmailCorrect, setIsEmailCorrect] = React.useState(true);
   const [isPasswordCorrect, setIsPasswordCorrect] = React.useState(true);
   const [shouldAddSSign, setShouldAddSSign] = React.useState(false);
   const [passwordErrorText, setPasswordErrorText] = React.useState('Password incorrect');
-  const [isNameCorrect, setIsNameCorrect] = React.useState(true);
+  const [isUsernameCorrect, setisUsernameCorrect] = React.useState(true);
 
   // ! Reseting the popup when closing
   React.useEffect(() => {
     setIsEmailCorrect(true);
     setIsPasswordCorrect(true);
-    setIsNameCorrect(true);
+    setisUsernameCorrect(true);
     setEmail('');
     setPassword('');
-    setName('');
+    setUsername('');
     setIsValid(false);
     setShouldAddSSign(false);
   }, [isOpen]);
@@ -74,16 +74,24 @@ export default function SignUpPopup(props) {
   };
 
   // ! Validating the name input
-  const checkNameValid = () => {
-    var nameRegExp = /^[a-zA-Z0-9 ]{2,40}$/;
-    if (nameRegExp.test(name)) {
-      setIsNameCorrect(true);
+  const checkUsernameValid = () => {
+    var usernameRegExp = /^[a-zA-Z0-9 ]{2,40}$/;
+    if (usernameRegExp.test(username)) {
+      setisUsernameCorrect(true);
     } else {
-      if (name === '') {
-        setIsNameCorrect(true);
+      if (username === '') {
+        setisUsernameCorrect(true);
       } else {
-        setIsNameCorrect(false);
+        setisUsernameCorrect(false);
       }
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (isValid) {
+      handleSignup(email, password, username);
+      setIsValid(false);
     }
   };
 
@@ -91,9 +99,9 @@ export default function SignUpPopup(props) {
   React.useEffect(() => {
     checkEmailValid();
     checkPasswordValid();
-    checkNameValid();
-    if (isEmailCorrect || isPasswordCorrect || isNameCorrect) {
-      if (isEmailCorrect && isPasswordCorrect && isNameCorrect) {
+    checkUsernameValid();
+    if (isEmailCorrect || isPasswordCorrect || isUsernameCorrect) {
+      if (isEmailCorrect && isPasswordCorrect && isUsernameCorrect) {
         setIsValid(true);
       } else {
         setIsValid(false);
@@ -102,11 +110,11 @@ export default function SignUpPopup(props) {
       setIsValid(false);
     }
     // eslint-disable-next-line
-  }, [email, password, name]);
+  }, [email, password, username]);
 
   return (
     <div onMouseDown={onPopupClick}>
-      <PopupWithForm name="signup" isValid={isValid} title="Sign up" onSubmit={onSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={onClose} linkText="Sign in" buttonText={buttonText}>
+      <PopupWithForm name="signup" isValid={isValid} title="Sign up" onSubmit={handleSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={onClose} linkText="Sign in" buttonText={buttonText}>
         <h3 className='popup__input-title'>Email</h3>
         <input
           className="popup__input"
@@ -138,7 +146,7 @@ export default function SignUpPopup(props) {
         <h3 className='popup__input-title'>Username</h3>
         <input
           className="popup__input"
-          onChange={(evt) => setName(evt.currentTarget.value)}
+          onChange={(evt) => setUsername(evt.currentTarget.value)}
           placeholder="Enter your username"
           id="signup-username-input"
           type="text"
@@ -148,7 +156,7 @@ export default function SignUpPopup(props) {
           maxLength="200"
           autoComplete="off"
         />
-        <p className={`popup__error-massage${isNameCorrect ? '' : '_visible'}`}>Name incorrect.</p>
+        <p className={`popup__error-massage${isUsernameCorrect ? '' : '_visible'}`}>Name incorrect.</p>
       </PopupWithForm>
     </div>
   );
