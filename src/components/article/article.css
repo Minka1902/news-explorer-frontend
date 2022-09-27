@@ -198,10 +198,6 @@
 		height: 440px;
     }
 
-	.article__save-massage_active{
-		display: none !important;
-	}
-
 	.article__title{
 		width: 275px !important;
 		font-size: 22px !important;

@@ -123,6 +123,7 @@ function App() {
       })
       .catch((err) => {
         console.log(`Error type: ${err.message}`);
+        setCurrentUser({});
         setLoggedIn(false);
       })
       .finally(() => {
@@ -247,20 +248,45 @@ function App() {
   const saveArticleClick = (evt) => {
     const parent = evt.target.parentElement;
     if (evt.target.classList.contains('article__saved')) {
-      currentUser.savedArticles.push({
-        urlToImage: `${parent.children[2].currentSrc}`,
-        publishedAt: parent.children[3].children[0].textContent,
-        url: `${parent.id}`,
-        author: parent.children[3].children[3].textContent,
-        content: parent.children[3].children[2].textContent,
-        title: parent.children[3].children[1].textContent,
-        source: { name: `${parent.children[2].alt}` },
+      const articleToSave = {
         keyword: q,
-      });
-      // TODO create article in finalDB 
+        title: parent.children[3].children[1].textContent,
+        date: parent.children[3].children[0].textContent,
+        image: `${parent.children[2].currentSrc}`,
+        source: `${parent.children[2].alt}`,
+        link: `${parent.id}`,
+        author: parent.children[3].children[3].textContent,
+        text: parent.children[3].children[2].textContent,
+        ownerId: currentUser.id,
+      };
+      usersApiOBJ
+        .saveArticle(articleToSave)
+        .then((data) => {
+          if (data.data) {
+            articleToSave._id = data.data._id;
+            currentUser.saveArticles[currentUser.savedArticles.length] = articleToSave;
+          }
+        })
+        .catch((err) => {
+          console.log(`Error type: ${err}`);
+        })
+
     } else {
-      const index = currentUser.savedArticles.findIndex((article) => article.url === parent.id);
-      currentUser.savedArticles.splice(index, 1);
+      const index = currentUser.savedArticles.findIndex((article) => {
+        if(article){
+          if(article.link === parent.id){
+            
+          }
+        }
+      });
+      // usersApiOBJ
+      //   .unsaveArticle()
+      //   .catch((err) => {
+      //     console.log(`Error: ${err}`);
+      //   })
+      //   .finally(() => {
+      //     currentUser.savedArticles.splice(index, 1);
+      //   })
       // TODO remove article from finalDB
     }
   };
@@ -309,6 +335,7 @@ function App() {
               showLessArray={showLessArray}
               isPreloader={isPreloader}
               generateKey={generateKey}
+              q={q}
             />
           }
           <SignUpPopup

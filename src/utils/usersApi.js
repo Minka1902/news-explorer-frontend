@@ -8,10 +8,10 @@ class usersApi {
     fetch(`${this._rootUrl}${url}`, {
       method: method,
       headers: {
-        "Content-Type": "application/json",
-        "Host": "<calculated when request is sent>",
-        "Content-Length": "<calculated when request is sent>",
-        "api-key": this._authToken
+        'Content-Type': 'application/json',
+        'Content-Length': '<calculated when request is sent>',
+        'Host': '<calculated when request is sent>',
+        'api-key': this._authToken,
       },
       body: JSON.stringify(data),
       }).then(this._handleResponse)
@@ -24,11 +24,11 @@ class usersApi {
 
   signUp = ({email, password, username}) => this._fetch({ method: "POST", url: "/signup", data: { email, password, username }})
 
-  submitNewArticle = ({ name, link }) => this._fetch({ url: '/articles', method: 'POST', data: { name, link } });
+  getArticles = () => this._fetch({ method: 'GET', url: '/articles' });
 
   unsaveArticle = (articleId) => this._fetch({ url: `/articles/${articleId}`, method: 'DELETE' });
 
-  saveArticle = (article) => this._fetch('/articles', 'POST', article);
+  saveArticle = (article) => this._fetch({ method: 'POST', url: '/articles', data: article});
 }
 
 const usersApiOBJ = new usersApi({ auth: '4den6CaDRe58L5Jx85R7E38xpVcn8TZcyqznqZVpKFAjeqqG80eZQc1WCtRNM1Aq', rootUrl: 'https://michaelscharff-api.herokuapp.com' });
