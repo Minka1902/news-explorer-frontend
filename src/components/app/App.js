@@ -26,6 +26,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState();
   const [articlesArray, setArticlesArray] = React.useState([]);
   const [showLessArray, setShowLessArray] = React.useState([]);
+  const [savedArticles, setSavedArticles] = React.useState([]);
   const [isHomePage, setIsHomePage] = React.useState(true);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isResultsOpen, setIsResultsOpen] = React.useState(false);
@@ -117,18 +118,17 @@ function App() {
       .then((data) => {
         if (data.email === email) {
           setCurrentUser({ username: data.username, email: data.email, id: data._id, savedArticles: [] });
+          setLoggedIn(true);
         } else {
-          //open error message
+          // TODO - open error message 
         }
       })
       .catch((err) => {
         console.log(`Error type: ${err.message}`);
-        setCurrentUser({});
         setLoggedIn(false);
       })
       .finally(() => {
         closeAllPopups();
-        setLoggedIn(true);
       });
   };
 
@@ -243,52 +243,45 @@ function App() {
     }
   };
 
-  // ! Article handling
-  // * Handling save article click
-  const saveArticleClick = (evt) => {
-    const parent = evt.target.parentElement;
-    if (evt.target.classList.contains('article__saved')) {
-      const articleToSave = {
-        keyword: q,
-        title: parent.children[3].children[1].textContent,
-        date: parent.children[3].children[0].textContent,
-        image: `${parent.children[2].currentSrc}`,
-        source: `${parent.children[2].alt}`,
-        link: `${parent.id}`,
-        author: parent.children[3].children[3].textContent,
-        text: parent.children[3].children[2].textContent,
-        ownerId: currentUser.id,
-      };
-      usersApiOBJ
-        .saveArticle(articleToSave)
-        .then((data) => {
-          if (data.data) {
-            articleToSave._id = data.data._id;
-            currentUser.saveArticles[currentUser.savedArticles.length] = articleToSave;
-          }
-        })
-        .catch((err) => {
-          console.log(`Error type: ${err}`);
-        })
-
-    } else {
-      const index = currentUser.savedArticles.findIndex((article) => {
-        if(article){
-          if(article.link === parent.id){
-            
-          }
+  const gettingSavedArticles = () => {
+    usersApiOBJ
+      .getArticles()
+      .then((data) => {
+        if (data.articles) {
+          const tempArray = [];
+          data.articles.map((article) => {
+            if (article.ownerId === currentUser.id) {
+              tempArray[tempArray.length] = article;
+            }
+          })
+          setSavedArticles(tempArray);
+          tempArray.map((article) => {
+            currentUser.savedArticles.push(article);
+          });
         }
+      })
+      .catch((err) => {
+        console.log(`Error type: ${err.message}`);
       });
-      // usersApiOBJ
-      //   .unsaveArticle()
-      //   .catch((err) => {
-      //     console.log(`Error: ${err}`);
-      //   })
-      //   .finally(() => {
-      //     currentUser.savedArticles.splice(index, 1);
-      //   })
-      // TODO remove article from finalDB
+  };
+
+  React.useEffect(() => {
+    gettingSavedArticles()
+  }, [currentUser]);
+
+  const deleteArticleFromArray = (evt) => {
+    const tempArray = articlesArray;
+    let indexToRemove = -1;
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i].urlToImage === evt.target.parentElement.children[2].currentSrc) {
+        indexToRemove = i;
+      }
     }
+    if (indexToRemove >= 0) {
+      tempArray.splice(indexToRemove, 1);
+    }
+
+    setArticlesArray(tempArray);
   };
 
   return (
@@ -305,7 +298,7 @@ function App() {
             toggleNoScroll={toggleNoScroll}
           />
           <SavedArticles
-            onArticleSave={saveArticleClick}
+            savedArticles={savedArticles}
             generateKey={generateKey}
           />
         </ProtectedRoute>
@@ -330,11 +323,11 @@ function App() {
             <Main
               isOpen={isResultsOpen}
               isLoggedIn={loggedIn}
-              onArticleSave={saveArticleClick}
               articles={articlesArray}
               showLessArray={showLessArray}
               isPreloader={isPreloader}
               generateKey={generateKey}
+              deleteArticleFromArray={deleteArticleFromArray}
               q={q}
             />
           }

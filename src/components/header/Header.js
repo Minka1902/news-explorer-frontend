@@ -25,33 +25,33 @@ export default function Header(props) {
 		checkWindowDimensions();
 	}, [isHomePage]);
 
-	React.useEffect(()=>{
+	React.useEffect(() => {
 		if (window.innerWidth < 520 && isLoggedIn === true) {
 			toggleNavMenu();
 		}
-    // eslint-disable-next-line
+		// eslint-disable-next-line
 	}, [isLoggedIn]);
-	
+
 	React.useEffect(() => {
 		window.addEventListener('resize', checkWindowDimensions);
 	});
 
 	const toggleNavMenu = () => {
 		setIsNavMenuOpen(!isNavMenuOpen);
-		if(window.innerWidth < 520){
+		if (window.innerWidth < 520) {
 			toggleNoScroll();
 		}
 	}
 
 	const determineButtonSrc = () => {
-		if(theme){
-			if(isNavMenuOpen){
+		if (theme) {
+			if (isNavMenuOpen) {
 				return headerCloseIcon;
 			} else {
 				return openMenuIconThemeDark;
 			}
 		} else {
-			if(isNavMenuOpen){
+			if (isNavMenuOpen) {
 				return headerCloseIcon;
 			}
 		}
@@ -59,8 +59,8 @@ export default function Header(props) {
 	}
 
 	const determineLogoSrc = () => {
-		if(theme){
-			if(isNavMenuOpen){
+		if (theme) {
+			if (isNavMenuOpen) {
 				return logo;
 			} else {
 				return logoThemeDark;
@@ -71,26 +71,26 @@ export default function Header(props) {
 	}
 
 	return (
-		<div className={`h-sb__container${theme? ' h-sb__container_no-background': ''}`}>
-			<header className={`header${theme?' header_theme_dark':''}${isNavMenuOpen?' header_darker':''}`}>
-				<img className={`header__logo ${theme?'header__logo_theme_dark':''}${isNavMenuOpen?'_not':''}`} src={determineLogoSrc()} alt="News explorer logo" />
-				{ isNavBar ?
-					<NavBar isHomePage={isHomePage} handleNavBarClick={handleNavBarClick} theme={theme} savedArticlesClick={savedArticlesClick} homeClick={homeClick} isLoggedIn={isLoggedIn} />
+		<div className={`h-sb__container${theme ? ' h-sb__container_no-background' : ''}`}>
+			<header className={`header${theme ? ' header_theme_dark' : ''}${isNavMenuOpen ? ' header_darker' : ''}`}>
+				<img className={`header__logo ${theme ? 'header__logo_theme_dark' : ''}${isNavMenuOpen ? '_not' : ''}`} src={determineLogoSrc()} alt="News explorer logo" />
+				{isNavBar ?
+					<>
+						<NavBar isHomePage={isHomePage} handleNavBarClick={handleNavBarClick} theme={theme} savedArticlesClick={savedArticlesClick} homeClick={homeClick} isLoggedIn={isLoggedIn} />
+						<HeaderButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
+					</>
 					:
-					<NavMenu isOpen={isNavMenuOpen} setIsOpen={setIsNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={savedArticlesClick} homeClick={homeClick}>
-						<HeaderButton isNavMenu={true} toggleNavMenu={toggleNavMenu} isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
-					</NavMenu>
-				}
-				{ isNavBar?
-					<HeaderButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
-					:
-					<button className={`header__button ${!isNavBar?'header__button_menu':''} ${theme?' header__logo_theme_dark':''}`} onClick={toggleNavMenu}>
-						<img src={determineButtonSrc()} alt="Menu icon" />
-					</button>
+					<>
+						<NavMenu isOpen={isNavMenuOpen} setIsOpen={setIsNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={savedArticlesClick} homeClick={homeClick}>
+							<HeaderButton isNavMenu={true} toggleNavMenu={toggleNavMenu} isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
+						</NavMenu>
+						<button className={`header__button ${!isNavBar ? 'header__button_menu' : ''} ${theme ? ' header__logo_theme_dark' : ''}`} onClick={toggleNavMenu}>
+							<img src={determineButtonSrc()} alt="Menu icon" />
+						</button>
+					</>
 				}
 			</header>
 			{children}
 		</div>
 	);
-  }
-  
+}

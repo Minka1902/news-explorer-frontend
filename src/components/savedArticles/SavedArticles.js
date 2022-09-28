@@ -1,34 +1,13 @@
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import * as React from 'react'
-import usersApiOBJ from '../../utils/usersApi';
+import * as React from 'react';
 import Article from '../article/Article';
 
 export default function SavedArticles(props) {
 	const currentUser = React.useContext(CurrentUserContext);
-	let [savedArticles, setSavedArticles] = React.useState([]);
-	const { onArticleSave, generateKey } = props;
+	const { generateKey, savedArticles } = props;
 	const [isSavedArticles] = React.useState(savedArticles.length > 0);
 	const keywordsArray = [];
 	let needToAdd = true;
-
-	React.useEffect(() => {
-		usersApiOBJ
-			.getArticles()
-			.then((data) => {
-				if (data.articles) {
-					const tempArray = [];
-					data.articles.map((article) => {
-						if(article.ownerId === currentUser.id){
-							tempArray[tempArray.length] = article;
-						}
-					})
-					setSavedArticles(tempArray);
-				}
-			})
-			.catch((err) => {
-				console.log(`Error type: ${err.message}`);
-			});
-	}, []);
 
 	function checkAuthors() {
 		if (savedArticles[0]) {
@@ -74,7 +53,7 @@ export default function SavedArticles(props) {
 			<p className='saved-articles__by'>By keywords: <span className='saved-articles__by_keywords'>{checkAuthors()}</span></p>
 			<ul className={`saved-articles__list${isSavedArticles ? '' : '_closed'}`}>
 				{savedArticles.map((article) =>
-					<Article key={generateKey(article)} toggleSave={onArticleSave} isSaved={true} article={article} />
+					<Article key={generateKey(article)} isSaved={true} article={article} />
 				)}
 			</ul>
 		</section>
