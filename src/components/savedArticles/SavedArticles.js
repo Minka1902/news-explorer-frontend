@@ -4,7 +4,7 @@ import Article from '../article/Article';
 
 export default function SavedArticles(props) {
 	const currentUser = React.useContext(CurrentUserContext);
-	const { generateKey, savedArticles } = props;
+	const { generateKey, savedArticles, gettingSavedArticles } = props;
 	const [isSavedArticles] = React.useState(savedArticles.length > 0);
 	const keywordsArray = [];
 	let needToAdd = true;
@@ -53,7 +53,7 @@ export default function SavedArticles(props) {
 			<p className='saved-articles__by'>By keywords: <span className='saved-articles__by_keywords'>{checkAuthors()}</span></p>
 			<ul className={`saved-articles__list${isSavedArticles ? '' : '_closed'}`}>
 				{savedArticles.map((article) =>
-					<Article key={generateKey(article)} isSaved={true} article={article} />
+					<Article gettingSavedArticles={gettingSavedArticles} isHomePage={false} key={generateKey(article)} article={article} />
 				)}
 			</ul>
 		</section>

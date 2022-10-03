@@ -53,8 +53,6 @@ function App() {
 
   const toggleNoScroll = () => html.classList.toggle('no-scroll');
 
-  // const scroll = () => html.classList.remove('no-scroll');
-
   const noScroll = () => html.classList.add('no-scroll');
 
   // ! Header handling
@@ -64,6 +62,7 @@ function App() {
     setIsHomePage(true);
     localStorage.removeItem('jwt');
     history.push("/");
+    gettingSavedArticles();
   };
 
   // * getting articles
@@ -264,25 +263,10 @@ function App() {
         console.log(`Error type: ${err.message}`);
       });
   };
-
+  
   React.useEffect(() => {
-    gettingSavedArticles()
+    gettingSavedArticles();
   }, [currentUser]);
-
-  const deleteArticleFromArray = (evt) => {
-    const tempArray = articlesArray;
-    let indexToRemove = -1;
-    for (let i = 0; i < tempArray.length; i++) {
-      if (tempArray[i].urlToImage === evt.target.parentElement.children[2].currentSrc) {
-        indexToRemove = i;
-      }
-    }
-    if (indexToRemove >= 0) {
-      tempArray.splice(indexToRemove, 1);
-    }
-
-    setArticlesArray(tempArray);
-  };
 
   return (
     <CurrentUserContext.Provider value={currentUser} className="app">
@@ -298,7 +282,9 @@ function App() {
             toggleNoScroll={toggleNoScroll}
           />
           <SavedArticles
+            isHomePage={isHomePage}
             savedArticles={savedArticles}
+            gettingSavedArticles={gettingSavedArticles}
             generateKey={generateKey}
           />
         </ProtectedRoute>
@@ -323,11 +309,12 @@ function App() {
             <Main
               isOpen={isResultsOpen}
               isLoggedIn={loggedIn}
+              isHomePage={isHomePage}
               articles={articlesArray}
               showLessArray={showLessArray}
               isPreloader={isPreloader}
               generateKey={generateKey}
-              deleteArticleFromArray={deleteArticleFromArray}
+              gettingSavedArticles={gettingSavedArticles}
               q={q}
             />
           }
