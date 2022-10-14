@@ -4,7 +4,7 @@ class usersApi {
     this._rootUrl = props.rootUrl;
   }
 
-  _fetch = ({ method = "POST", url = '/', data }) =>
+  _fetch = ({ method = "POST", url = '/', data, auth }) =>
     fetch(`${this._rootUrl}${url}`, {
       method: method,
       headers: {
@@ -12,15 +12,16 @@ class usersApi {
         'Content-Length': '<calculated when request is sent>',
         'Host': '<calculated when request is sent>',
         'api-key': this._authToken,
+        'authorization': `Bearer ${auth}`,
       },
       body: JSON.stringify(data),
       }).then(this._handleResponse)
 
   _handleResponse = (res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
 
-  _getUserInfo = () => this._fetch({ method: "POST", url: "/signin" });
-
   login = ({email, password}) => this._fetch({ method: "POST", url: "/signin", data: { email, password }});
+
+  getCurrentUser = (jwt) => this._fetch({method: "GET", url: "/users/me", auth: jwt});
 
   signUp = ({email, password, username}) => this._fetch({ method: "POST", url: "/signup", data: { email, password, username }})
 
@@ -30,6 +31,8 @@ class usersApi {
 
   saveArticle = (article) => this._fetch({ method: 'POST', url: '/articles', data: article});
 }
-
+// ! DEBUG API
+// const usersApiOBJ = new usersApi({ auth: '4den6CaDRe58L5Jx85R7E38xpVcn8TZcyqznqZVpKFAjeqqG80eZQc1WCtRNM1Aq', rootUrl: 'http://localhost:3001' });
+// ! REAL API
 const usersApiOBJ = new usersApi({ auth: '4den6CaDRe58L5Jx85R7E38xpVcn8TZcyqznqZVpKFAjeqqG80eZQc1WCtRNM1Aq', rootUrl: 'https://michaelscharff-api.herokuapp.com' });
 export default usersApiOBJ;

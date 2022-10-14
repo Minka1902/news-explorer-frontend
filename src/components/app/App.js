@@ -22,7 +22,7 @@ function App() {
   const safeDocument = typeof document !== 'undefined' ? document : {};
   const html = safeDocument.documentElement;
   const history = useHistory();
-  localStorage.setItem('history', history);
+
   const [currentUser, setCurrentUser] = React.useState();
   const [articlesArray, setArticlesArray] = React.useState([]);
   const [showLessArray, setShowLessArray] = React.useState([]);
@@ -35,7 +35,7 @@ function App() {
   const [, setSelectedArticle] = React.useState(null);
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
-  const [q, setQ] = React.useState('israel');
+  const [q, setQ] = React.useState('news');
 
   const handleSignUpClick = () => setIsSignUpPopupOpen(true);
 
@@ -60,9 +60,9 @@ function App() {
   const handleLogout = () => {
     setLoggedIn(false);
     setIsHomePage(true);
+    setSavedArticles([]);
     localStorage.removeItem('jwt');
     history.push("/");
-    gettingSavedArticles();
   };
 
   // * getting articles
@@ -115,21 +115,40 @@ function App() {
     usersApiOBJ
       .login({ email, password })
       .then((data) => {
-        if (data.email === email) {
-          setCurrentUser({ username: data.username, email: data.email, id: data._id, savedArticles: [] });
-          setLoggedIn(true);
-        } else {
-          // TODO - open error message 
+        if (data.user._id) {
+          findUserInfo();
+        }
+        if (data.jwt) {
+          localStorage.setItem('jwt', data.jwt);
         }
       })
       .catch((err) => {
         console.log(`Error type: ${err.message}`);
         setLoggedIn(false);
+      });
+  };
+
+  const findUserInfo = () => {
+    usersApiOBJ
+      .getCurrentUser(localStorage.getItem('jwt'))
+      .then((data) => {
+        if (data) {
+          setCurrentUser(data);
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(`Error type: ${err.message}`);
+          setLoggedIn(false);
+        }
       })
       .finally(() => {
         closeAllPopups();
       });
-  };
+  }
 
   // * Handling signup form submit
   const handleSignupSubmit = (email, password, username) => {
@@ -243,29 +262,30 @@ function App() {
   };
 
   const gettingSavedArticles = () => {
-    usersApiOBJ
-      .getArticles()
-      .then((data) => {
-        if (data.articles) {
-          const tempArray = [];
-          data.articles.map((article) => {
-            if (article.ownerId === currentUser.id) {
-              tempArray[tempArray.length] = article;
-            }
-          })
-          setSavedArticles(tempArray);
-          tempArray.map((article) => {
-            currentUser.savedArticles.push(article);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(`Error type: ${err.message}`);
-      });
+    if (currentUser) {
+      usersApiOBJ
+        .getArticles()
+        .then((articles) => {
+          if (articles) {                   // eslint-disable-next-line
+            articles.map((article) => {
+              if (article.ownerId === currentUser.id) {
+                currentUser.savedArticles.push(article);
+              }
+            })
+            // setSavedArticles(tempArray);    // eslint-disable-next-line
+            // tempArray.map((article) => {
+            //   currentUser.savedArticles.push(article);
+            // });
+          }
+        })
+        .catch((err) => {
+          console.log(`getArticles function Error type: ${err.message}`);
+        });
+    }
   };
-  
+
   React.useEffect(() => {
-    gettingSavedArticles();
+    gettingSavedArticles(); // eslint-disable-next-line
   }, [currentUser]);
 
   return (
