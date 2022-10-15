@@ -84,7 +84,7 @@ export default function Article(props) {
 
 		React.useEffect(() => {
 			if (isHomePage) {
-				if (article && currentUser) {
+				if (article && currentUser) {			// eslint-disable-next-line
 					currentUser.savedArticles.map((savedArticle) => {
 						if (article.url === savedArticle.url) {
 							setDidSave(true);
