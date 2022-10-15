@@ -115,11 +115,11 @@ function App() {
     usersApiOBJ
       .login({ email, password })
       .then((data) => {
-        if (data.user._id) {
-          findUserInfo();
-        }
         if (data.jwt) {
           localStorage.setItem('jwt', data.jwt);
+        }
+        if (data.user._id) {
+          findUserInfo();
         }
       })
       .catch((err) => {
