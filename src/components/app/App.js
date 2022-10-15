@@ -22,7 +22,6 @@ function App() {
   const safeDocument = typeof document !== 'undefined' ? document : {};
   const html = safeDocument.documentElement;
   const history = useHistory();
-
   const [currentUser, setCurrentUser] = React.useState();
   const [articlesArray, setArticlesArray] = React.useState([]);
   const [showLessArray, setShowLessArray] = React.useState([]);
@@ -32,7 +31,6 @@ function App() {
   const [isResultsOpen, setIsResultsOpen] = React.useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
-  const [, setSelectedArticle] = React.useState(null);
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('news');
@@ -44,7 +42,6 @@ function App() {
   const closeAllPopups = () => {
     setIsSignUpPopupOpen(false);
     setIsLoginPopupOpen(false);
-    setSelectedArticle(null);
     if (window.innerWidth < 520) {
       noScroll();
     }
@@ -67,25 +64,6 @@ function App() {
 
   // * getting articles
   React.useEffect(() => {
-    newsApiOBJ
-      .getInitialArticles()
-      .then((data) => {
-        if (data.totalResults !== 0) {
-          setArticlesArray(data.articles);
-        } else {
-          setArticlesArray(data.articles);
-          setShowLessArray(data.articles);
-        }
-      })
-      .catch((err) => {
-        if (err.message === 'Failed to fetch') {
-          if (isResultsOpen) {
-            setIsNotFound(true);
-          }
-        }
-      })
-      .finally(() => setIsPreloader(false));
-
     const closeByEscape = (evt) => {
       if (evt.key === 'Escape') {
         closeAllPopups();
@@ -168,15 +146,14 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth.checkToken(jwt)
-        .then(() => {
-          history.push('/');
+        .then((user) => {
+          if(user){
+            setCurrentUser(user);
+            setLoggedIn(true);
+          }
         });
     }
   }
-
-  React.useEffect(() => {
-    isAutoLogin()
-  });
 
   // * Handling the serch form submit
   const handleSearch = (e) => {
@@ -284,6 +261,10 @@ function App() {
     gettingSavedArticles(); // eslint-disable-next-line
   }, [currentUser]);
 
+  React.useEffect(() => {
+    isAutoLogin(); // eslint-disable-next-line
+  }, []);
+  
   return (
     <CurrentUserContext.Provider value={currentUser} className="app">
       <Switch>
