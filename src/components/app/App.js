@@ -272,10 +272,6 @@ function App() {
                 currentUser.savedArticles.push(article);
               }
             })
-            // setSavedArticles(tempArray);    // eslint-disable-next-line
-            // tempArray.map((article) => {
-            //   currentUser.savedArticles.push(article);
-            // });
           }
         })
         .catch((err) => {

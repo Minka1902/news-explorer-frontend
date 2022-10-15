@@ -93,8 +93,8 @@ export default function Article(props) {
 						}
 					});
 				}
-			}
-		}, [currentUser]);
+			}											// eslint-disable-next-line
+		}, [currentUser, didSave]);
 
 		return (
 			<li className="article" id={article._id ? article._id : ''} key={article.id} onClick={onArticleClick}>
