@@ -165,14 +165,12 @@ function App() {
   }
 
   // * Handling the serch form submit
-  const handleSearch = (e) => {
-    e.preventDefault();
-    let qInput = document.getElementById('search-bar-input');
-    if (qInput && (qInput.value.length > 2)) {
+  const handleSearch = (q) => {
+    if (q && (q.length > 2)) {
       setIsPreloader(true);
-      setQ(qInput.value);
+      setQ(q);
       newsApiOBJ
-        .searchNewTopic(qInput.value)
+        .searchNewTopic(q)
         .then((data) => {
           if (data.totalResults !== 0) {
             setArticlesArray(data.articles);
