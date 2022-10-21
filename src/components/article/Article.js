@@ -4,9 +4,9 @@ import usersApiOBJ from '../../utils/usersApi';
 
 export default function Article(props) {
 	const currentUser = React.useContext(CurrentUserContext);
-	const { article, isLoggedIn, q, isHomePage, gettingSavedArticles } = props;
+	const { article, isLoggedIn, q, key, isHomePage, gettingSavedArticles } = props;
 	const [isHovering, setIsHovering] = React.useState(false);
-	const [didSave, setDidSave] = React.useState(article.ownerId ? true : false);
+	const [isSaved, setIsSaved] = React.useState(false);
 	let idToDelete = '';
 
 	// ! Article handling
@@ -27,14 +27,13 @@ export default function Article(props) {
 				};
 				usersApiOBJ 					// * saving the article
 					.saveArticle(articleToSave)
-					.then((data) => {
-						if (data) {
-							articleToSave._id = data._id;
-							setDidSave(true);
+					.then((savedArticle) => {
+						if (savedArticle) {
+							setIsSaved(true);
 						}
 					})
 					.catch((err) => {
-						console.log(`Error type: ${err.message}`);
+						console.log(`Error type: ${err.message ? err.message : err}`);
 					})
 					.finally(() => {
 						gettingSavedArticles();
@@ -42,23 +41,30 @@ export default function Article(props) {
 			} else {
 				if ((evt.target.classList.contains('article__delete')) || (evt.target.classList.contains('article__saved_active'))) {
 					for (let i = 0; i < currentUser.savedArticles.length; i++) {
-						if (currentUser.savedArticles[i]._id === evt.target.parentElement.id) {
+						if (currentUser.savedArticles[i].urlToImage === evt.target.parentElement.children[2].currentSrc) {
 							idToDelete = currentUser.savedArticles[i]._id;
+						} else {
+							if (currentUser.savedArticles[i].urlToImage === evt.target.parentElement.children[3].currentSrc) {
+								idToDelete = currentUser.savedArticles[i]._id;
+							}
 						}
 					}
-					usersApiOBJ 			// * unsaving the article
-						.unsaveArticle(idToDelete)
-						.then((deletedArticle) => {
-							if (deletedArticle) {
-								setDidSave(false);
-							}
-						})
-						.catch((err) => {
-							console.log(`Unsave article, ${err}`)
-						})
-						.finally(() => {
-							gettingSavedArticles();
-						});
+					const jwt = localStorage.getItem('jwt');
+					if (jwt && idToDelete != '') {
+						usersApiOBJ 			// * unsaving the article
+							.unsaveArticle(idToDelete)
+							.then((deletedArticle) => {
+								if (deletedArticle) {
+									setIsSaved(false);
+								}
+							})
+							.catch((err) => {
+								console.log(`Unsave article, ${err}`)
+							})
+							.finally(() => {
+								gettingSavedArticles();
+							});
+					}
 				}
 			}
 		}
@@ -75,10 +81,6 @@ export default function Article(props) {
 	const onArticleClick = (evt) => {
 		if ((!evt.target.classList.contains("article__saved")) && (!evt.target.classList.contains("article__delete")) && (!evt.target.classList.contains("article__saved_active"))) {
 			window.open(article.url, '_blank', 'noopener,noreferrer');
-		// } else {
-		// 	if ((evt.target.classList.contains("article__saved")) || (evt.target.classList.contains('article__delete')) || (evt.target.classList.contains('article__saved_active'))) {
-		// 		// saveArticleClick(evt);
-		// 	}
 		}
 	}
 
@@ -86,19 +88,17 @@ export default function Article(props) {
 		if (isHomePage) {
 			if (article && currentUser) {			// eslint-disable-next-line
 				currentUser.savedArticles.map((savedArticle) => {
-					if (article.url === savedArticle.url) {
-						setDidSave(true);
-					} else {
-						setDidSave(false);
+					if (article.url == savedArticle.url) {
+						setIsSaved(true);
 					}
 				});
 			}
 		}											// eslint-disable-next-line
-	}, [currentUser, didSave]);
+	}, []);
 
 	return (
-		<li className="article" id={article._id ? article._id : ''} key={article.id} onClick={onArticleClick}>
-			<button className={`${isHomePage ? "article__saved" : "article__delete "}${didSave ? '_active' : ''}`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} onClick={saveArticleClick} />
+		<li className="article" id={article._id ? article._id : ''} key={key} onClick={onArticleClick}>
+			<button className={`${isHomePage ? "article__saved" : "article__delete "}${isSaved ? '_active' : ''}`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} onClick={saveArticleClick} />
 			<h3 className={`article__save-massage ${isHovering ? 'article__save-massage_active' : ''}${isLoggedIn ? '_not' : ''}`}>{!isHomePage ? 'Remove from saved' : 'Sign in to save article'}</h3>
 			{!isHomePage ? <h3 className='article__saved_keyword'>{article.keyword}</h3> : <></>}
 			<img className="article__image" src={article.urlToImage} alt={article.source.name ? article.source.name : article.source} />

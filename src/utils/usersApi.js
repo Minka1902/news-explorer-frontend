@@ -4,12 +4,13 @@ class usersApi {
     this._rootUrl = props.rootUrl;
   }
 
-  _fetch = ({ method = "POST", url = '/', data, auth }) =>
+  _fetch = ({ method = "POST", url = '/', data, auth = localStorage.getItem('jwt') }) =>
     fetch(`${this._rootUrl}${url}`, {
       method: method,
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': '<calculated when request is sent>',
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
         'Host': '<calculated when request is sent>',
         'api-key': this._authToken,
         'authorization': `Bearer ${auth}`,
@@ -21,7 +22,7 @@ class usersApi {
 
   login = ({email, password}) => this._fetch({ method: "POST", url: "/signin", data: { email, password }});
 
-  getCurrentUser = (jwt) => this._fetch({method: "GET", url: "/users/me", auth: jwt});
+  getCurrentUser = () => this._fetch({ method: "GET", url: "/users/me" });
 
   signUp = ({email, password, username}) => this._fetch({ method: "POST", url: "/signup", data: { email, password, username }})
 

@@ -148,6 +148,10 @@
 	background-repeat: no-repeat;
 }
 
+.article__saved_active:hover{
+	cursor: pointer;
+}
+
 .article__save-massage{
 	position: absolute;
     display: block;

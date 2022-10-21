@@ -99,6 +99,7 @@ export default function LoginPopup(props) {
           required
           minLength="2"
           maxLength="40"
+          value={email}
           onChange={(evt) => setEmail(evt.currentTarget.value)}
           autoComplete="off"
         />
@@ -113,6 +114,7 @@ export default function LoginPopup(props) {
           required
           minLength="8"
           maxLength="200"
+          value={password}
           onChange={(evt) => setPassword(evt.currentTarget.value)}
         />
         <p className={`popup__error-massage${isPasswordCorrect ? '' : '_visible'}${shouldAddSSign ? '_visible' : ''}`}>{passwordErrorText}</p>

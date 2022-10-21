@@ -75,7 +75,7 @@ export default function SignUpPopup(props) {
 
   // ! Validating the name input
   const checkUsernameValid = () => {
-    var usernameRegExp = /^[a-zA-Z0-9 ]{2,40}$/;
+    const usernameRegExp = /^[a-zA-Z0-9 ]{2,40}$/;
     if (usernameRegExp.test(username)) {
       setisUsernameCorrect(true);
     } else {
@@ -87,6 +87,7 @@ export default function SignUpPopup(props) {
     }
   };
 
+  // ! Submitting the form
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (isValid) {
@@ -118,6 +119,7 @@ export default function SignUpPopup(props) {
         <h3 className='popup__input-title'>Email</h3>
         <input
           className="popup__input"
+          value={email}
           onChange={(evt) => setEmail(evt.currentTarget.value)}
           placeholder="Enter email"
           id="signup-email-input"
@@ -132,6 +134,7 @@ export default function SignUpPopup(props) {
         <h3 className='popup__input-title'>Password</h3>
         <input
           className="popup__input"
+          value={password}
           onChange={(evt) => setPassword(evt.currentTarget.value)}
           placeholder="Enter password"
           id="signup-password-input"
@@ -146,6 +149,7 @@ export default function SignUpPopup(props) {
         <h3 className='popup__input-title'>Username</h3>
         <input
           className="popup__input"
+          value={username}
           onChange={(evt) => setUsername(evt.currentTarget.value)}
           placeholder="Enter your username"
           id="signup-username-input"

@@ -62,7 +62,7 @@ function App() {
     history.push("/");
   };
 
-  // * getting articles
+  // * close popup by ESCAPE 
   React.useEffect(() => {
     const closeByEscape = (evt) => {
       if (evt.key === 'Escape') {
@@ -103,15 +103,18 @@ function App() {
       .catch((err) => {
         console.log(`Error type: ${err.message}`);
         setLoggedIn(false);
-      });
+      })
+      .finally(()=> {
+        gettingSavedArticles();
+      })
   };
 
   const findUserInfo = () => {
     usersApiOBJ
-      .getCurrentUser(localStorage.getItem('jwt'))
-      .then((data) => {
-        if (data) {
-          setCurrentUser(data);
+      .getCurrentUser()
+      .then((user) => {
+        if (user) {
+          setCurrentUser(user);
           setLoggedIn(true);
         } else {
           setLoggedIn(false);
@@ -147,10 +150,16 @@ function App() {
     if (jwt) {
       auth.checkToken(jwt)
         .then((user) => {
-          if(user){
+          if (user) {
             setCurrentUser(user);
             setLoggedIn(true);
           }
+        })
+        .catch((err) => {
+          console.log(`Check token error: ${err}`);
+        })
+        .finally(() => {
+          gettingSavedArticles();
         });
     }
   }
@@ -207,18 +216,6 @@ function App() {
     }
   }, [articlesArray]);
 
-  // * Generating key for article
-  const generateKey = (article) => {
-    let tempKey = '';
-    if (article) {
-      tempKey += article.url;
-      tempKey += (Math.random(0, 9) * Math.random(0, 9)).toString();
-      tempKey += article.title;
-      tempKey += article.urlToImage;
-    }
-    return tempKey.replace(/ /g, '');
-  };
-
   // ! Nav bar handling
   // * Handling the logout click
   const savedArticlesClick = () => {
@@ -243,28 +240,30 @@ function App() {
       usersApiOBJ
         .getArticles()
         .then((articles) => {
-          if (articles) {                   // eslint-disable-next-line
+          if (articles) {
+            currentUser.savedArticles = [];             // eslint-disable-next-line
             articles.map((article) => {
               if (article.ownerId === currentUser.id) {
                 currentUser.savedArticles.push(article);
               }
+              setSavedArticles(currentUser.savedArticles);
             })
           }
         })
         .catch((err) => {
-          console.log(`getArticles function Error type: ${err.message}`);
+          console.log(`getArticles function Error type: ${err}`);
         });
     }
   };
 
   React.useEffect(() => {
-    gettingSavedArticles(); // eslint-disable-next-line
-  }, [currentUser]);
+    isAutoLogin();            // eslint-disable-next-line
+  }, []);
 
   React.useEffect(() => {
-    isAutoLogin(); // eslint-disable-next-line
-  }, []);
-  
+    gettingSavedArticles();            // eslint-disable-next-line
+  }, [currentUser]);
+
   return (
     <CurrentUserContext.Provider value={currentUser} className="app">
       <Switch>
@@ -279,10 +278,8 @@ function App() {
             toggleNoScroll={toggleNoScroll}
           />
           <SavedArticles
-            isHomePage={isHomePage}
             savedArticles={savedArticles}
             gettingSavedArticles={gettingSavedArticles}
-            generateKey={generateKey}
           />
         </ProtectedRoute>
 
@@ -310,7 +307,6 @@ function App() {
               articles={articlesArray}
               showLessArray={showLessArray}
               isPreloader={isPreloader}
-              generateKey={generateKey}
               gettingSavedArticles={gettingSavedArticles}
               q={q}
             />

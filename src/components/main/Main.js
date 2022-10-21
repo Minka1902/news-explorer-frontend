@@ -3,7 +3,7 @@ import * as React from 'react';
 import Preloader from "../preloader/Preloader.js";
 
 export default function Main(props) {
-	const { isLoggedIn, isOpen, isHomePage, showLessArray, articles, isPreloader, generateKey, q, gettingSavedArticles } = props;
+	const { isLoggedIn, isOpen, isHomePage, showLessArray, articles, isPreloader, q, gettingSavedArticles } = props;
 	const [ isShowenMore, setIsShowenMore ] = React.useState(false);
 	const [ buttonText, setButtonText ] = React.useState('Show more');
 
@@ -22,8 +22,8 @@ export default function Main(props) {
 			<h3 className="main__title">Search results</h3>
 			{isPreloader? <Preloader />: <></>}
 			<ul className={`main__list${isPreloader?'_closed':''}`}>
-				{(isShowenMore?articles:showLessArray).map((article) => {
-					return <Article isHomePage={isHomePage} gettingSavedArticles={gettingSavedArticles} key={generateKey(article)} q={q} isLoggedIn={isLoggedIn} article={article} />;
+				{(isShowenMore?articles:showLessArray).map((article, idnex) => {
+					return <Article isHomePage={isHomePage} key={idnex} gettingSavedArticles={gettingSavedArticles} q={q} isLoggedIn={isLoggedIn} article={article} />;
 				})}
 			</ul>
 			<button className={`main__button${isPreloader?'_closed':''}`} onClick={handleButtonClick}>{buttonText}</button>

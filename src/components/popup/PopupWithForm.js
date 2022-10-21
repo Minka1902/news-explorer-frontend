@@ -13,8 +13,8 @@ export default function PopupWithForm(props) {
 	// ! Reseting the form
 	React.useEffect(() => {
 		const form = document.querySelector(`.form-${name}`);
-		form.reset();
-	}, [isOpen, name]);
+		form.reset();								// eslint-disable-next-line
+	}, [isOpen]);
 
 	return (
 		<div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}>
