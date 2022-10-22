@@ -4,7 +4,7 @@ import usersApiOBJ from '../../utils/usersApi';
 
 export default function Article(props) {
 	const currentUser = React.useContext(CurrentUserContext);
-	const { article, isLoggedIn, q, key, isHomePage, gettingSavedArticles } = props;
+	const { article, isLoggedIn, q, isHomePage, gettingSavedArticles } = props;
 	const [isHovering, setIsHovering] = React.useState(false);
 	const [isSaved, setIsSaved] = React.useState(false);
 	let idToDelete = '';
@@ -97,7 +97,7 @@ export default function Article(props) {
 	}, []);
 
 	return (
-		<li className="article" id={article._id ? article._id : ''} key={key} onClick={onArticleClick}>
+		<li className="article" id={article._id ? article._id : article.url} onClick={onArticleClick}>
 			<button className={`${isHomePage ? "article__saved" : "article__delete "}${isSaved ? '_active' : ''}`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} onClick={saveArticleClick} />
 			<h3 className={`article__save-massage ${isHovering ? 'article__save-massage_active' : ''}${isLoggedIn ? '_not' : ''}`}>{!isHomePage ? 'Remove from saved' : 'Sign in to save article'}</h3>
 			{!isHomePage ? <h3 className='article__saved_keyword'>{article.keyword}</h3> : <></>}

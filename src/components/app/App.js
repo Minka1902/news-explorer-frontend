@@ -263,17 +263,17 @@ function App() {
   }, [currentUser]);
 
   return (
-    <CurrentUserContext.Provider value={currentUser} className="app">
+    <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <ProtectedRoute exact path="/saved-articles" loggedIn={loggedIn}>
           <Header
             isLoggedIn={loggedIn}
-            handleLogout={handleLogout}
-            savedArticlesClick={savedArticlesClick}
-            homeClick={homeClick}
-            theme={true}
             isHomePage={isHomePage}
+            homeClick={homeClick}
+            savedArticlesClick={savedArticlesClick}
+            handleLogout={handleLogout}
             toggleNoScroll={toggleNoScroll}
+            theme={true}
           />
           <SavedArticles
             savedArticles={savedArticles}
@@ -284,12 +284,12 @@ function App() {
         <Route path="/">
           <Header
             isLoggedIn={loggedIn}
-            handleButtonClick={handleLoginClick}
-            handleLogout={handleLogout}
-            savedArticlesClick={savedArticlesClick}
-            homeClick={homeClick}
             isHomePage={isHomePage}
+            homeClick={homeClick}
+            savedArticlesClick={savedArticlesClick}
+            handleLogout={handleLogout}
             toggleNoScroll={toggleNoScroll}
+            handleButtonClick={handleLoginClick}
           >
             <SearchBar
               onSubmit={handleSearch}

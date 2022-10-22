@@ -9,8 +9,8 @@ import openMenuIconThemeDark from '../../images/open-menu-theme-dark.svg';
 import headerCloseIcon from '../../images/header-close-icon.svg';
 
 export default function Header(props) {
-	const { handleButtonClick, isHomePage, toggleNoScroll, handleLogout, handleNavBarClick, savedArticlesClick, homeClick, isLoggedIn, theme, children } = props;
-	const [isNavBar, setIsNavBar] = React.useState(true);
+	const { handleButtonClick, isHomePage, toggleNoScroll, handleLogout, savedArticlesClick, homeClick, isLoggedIn, theme, children } = props;
+	const [isNavBar, setIsNavBar] = React.useState(window.innerWidth > 520);
 	const [isNavMenuOpen, setIsNavMenuOpen] = React.useState(false);
 
 	const checkWindowDimensions = () => {
@@ -70,18 +70,32 @@ export default function Header(props) {
 		}
 	}
 
+	const handleSavedArticlesClick = () => {
+		savedArticlesClick();
+		if (window.innerWidth < 520) {
+			toggleNoScroll();
+		}
+	}
+
+	const handleHomeClick = () => {
+		homeClick();
+		if (window.innerWidth < 520) {
+			toggleNoScroll();
+		}
+	}
+
 	return (
 		<div className={`h-sb__container${theme ? ' h-sb__container_no-background' : ''}`}>
 			<header className={`header${theme ? ' header_theme_dark' : ''}${isNavMenuOpen ? ' header_darker' : ''}`}>
 				<img className={`header__logo ${theme ? 'header__logo_theme_dark' : ''}${isNavMenuOpen ? '_not' : ''}`} src={determineLogoSrc()} alt="News explorer logo" />
 				{isNavBar ?
 					<>
-						<NavBar isHomePage={isHomePage} handleNavBarClick={handleNavBarClick} theme={theme} savedArticlesClick={savedArticlesClick} homeClick={homeClick} isLoggedIn={isLoggedIn} />
+						<NavBar isHomePage={isHomePage} theme={theme} savedArticlesClick={savedArticlesClick} homeClick={homeClick} isLoggedIn={isLoggedIn} />
 						<HeaderButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 					</>
 					:
 					<>
-						<NavMenu isOpen={isNavMenuOpen} setIsOpen={setIsNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={savedArticlesClick} homeClick={homeClick}>
+						<NavMenu isOpen={isNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={handleSavedArticlesClick} homeClick={handleHomeClick}>
 							<HeaderButton isNavMenu={true} toggleNavMenu={toggleNavMenu} isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 						</NavMenu>
 						<button className={`header__button ${!isNavBar ? 'header__button_menu' : ''} ${theme ? ' header__logo_theme_dark' : ''}`} onClick={toggleNavMenu}>
