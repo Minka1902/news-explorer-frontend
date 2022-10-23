@@ -19,7 +19,7 @@ export default function Main(props) {
 	
 	return (
 		<main className={`main ${isOpen? 'main__opened' : ''}`}>
-			<h3 className="main__title">Search results</h3>
+			<h3 className="main__title">Search results - <span className="main__title_q">'{q}'</span></h3>
 			{isPreloader? <Preloader />: <></>}
 			<ul className={`main__list${isPreloader?'_closed':''}`}>
 				{(isShowenMore?articles:showLessArray).map((article, idnex) => {

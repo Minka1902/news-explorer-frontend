@@ -62,6 +62,7 @@
 		justify-content: center !important;
 		align-items: center !important;
 		padding: 0 !important;
+		margin-bottom: 0;
 	}
 
 	.saved-articles__title{

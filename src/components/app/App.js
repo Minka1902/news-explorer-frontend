@@ -28,7 +28,7 @@ function App() {
   const [savedArticles, setSavedArticles] = React.useState([]);
   const [isHomePage, setIsHomePage] = React.useState(true);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [isResultsOpen, setIsResultsOpen] = React.useState(false);
+  const [isResultsOpen, setIsResultsOpen] = React.useState(true);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
   const [isPreloader, setIsPreloader] = React.useState(true);
@@ -51,6 +51,8 @@ function App() {
   const toggleNoScroll = () => html.classList.toggle('no-scroll');
 
   const noScroll = () => html.classList.add('no-scroll');
+
+  const scroll = () => html.classList.remove('no-scroll');
 
   // ! Header handling
   // * Handling the logout click
@@ -146,6 +148,7 @@ function App() {
 
   // * checking if should auto-login
   const isAutoLogin = () => {
+    handleSearch();
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth.checkToken(jwt)
@@ -165,12 +168,12 @@ function App() {
   }
 
   // * Handling the serch form submit
-  const handleSearch = (q) => {
-    if (q && (q.length > 2)) {
+  const handleSearch = (qInput = q) => {
+    if (qInput && (qInput.length > 2)) {
       setIsPreloader(true);
-      setQ(q);
+      setQ(qInput);
       newsApiOBJ
-        .searchNewTopic(q)
+        .searchNewTopic(qInput)
         .then((data) => {
           if (data.totalResults !== 0) {
             setArticlesArray(data.articles);
@@ -220,7 +223,7 @@ function App() {
     history.push("/saved-articles");
     setIsHomePage(false);
     if (window.innerWidth < 520) {
-      toggleNoScroll();
+      scroll();
     }
   };
 
@@ -229,7 +232,7 @@ function App() {
     history.push("/");
     setIsHomePage(true);
     if (window.innerWidth < 520) {
-      toggleNoScroll();
+      scroll();
     }
   };
 
@@ -272,7 +275,8 @@ function App() {
             homeClick={homeClick}
             savedArticlesClick={savedArticlesClick}
             handleLogout={handleLogout}
-            toggleNoScroll={toggleNoScroll}
+            noScroll={noScroll}
+            scroll={scroll}
             theme={true}
           />
           <SavedArticles
@@ -288,7 +292,8 @@ function App() {
             homeClick={homeClick}
             savedArticlesClick={savedArticlesClick}
             handleLogout={handleLogout}
-            toggleNoScroll={toggleNoScroll}
+            noScroll={noScroll}
+            scroll={scroll}
             handleButtonClick={handleLoginClick}
           >
             <SearchBar

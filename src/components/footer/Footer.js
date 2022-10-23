@@ -1,4 +1,4 @@
-import FBLogo from '../../images/facebook_icon.svg';
+import LILogo from '../../images/linkedin-icon.svg';
 import GHLogo from '../../images/github_icon.svg';
 
 export default function Footer(props) {
@@ -8,9 +8,9 @@ export default function Footer(props) {
 		}
 	};
 
-	const facebookClick = (evt) => {
+	const linkedInClick = (evt) => {
 		if(evt.target.classList.contains("footer__icon")){
-			window.open("https://www.facebook.com/login", '_blank', 'noopener,noreferrer');
+			window.open("https://www.linkedin.com/in/michael-scharff-1525b6235/", '_blank', 'noopener,noreferrer');
 		}
 	};
 	
@@ -25,7 +25,7 @@ export default function Footer(props) {
   				</div>
   				<div className="footer__container-icons">
 					  <img className="footer__icon" src={GHLogo} alt="Git-Hub icon" onClick={githubClick} />
-					  <img className="footer__icon" src={FBLogo} alt="Facebook icon" onClick={facebookClick} />
+					  <img className="footer__icon" src={LILogo} alt="LinkedIn icon" onClick={linkedInClick} />
   				</div>
 			</div>
 		</footer>
