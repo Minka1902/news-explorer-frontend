@@ -77,18 +77,28 @@ export default function Header(props) {
 		}
 	}
 
+	const savedArticlesClicked = () => {
+		setIsNavMenuOpen(false);
+		savedArticlesClick();
+	}
+
+	const homeClicked = () => {
+		setIsNavMenuOpen(false);
+		homeClick();
+	}
+
 	return (
 		<div className={`h-sb__container${theme ? ' h-sb__container_no-background' : ''}`}>
 			<header className={`header${theme ? ' header_theme_dark' : ''}${isNavMenuOpen ? ' header_darker' : ''}`}>
 				<img className={`header__logo ${theme ? 'header__logo_theme_dark' : ''}${isNavMenuOpen ? '_not' : ''}`} src={determineLogoSrc()} alt="News explorer logo" />
 				{isNavBar ?
 					<>
-						<NavBar isHomePage={isHomePage} theme={theme} savedArticlesClick={savedArticlesClick} homeClick={homeClick} isLoggedIn={isLoggedIn} />
+						<NavBar isHomePage={isHomePage} theme={theme} savedArticlesClick={savedArticlesClicked} homeClick={homeClicked} isLoggedIn={isLoggedIn} />
 						<HeaderButton isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 					</>
 					:
 					<>
-						<NavMenu isOpen={isNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={savedArticlesClick} homeClick={homeClick}>
+						<NavMenu isOpen={isNavMenuOpen} isLoggedIn={isLoggedIn} savedArticlesClick={savedArticlesClicked} homeClick={homeClicked}>
 							<HeaderButton isNavMenu={true} toggleNavMenu={toggleNavMenu} isLoggedIn={isLoggedIn} handleLogout={handleLogout} handleButtonClick={handleButtonClick} theme={theme} />
 						</NavMenu>
 						<button className={`header__button ${!isNavBar ? 'header__button_menu' : ''} ${theme ? ' header__logo_theme_dark' : ''}`} onClick={toggleNavMenu}>
