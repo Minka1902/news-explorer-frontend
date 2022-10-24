@@ -12,6 +12,7 @@ export default function Header(props) {
 	const { handleButtonClick, isHomePage, scroll, noScroll, handleLogout, savedArticlesClick, homeClick, isLoggedIn, theme, children } = props;
 	const [isNavBar, setIsNavBar] = React.useState(window.innerWidth > 520);
 	const [isNavMenuOpen, setIsNavMenuOpen] = React.useState(false);
+	const [isFirstRender, setIsFirstRender] = React.useState(true);
 
 	const checkWindowDimensions = () => {
 		if (window.innerWidth > 520) {
@@ -27,7 +28,10 @@ export default function Header(props) {
 
 	React.useEffect(() => {
 		if (window.innerWidth < 520 && isLoggedIn === true) {
-			toggleNavMenu();
+			if(!isFirstRender){
+				toggleNavMenu();
+			}
+			setIsFirstRender(false);
 		}
 		// eslint-disable-next-line
 	}, [isLoggedIn]);
