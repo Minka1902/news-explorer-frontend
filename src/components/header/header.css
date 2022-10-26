@@ -1,5 +1,5 @@
 .header{
-	width: 1440px;
+	width: 100%;
 	height: 80px;
 	display: flex;
 	flex-direction: row;
@@ -8,7 +8,6 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 4;
-	margin: 0 auto;
 }
 
 .header_darker{
@@ -16,7 +15,8 @@
 }
 
 .h-sb__container{
-	min-width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	background-image: url('../../images/search-bar-image.png');
