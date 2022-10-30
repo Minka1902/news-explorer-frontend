@@ -218,7 +218,7 @@ function App() {
   }, [articlesArray]);
 
   // ! Nav bar handling
-  // * Handling the logout click
+  // * Handling saved articles click
   const savedArticlesClick = () => {
     history.push("/saved-articles");
     setIsHomePage(false);
