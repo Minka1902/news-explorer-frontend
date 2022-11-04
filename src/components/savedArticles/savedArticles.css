@@ -43,6 +43,7 @@
 	color: #1A1B22;
 	width: 530px;
 	margin: 0 0 30px 104px;
+	text-transform: capitalize;
 }
 
 .saved-articles__title{

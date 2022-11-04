@@ -67,6 +67,7 @@
 	height: 48px;
 	box-sizing: border-box;
 	justify-content: space-around;
+	text-transform: capitalize;
 }
 
 .header__button_menu{
