@@ -1,6 +1,6 @@
 import newsApiOBJ from '../../utils/newsApi';
 import usersApiOBJ from '../../utils/usersApi';
-import monthArray from '../../constants/constants';
+import findMonth from '../../constants/constants';
 import * as React from 'react'
 import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
 import Header from '../header/Header';
@@ -48,13 +48,10 @@ function App() {
     history.push('/');
   };
 
-  const toggleNoScroll = () => html.classList.toggle('no-scroll');
-
   const noScroll = () => html.classList.add('no-scroll');
 
   const scroll = () => html.classList.remove('no-scroll');
 
-  // ! Header handling
   // * Handling the logout click
   const handleLogout = () => {
     setLoggedIn(false);
@@ -196,23 +193,31 @@ function App() {
     }
   };
 
-  // * Handling the article date creation
-  const createDateText = (date) => {
-    const day = Number(`${date[8]}${date[9]}`);
-    const month = monthArray[Number(`${date[5]}${date[6]}`) - 1];
-    const year = Number(`${date[0]}${date[1]}${date[2]}${date[3]}`);
+  // * creating the correct date format
+  const createDateText = (date, isMain = true) => {
+    let day, month, year;
+    if(isMain){
+      day = Number(`${date[8]}${date[9]}`);
+      month = findMonth(`${date[5]}${date[6]}`);
+      year = Number(`${date[0]}${date[1]}${date[2]}${date[3]}`);
+    } else{
+      day = Number(`${date[8]}${date[9]}`);
+      month = findMonth(`${date[4]}${date[5]}${date[6]}`);
+      year = Number(`${date[11]}${date[12]}${date[13]}${date[14]}`);
+    }
     return `${month} ${day}, ${year}`;
   };
 
   // * Setting the partial articles array
   React.useEffect(() => {
-    if (articlesArray[2]) {
+    if(articlesArray){
       articlesArray.map((article) => article.publishedAt = createDateText(article.publishedAt));
-      setShowLessArray([articlesArray[0], articlesArray[1], articlesArray[2]]);
-    } else {
-      if (articlesArray[1]) {
-        articlesArray.map((article) => article.publishedAt = createDateText(article.publishedAt));
-        setShowLessArray([articlesArray[0], articlesArray[1]]);
+      if (articlesArray[2]) {
+        setShowLessArray([articlesArray[0], articlesArray[1], articlesArray[2]]);
+      } else {
+        if (articlesArray[1]) {
+          setShowLessArray([articlesArray[0], articlesArray[1]]);
+        }
       }
     }
   }, [articlesArray]);
@@ -244,6 +249,7 @@ function App() {
           if (articles) {
             currentUser.savedArticles = [];             // eslint-disable-next-line
             articles.map((article) => {
+              article.publishedAt = createDateText(article.publishedAt, false);
               if (article.ownerId === currentUser.id) {
                 currentUser.savedArticles.push(article);
               }
@@ -257,6 +263,7 @@ function App() {
     }
   };
 
+  // * running the 'isAutoLogin' function in the beggining
   React.useEffect(() => {
     isAutoLogin();            // eslint-disable-next-line
   }, []);

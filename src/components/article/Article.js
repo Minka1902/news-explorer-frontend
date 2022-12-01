@@ -78,12 +78,14 @@ export default function Article(props) {
 		setIsHovering(false);
 	};
 
+	// * opens the article in a new window
 	const onArticleClick = (evt) => {
 		if ((!evt.target.classList.contains("article__saved")) && (!evt.target.classList.contains("article__delete")) && (!evt.target.classList.contains("article__saved_active"))) {
 			window.open(article.url, '_blank', 'noopener,noreferrer');
 		}
 	}
 
+	// * determines if the article is saved or not
 	React.useEffect(() => {
 		if (isHomePage) {
 			if (article && currentUser) {			// eslint-disable-next-line
