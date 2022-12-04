@@ -2,7 +2,7 @@ import PopupWithForm from './PopupWithForm';
 import React from 'react';
 
 export default function LoginPopup(props) {
-  const { linkText, isOpen, handleSwitchPopup, handleLogin, onClose, buttonText, onPopupClick } = props;
+  const { linkText, isOpen, handleSwitchPopup, handleLogin, onClose, buttonText, onPopupClick, isPreloader } = props;
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isValid, setIsValid] = React.useState(false);
@@ -88,7 +88,7 @@ export default function LoginPopup(props) {
 
   return (
     <div onMouseDown={onPopupClick}>
-      <PopupWithForm onSubmit={handleSubmit} isValid={isValid} handleSwitchPopup={handleSwitchPopup} linkText={linkText} name="login" title="Sign in" isOpen={isOpen} onClose={onClose} buttonText={buttonText}>
+      <PopupWithForm preloaderText="Log you in" isPreloader={isPreloader} onSubmit={handleSubmit} isValid={isValid} handleSwitchPopup={handleSwitchPopup} linkText={linkText} name="login" title="Sign in" isOpen={isOpen} onClose={onClose} buttonText={buttonText}>
         <h3 className='popup__input-title'>Email</h3>
         <input
           className="popup__input"

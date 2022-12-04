@@ -33,6 +33,8 @@ function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
+  const [isSigninPreloader, setIsSigninPreloader] = React.useState(false);
+  const [isSignupPreloader, setIsSignupPreloader] = React.useState(false);
   const [q, setQ] = React.useState('news');
 
   const handleSignUpClick = () => setIsSignUpPopupOpen(true);
@@ -92,6 +94,7 @@ function App() {
     usersApiOBJ
       .login({ email, password })
       .then((data) => {
+        setIsSigninPreloader(true);
         if (data.jwt) {
           localStorage.setItem('jwt', data.jwt);
         }
@@ -100,10 +103,12 @@ function App() {
         }
       })
       .catch((err) => {
+        setIsSigninPreloader(true);
         console.log(`Error type: ${err.message}`);
         setLoggedIn(false);
       })
-      .finally(()=> {
+      .finally(() => {
+        setIsSigninPreloader(false);
         gettingSavedArticles();
       })
   };
@@ -134,10 +139,14 @@ function App() {
   const handleSignupSubmit = (email, password, username) => {
     usersApiOBJ
       .signUp({ email, password, username })
+      .then(() => {
+        setIsSignupPreloader(true);
+      })
       .catch((err) => {
         console.log(`Error type: ${err.message}`)
       })
       .finally(() => {
+        setIsSignupPreloader(false);
         closeAllPopups();
         setIsLoginPopupOpen(true);
       })
@@ -196,11 +205,11 @@ function App() {
   // * creating the correct date format
   const createDateText = (date, isMain = true) => {
     let day, month, year;
-    if(isMain){
+    if (isMain) {
       day = Number(`${date[8]}${date[9]}`);
       month = findMonth(`${date[5]}${date[6]}`);
       year = Number(`${date[0]}${date[1]}${date[2]}${date[3]}`);
-    } else{
+    } else {
       day = Number(`${date[8]}${date[9]}`);
       month = findMonth(`${date[4]}${date[5]}${date[6]}`);
       year = Number(`${date[11]}${date[12]}${date[13]}${date[14]}`);
@@ -210,7 +219,7 @@ function App() {
 
   // * Setting the partial articles array
   React.useEffect(() => {
-    if(articlesArray){
+    if (articlesArray) {
       articlesArray.map((article) => article.publishedAt = createDateText(article.publishedAt));
       if (articlesArray[2]) {
         setShowLessArray([articlesArray[0], articlesArray[1], articlesArray[2]]);
@@ -328,6 +337,7 @@ function App() {
             linkText="Sign up"
             buttonText="Sign up"
             handleSwitchPopup={handleLoginClick}
+            isPreloader={isSignupPreloader}
           />
           <LoginPopup
             isOpen={isLoginPopupOpen}
@@ -336,6 +346,7 @@ function App() {
             buttonText="Sign in"
             handleSwitchPopup={handleSignUpClick}
             handleLogin={handleLoginSubmit}
+            isPreloader={isSigninPreloader}
           />
           <AboutTheAuthor />
         </Route>
