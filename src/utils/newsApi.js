@@ -10,7 +10,7 @@ class newsApi {
     this._q = 'news';
   }
   
-  _fetch = ({ url, method, data = this._q }) =>
+  _fetch = ({ method, data = this._q }) =>
     fetch(`${this._rootUrl}${this._authToken}&from=${this._fromDate}&to=${this._todaysDate}&q=${data}`, {
       method,
     }).then(this._handleResponse)

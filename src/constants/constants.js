@@ -3,7 +3,7 @@ const shortMonthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug
 
 const findMonth = (month) => {
 	let index;
-	if(month.length == 2){
+	if(month.length === 2){
 		index = Number(month) - 1;
 	}else{
 		index = shortMonthArray.indexOf(month);

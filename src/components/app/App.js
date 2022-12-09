@@ -33,9 +33,8 @@ function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
-  const [isSigninPreloader, setIsSigninPreloader] = React.useState(false);
-  const [isSignupPreloader, setIsSignupPreloader] = React.useState(false);
   const [q, setQ] = React.useState('news');
+  const [isResults, setIsResults] = React.useState(true);
 
   const handleSignUpClick = () => setIsSignUpPopupOpen(true);
 
@@ -94,7 +93,6 @@ function App() {
     usersApiOBJ
       .login({ email, password })
       .then((data) => {
-        setIsSigninPreloader(true);
         if (data.jwt) {
           localStorage.setItem('jwt', data.jwt);
         }
@@ -103,12 +101,10 @@ function App() {
         }
       })
       .catch((err) => {
-        setIsSigninPreloader(true);
         console.log(`Error type: ${err.message}`);
         setLoggedIn(false);
       })
       .finally(() => {
-        setIsSigninPreloader(false);
         gettingSavedArticles();
       })
   };
@@ -139,14 +135,10 @@ function App() {
   const handleSignupSubmit = (email, password, username) => {
     usersApiOBJ
       .signUp({ email, password, username })
-      .then(() => {
-        setIsSignupPreloader(true);
-      })
       .catch((err) => {
         console.log(`Error type: ${err.message}`)
       })
       .finally(() => {
-        setIsSignupPreloader(false);
         closeAllPopups();
         setIsLoginPopupOpen(true);
       })
@@ -183,11 +175,11 @@ function App() {
         .then((data) => {
           if (data.totalResults !== 0) {
             setArticlesArray(data.articles);
-            setIsResultsOpen(true);
+            setIsResults(true);
           } else {
             setArticlesArray(data.articles);
             setShowLessArray(data.articles);
-            setIsResultsOpen(false);
+            setIsResults(false);
           }
         })
         .catch((err) => {
@@ -328,6 +320,7 @@ function App() {
               isPreloader={isPreloader}
               gettingSavedArticles={gettingSavedArticles}
               q={q}
+              isResults={isResults}
             />
           }
           <SignUpPopup
@@ -337,7 +330,6 @@ function App() {
             linkText="Sign up"
             buttonText="Sign up"
             handleSwitchPopup={handleLoginClick}
-            isPreloader={isSignupPreloader}
           />
           <LoginPopup
             isOpen={isLoginPopupOpen}
@@ -346,7 +338,6 @@ function App() {
             buttonText="Sign in"
             handleSwitchPopup={handleSignUpClick}
             handleLogin={handleLoginSubmit}
-            isPreloader={isSigninPreloader}
           />
           <AboutTheAuthor />
         </Route>
