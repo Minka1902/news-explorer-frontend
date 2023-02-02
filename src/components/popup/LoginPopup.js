@@ -2,14 +2,14 @@ import PopupWithForm from './PopupWithForm';
 import React from 'react';
 
 export default function LoginPopup(props) {
-  const { linkText, isOpen, handleSwitchPopup, handleLogin, onClose, buttonText, onPopupClick } = props;
+  const { linkText, isOpen, handleSwitchPopup, isFound, handleLogin, onClose, buttonText, onPopupClick } = props;
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isValid, setIsValid] = React.useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = React.useState(true);
+  const [isEmailCorrect, setIsEmailCorrect] = React.useState(true);
   const [shouldAddSSign, setShouldAddSSign] = React.useState(false);
   const [passwordErrorText, setPasswordErrorText] = React.useState('Password incorrect');
-  const [isEmailCorrect, setIsEmailCorrect] = React.useState(true);
 
   // ! submit
   const handleSubmit = (evt) => {
@@ -118,6 +118,7 @@ export default function LoginPopup(props) {
           onChange={(evt) => setPassword(evt.currentTarget.value)}
         />
         <p className={`popup__error-massage${isPasswordCorrect ? '' : '_visible'}${shouldAddSSign ? '_visible' : ''}`}>{passwordErrorText}</p>
+        <p className={`popup__error-massage${isFound ? '' : '_visible'}`}>User not found</p>
       </PopupWithForm>
     </div>
   );

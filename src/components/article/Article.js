@@ -50,7 +50,7 @@ export default function Article(props) {
 						}
 					}
 					const jwt = localStorage.getItem('jwt');
-					if (jwt && idToDelete != '') {
+					if (jwt && idToDelete !== '') {
 						usersApiOBJ 			// * unsaving the article
 							.unsaveArticle(idToDelete)
 							.then((deletedArticle) => {
@@ -90,7 +90,7 @@ export default function Article(props) {
 		if (isHomePage) {
 			if (article && currentUser) {			// eslint-disable-next-line
 				currentUser.savedArticles.map((savedArticle) => {
-					if (article.url == savedArticle.url) {
+					if (article.url === savedArticle.url) {
 						setIsSaved(true);
 					}
 				});

@@ -35,10 +35,15 @@ function App() {
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('news');
   const [isResults, setIsResults] = React.useState(true);
+  const [isUserFound, setIsUserFound] =React.useState(true);
 
   const handleSignUpClick = () => setIsSignUpPopupOpen(true);
 
   const handleLoginClick = () => setIsLoginPopupOpen(true);
+  
+  const noScroll = () => html.classList.add('no-scroll');
+  
+  const scroll = () => html.classList.remove('no-scroll');
 
   const closeAllPopups = () => {
     setIsSignUpPopupOpen(false);
@@ -46,12 +51,9 @@ function App() {
     if (window.innerWidth < 520) {
       noScroll();
     }
+    setIsUserFound(true);
     history.push('/');
   };
-
-  const noScroll = () => html.classList.add('no-scroll');
-
-  const scroll = () => html.classList.remove('no-scroll');
 
   // * Handling the logout click
   const handleLogout = () => {
@@ -97,11 +99,15 @@ function App() {
           localStorage.setItem('jwt', data.jwt);
         }
         if (data.user._id) {
+          setIsUserFound(true);
           findUserInfo();
         }
       })
       .catch((err) => {
         console.log(`Error type: ${err.message}`);
+        if((err === 'Error: 404') || (err.message === 'Failed to fetch')){
+          setIsUserFound(false);
+        }
         setLoggedIn(false);
       })
       .finally(() => {
@@ -338,6 +344,7 @@ function App() {
             buttonText="Sign in"
             handleSwitchPopup={handleSignUpClick}
             handleLogin={handleLoginSubmit}
+            isFound={isUserFound}
           />
           <AboutTheAuthor />
         </Route>
