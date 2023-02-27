@@ -2,7 +2,7 @@ import * as React from 'react';
 import Project from './Project';
 
 export default function Projects() {
-	const projects = [{ name: 'EPSG convert program and Map', imageUrl: '../../images/map-project-image.jpg', description: `This project was built using react-leaflet and openStreetMap resources. Very easy to use and understand. Just enter the location and convert it from EPSG 4326 to any EPSG you want.`, projectUrl: 'http://localhost:3000/' }];
+	const projects = [{ name: 'EPSG convert program and Map', imageUrl: 'https://miro.medium.com/max/1400/1*cX1Ve9_YQ2fQwjgA04yZ-g.png', description: `This project was built using react-leaflet and openStreetMap resources. Very easy to use and understand. Just enter the location and convert it from EPSG 4326 to any EPSG you want.`, projectUrl: 'http://localhost:3000/' }];
 
 	return (
 		<section className='projects'>
