@@ -21,6 +21,9 @@
 /* ! saved-articles */
 @import url('./components/savedArticles/savedArticles.css');
 
+/* ! projects */
+@import url('./components/projects/projects.css');
+
 /* ! about the author */
 @import url('./components/aboutTheAuthor/aboutTheAuthor.css');
 

@@ -4,6 +4,7 @@ import findMonth from '../../constants/constants';
 import * as React from 'react'
 import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
 import Header from '../header/Header';
+import Projects from '../projects/Projects';
 import AboutTheAuthor from '../aboutTheAuthor/AboutTheAuthor';
 import Footer from '../footer/Footer';
 import SignUpPopup from '../popup/SignUpPopup';
@@ -35,14 +36,14 @@ function App() {
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('news');
   const [isResults, setIsResults] = React.useState(true);
-  const [isUserFound, setIsUserFound] =React.useState(true);
+  const [isUserFound, setIsUserFound] = React.useState(true);
 
   const handleSignUpClick = () => setIsSignUpPopupOpen(true);
 
   const handleLoginClick = () => setIsLoginPopupOpen(true);
-  
+
   const noScroll = () => html.classList.add('no-scroll');
-  
+
   const scroll = () => html.classList.remove('no-scroll');
 
   const closeAllPopups = () => {
@@ -105,7 +106,7 @@ function App() {
       })
       .catch((err) => {
         console.log(`Error type: ${err.message}`);
-        if((err === 'Error: 404') || (err.message === 'Failed to fetch')){
+        if ((err === 'Error: 404') || (err.message === 'Failed to fetch')) {
           setIsUserFound(false);
         }
         setLoggedIn(false);
@@ -346,6 +347,7 @@ function App() {
             handleLogin={handleLoginSubmit}
             isFound={isUserFound}
           />
+          <Projects />
           <AboutTheAuthor />
         </Route>
       </Switch>
