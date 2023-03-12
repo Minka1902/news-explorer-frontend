@@ -9,7 +9,7 @@
 
 .projects__title{
 	font-family: 'Roboto Slab', Arial, sans-serif;
-	margin: 0 auto 15px;
+	margin: 15px auto;
 }
 
 .projects__list{
@@ -17,8 +17,8 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: min-content;
-	margin: 0 auto 64px;
+	width: 90%;
+	margin: 0 auto;
 	padding: 0;
 }
 
@@ -62,7 +62,39 @@
 }
 
 .project__image{
-	border-radius: 100px;
+	border-radius: 2px;
 	width: 150px;
 	height: 150px;
+	object-fit: fill;
+	border: 0.5px solid #cbcdce;
+}
+
+@media screen and (max-width: 703.5px) {
+	.project{
+		width: 100%;
+	}
+
+	.projects__title{
+		font-size: 15px;
+		line-height: 17px;
+	}
+
+	.project__container{
+		width: 100%;
+	}
+
+	.project__name{
+		font-size: 10px;
+		line-height: 13px;
+	}
+
+	.project__description{
+		font-size: 8px;
+		line-height: 11px;
+	}
+
+	.project__image{
+		width: 75px;
+		height: 75px;
+	}
 }

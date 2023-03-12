@@ -1,15 +1,14 @@
 import * as React from 'react';
 import Project from './Project';
+import projects from '../../constants/projects';
 
 export default function Projects() {
-	const projects = [{ name: 'EPSG convert program and Map', imageUrl: 'https://miro.medium.com/max/1400/1*cX1Ve9_YQ2fQwjgA04yZ-g.png', description: `This project was built using react-leaflet and openStreetMap resources. Very easy to use and understand. Just enter the location and convert it from EPSG 4326 to any EPSG you want.`, projectUrl: 'http://localhost:3000/' }];
-
 	return (
 		<section className='projects'>
 			<h1 className='projects__title'>Other Projects</h1>
 			<ul className='projects__list'>
-				{projects.map((project) => {
-					return <Project project={project} key={1} />;
+				{projects.map((project, idnex) => {
+					return <Project project={project} key={idnex} />;
 				})}
 			</ul>
 		</section>
