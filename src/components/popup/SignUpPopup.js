@@ -2,7 +2,7 @@ import PopupWithForm from './PopupWithForm';
 import React from 'react';
 
 export default function SignUpPopup(props) {
-  const { isOpen, onClose, handleSwitchPopup, handleSignup, buttonText, onPopupClick } = props;
+  const { isOpen, onClose, handleSwitchPopup, handleSignup, buttonText } = props;
   const [isValid, setIsValid] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -67,7 +67,7 @@ export default function SignUpPopup(props) {
           setIsPasswordCorrect(false);
         }
       }
-    } else{
+    } else {
       setIsPasswordCorrect(false);
       setPasswordErrorText('Password to short!');
     }
@@ -114,54 +114,52 @@ export default function SignUpPopup(props) {
   }, [email, password, username]);
 
   return (
-    <div onMouseDown={onPopupClick}>
-      <PopupWithForm name="signup" isValid={isValid} title="Sign up" onSubmit={handleSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={onClose} linkText="Sign in" buttonText={buttonText}>
-        <h3 className='popup__input-title'>Email</h3>
-        <input
-          className="popup__input"
-          value={email}
-          onChange={(evt) => setEmail(evt.currentTarget.value)}
-          placeholder="Enter email"
-          id="signup-email-input"
-          type="email"
-          name="emailInput"
-          required
-          minLength="2"
-          maxLength="40"
-          autoComplete="off"
-        />
-        <p className={`popup__error-massage${isEmailCorrect ? '' : '_visible'}`}>Email incorrect.</p>
-        <h3 className='popup__input-title'>Password</h3>
-        <input
-          className="popup__input"
-          value={password}
-          onChange={(evt) => setPassword(evt.currentTarget.value)}
-          placeholder="Enter password"
-          id="signup-password-input"
-          type="password"
-          name="passwordInput"
-          required
-          minLength="2"
-          maxLength="200"
-          autoComplete="off"
-        />
-        <p className={`popup__error-massage${isPasswordCorrect ? '' : '_visible'}${shouldAddSSign ? '_visible' : ''}`}>{passwordErrorText}</p>
-        <h3 className='popup__input-title'>Username</h3>
-        <input
-          className="popup__input"
-          value={username}
-          onChange={(evt) => setUsername(evt.currentTarget.value)}
-          placeholder="Enter your username"
-          id="signup-username-input"
-          type="text"
-          name="usernameInput"
-          required
-          minLength="2"
-          maxLength="200"
-          autoComplete="off"
-        />
-        <p className={`popup__error-massage${isUsernameCorrect ? '' : '_visible'}`}>Name incorrect.</p>
-      </PopupWithForm>
-    </div>
+    <PopupWithForm name="signup" isValid={isValid} title="Sign up" onSubmit={handleSubmit} handleSwitchPopup={handleSwitchPopup} isOpen={isOpen} onClose={onClose} linkText="Sign in" buttonText={buttonText}>
+      <h3 className='popup__input-title'>Email</h3>
+      <input
+        className="popup__input"
+        value={email}
+        onChange={(evt) => setEmail(evt.currentTarget.value)}
+        placeholder="Enter email"
+        id="signup-email-input"
+        type="email"
+        name="emailInput"
+        required
+        minLength="2"
+        maxLength="40"
+        autoComplete="off"
+      />
+      <p className={`popup__error-massage${isEmailCorrect ? '' : '_visible'}`}>Email incorrect.</p>
+      <h3 className='popup__input-title'>Password</h3>
+      <input
+        className="popup__input"
+        value={password}
+        onChange={(evt) => setPassword(evt.currentTarget.value)}
+        placeholder="Enter password"
+        id="signup-password-input"
+        type="password"
+        name="passwordInput"
+        required
+        minLength="2"
+        maxLength="200"
+        autoComplete="off"
+      />
+      <p className={`popup__error-massage${isPasswordCorrect ? '' : '_visible'}${shouldAddSSign ? '_visible' : ''}`}>{passwordErrorText}</p>
+      <h3 className='popup__input-title'>Username</h3>
+      <input
+        className="popup__input"
+        value={username}
+        onChange={(evt) => setUsername(evt.currentTarget.value)}
+        placeholder="Enter your username"
+        id="signup-username-input"
+        type="text"
+        name="usernameInput"
+        required
+        minLength="2"
+        maxLength="200"
+        autoComplete="off"
+      />
+      <p className={`popup__error-massage${isUsernameCorrect ? '' : '_visible'}`}>Name incorrect.</p>
+    </PopupWithForm>
   );
 }

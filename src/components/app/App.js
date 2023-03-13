@@ -7,10 +7,11 @@ import Header from '../header/Header';
 import Projects from '../projects/Projects';
 import AboutTheAuthor from '../aboutTheAuthor/AboutTheAuthor';
 import Footer from '../footer/Footer';
-import SignUpPopup from '../popup/SignUpPopup';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as auth from '../../utils/auth';
+import SignUpPopup from '../popup/SignUpPopup';
 import LoginPopup from '../popup/LoginPopup';
+import PopupProject from '../popup/PopupProject';
 import Main from '../main/Main';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import SavedArticles from '../savedArticles/SavedArticles';
@@ -32,15 +33,30 @@ function App() {
   const [isResultsOpen, setIsResultsOpen] = React.useState(true);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState();
+  const [imageSrc, setImageSrc] = React.useState();
+  const [imageAlt, setImageAlt] = React.useState();
+  const [imageDiscription, setImageDiscription] = React.useState();
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('news');
   const [isResults, setIsResults] = React.useState(true);
   const [isUserFound, setIsUserFound] = React.useState(true);
 
-  const handleSignUpClick = () => setIsSignUpPopupOpen(true);
+  const handleSignUpClick = () => {
+    noScroll();
+    setIsSignUpPopupOpen(true);
+  };
 
-  const handleLoginClick = () => setIsLoginPopupOpen(true);
+  const handleProjectClick = () => {
+    noScroll();
+    setIsImagePopupOpen(true);
+  };
+
+  const handleLoginClick = () => {
+    noScroll();
+    setIsLoginPopupOpen(true);
+  };
 
   const noScroll = () => html.classList.add('no-scroll');
 
@@ -49,8 +65,11 @@ function App() {
   const closeAllPopups = () => {
     setIsSignUpPopupOpen(false);
     setIsLoginPopupOpen(false);
+    setIsImagePopupOpen(false);
     if (window.innerWidth < 520) {
       noScroll();
+    } else {
+      scroll();
     }
     setIsUserFound(true);
     history.push('/');
@@ -347,7 +366,19 @@ function App() {
             handleLogin={handleLoginSubmit}
             isFound={isUserFound}
           />
-          <Projects />
+          <PopupProject
+            isOpen={isImagePopupOpen}
+            onClose={closeAllPopups}
+            imageSrc={imageSrc}
+            imageDiscription={imageDiscription}
+            imageAlt={imageAlt}
+          />
+          <Projects
+            openProject={handleProjectClick}
+            setImageDiscription={setImageDiscription}
+            setImageAlt={setImageAlt}
+            setImageSrc={setImageSrc}
+          />
           <AboutTheAuthor />
         </Route>
       </Switch>

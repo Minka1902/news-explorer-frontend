@@ -210,6 +210,18 @@
     margin: -6px 0 22px 0;
 }
 
+.popup__title_project {
+    width: 358px;
+    text-align: left;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 28px;
+    color: white;
+    margin: -6px 0 22px 0;
+}
+
 .popup_opened {
     visibility: visible;
     opacity: 1;

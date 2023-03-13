@@ -1,14 +1,21 @@
 import * as React from 'react';
 
 export default function Project(props) {
-    const { project } = props;
+    const { project, openProject, setImageDiscription, setImageAlt, setImageSrc } = props;
 
     const onProjectClick = () => {
         window.open(project.projectUrl, '_blank', 'noopener,noreferrer');
     };
 
+    const onOpen = () =>{
+        setImageSrc(project.imageUrl);
+        setImageDiscription(project.description);
+        setImageAlt(project.name);
+        openProject();
+    }
+
     return (
-        <li className='project' onClick={onProjectClick}>
+        <li className='project' onClick={onOpen}>
             <img className='project__image' src={project.imageUrl} alt={project.name} />
             <div className='project__container'>
                 <h1 className='project__name'>{project.name}</h1>
