@@ -8,7 +8,7 @@ export default function AboutTheAuthor() {
 			<div className="about-the-author__container">
 				<h2 className="about-the-author__title">About the author</h2>
 				<p className="about-the-author__text">
-					I'm <span className='about-the-author__text_bold'>Michael Scharff</span>, a 22 years old Israeli. After completing my IDF service as a platoon sergant
+					I'm <span className='about-the-author__text_bold'>Michael Scharff</span>, a 23 years old Israeli. After completing my IDF service as a platoon sergant
 					in 2021, I decided to become a full stack web developer and completed a 10 months bootcamp at Practicum-100.
 				</p>
 				<p className="about-the-author__text">
