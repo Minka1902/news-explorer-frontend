@@ -1,18 +1,18 @@
-.projects{    
+.projects {
 	width: 100%;
-    display: flex;
+	display: flex;
 	flex-direction: column;
 	position: relative;
 	background-color: white;
 	justify-content: center;
 }
 
-.projects__title{
+.projects__title {
 	font-family: 'Roboto Slab', Arial, sans-serif;
 	margin: 15px auto;
 }
 
-.projects__list{
+.projects__list {
 	list-style: none;
 	display: flex;
 	flex-direction: column;
@@ -22,7 +22,7 @@
 	padding: 0;
 }
 
-.project{
+.project {
 	display: flex;
 	height: min-content;
 	flex-direction: row;
@@ -31,7 +31,7 @@
 	cursor: pointer;
 }
 
-.project__name{
+.project__name {
 	font-family: 'Roboto Slab', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 700;
@@ -44,7 +44,7 @@
 	overflow: hidden;
 }
 
-.project__description{
+.project__description {
 	font-family: 'Roboto Slab', Arial, sans-serif;
 	font-style: normal;
 	font-weight: 700;
@@ -54,15 +54,15 @@
 	margin: 0;
 }
 
-.project__container{
+.project__container {
 	display: flex;
 	flex-direction: column;
-	width: 400px;
+	width: 300px;
 	align-items: left;
 	margin-left: 15px;
 }
 
-.project__image{
+.project__image {
 	border-radius: 2px;
 	width: 150px;
 	height: 150px;
@@ -71,31 +71,28 @@
 }
 
 @media screen and (max-width: 703.5px) {
-	.project{
-		width: 100%;
+	.project {
+		flex-direction: column;
+		width: 300px;
 	}
 
-	.projects__title{
+	.projects__title {
 		font-size: 15px;
 		line-height: 17px;
 	}
 
-	.project__container{
+	.project__container {
 		width: 100%;
 	}
 
-	.project__name{
-		font-size: 10px;
-		line-height: 13px;
+	.project__image {
+		margin: auto;
+		width: 250px;
+		height: 250px;
 	}
 
-	.project__description{
-		font-size: 8px;
-		line-height: 11px;
-	}
-
-	.project__image{
-		width: 75px;
-		height: 75px;
+	.project__container {
+		text-align: center;
+		margin: 0;
 	}
 }

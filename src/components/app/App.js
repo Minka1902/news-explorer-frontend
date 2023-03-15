@@ -33,7 +33,7 @@ function App() {
   const [isResultsOpen, setIsResultsOpen] = React.useState(true);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = React.useState();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState();
-  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState();
+  const [isProjectPopupOpen, setIsProjectPopupOpen] = React.useState();
   const [imageSrc, setImageSrc] = React.useState();
   const [imageAlt, setImageAlt] = React.useState();
   const [imageDiscription, setImageDiscription] = React.useState();
@@ -50,7 +50,7 @@ function App() {
 
   const handleProjectClick = () => {
     noScroll();
-    setIsImagePopupOpen(true);
+    setIsProjectPopupOpen(true);
   };
 
   const handleLoginClick = () => {
@@ -62,11 +62,11 @@ function App() {
 
   const scroll = () => html.classList.remove('no-scroll');
 
-  const closeAllPopups = () => {
+  const closeAllPopups = ({ isProject }) => {
     setIsSignUpPopupOpen(false);
     setIsLoginPopupOpen(false);
-    setIsImagePopupOpen(false);
-    if (window.innerWidth < 520) {
+    setIsProjectPopupOpen(false);
+    if ((window.innerWidth < 520) && (!isProject)) {
       noScroll();
     } else {
       scroll();
@@ -88,7 +88,7 @@ function App() {
   React.useEffect(() => {
     const closeByEscape = (evt) => {
       if (evt.key === 'Escape') {
-        closeAllPopups();
+        closeAllPopups({ isProject: true });
       }
     };
 
@@ -101,8 +101,12 @@ function App() {
   // ! Mouse event
   React.useEffect(() => {
     const closeByClick = (evt) => {
-      if (evt.target.classList.contains("popup")) {
-        closeAllPopups();
+      if (evt.target.classList.contains('popup_type_project')) {
+        closeAllPopups({ isProject: true });
+      } else {
+        if (evt.target.classList.contains("popup")) {
+          closeAllPopups({ isProject: false });
+        }
       }
     }
 
@@ -153,7 +157,7 @@ function App() {
         }
       })
       .finally(() => {
-        closeAllPopups();
+        closeAllPopups({ isProject: false });
       });
   }
 
@@ -367,7 +371,7 @@ function App() {
             isFound={isUserFound}
           />
           <PopupProject
-            isOpen={isImagePopupOpen}
+            isOpen={isProjectPopupOpen}
             onClose={closeAllPopups}
             imageSrc={imageSrc}
             imageDiscription={imageDiscription}

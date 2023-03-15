@@ -6,7 +6,7 @@ export default function PopupWithForm(props) {
 
 	// ! Switching between popups
 	const handleLinkClick = () => {
-		onClose();
+		onClose({ isProject: false });
 		handleSwitchPopup();
 	}
 
