@@ -386,7 +386,6 @@ function App() {
           <AboutTheAuthor />
         </Route>
       </Switch>
-
       <Footer homeClick={homeClick} />
     </CurrentUserContext.Provider>
   );

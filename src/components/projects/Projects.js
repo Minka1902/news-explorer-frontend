@@ -9,8 +9,9 @@ export default function Projects(props) {
 		<section className='projects'>
 			<h1 className='projects__title'>Other Projects</h1>
 			<ul className='projects__list'>
-				{projects.map((project, idnex) => {
-					return <Project key={idnex}
+				{projects.map((project, index) => {
+					return <Project key={index}
+						isEven={(index + 1) % 2 === 0 ? true : false}
 						project={project}
 						openProject={openProject}
 						setImageDiscription={setImageDiscription}

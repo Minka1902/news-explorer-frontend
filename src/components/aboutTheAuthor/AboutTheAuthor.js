@@ -9,10 +9,10 @@ export default function AboutTheAuthor() {
 				<h2 className="about-the-author__title">About the author</h2>
 				<p className="about-the-author__text">
 					I'm <span className='about-the-author__text_bold'>Michael Scharff</span>, a 23 years old Israeli. After completing my IDF service as a platoon sergant
-					in 2021, I decided to become a full stack web developer and completed a 10 months bootcamp at Practicum-100.
+					in 2021, I decided to become a full stack developer and completed a 10 months bootcamp at Practicum-100.
 				</p>
 				<p className="about-the-author__text">
-					Now I'm looking to join a leading edge technological company as a junior web developer.
+					Now I'm looking to join a leading edge technological company as a junior full stack developer.
 				</p>
 				<p className="about-the-author__text">
 					My better qualities are working hard, being a good person and a team player. I like playing chess,

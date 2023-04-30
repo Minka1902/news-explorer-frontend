@@ -28,7 +28,7 @@ export default function SearchBar(props) {
 					className="search-bar__input"
 					type="text" id="search-bar-input"
 					name="search-bar-input"
-					placeholder="Nature" />
+					placeholder="News" />
 				<button className="search-bar__button" type="submit" onClick={mouseDown} onMouseUp={mouseUp}>Search</button>
 			</form>
 		</div>

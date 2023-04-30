@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 export default function Project(props) {
-    const { project, openProject, setImageDiscription, setImageAlt, setImageSrc } = props;
+    const { project, openProject, setImageDiscription, setImageAlt, setImageSrc, isEven } = props;
 
     const onProjectClick = () => {
         window.open(project.projectUrl, '_blank', 'noopener,noreferrer');
     };
 
-    const onOpen = () =>{
+    const onOpen = () => {
         setImageSrc(project.imageUrl);
         setImageDiscription(project.description);
         setImageAlt(project.name);
@@ -15,7 +15,7 @@ export default function Project(props) {
     }
 
     return (
-        <li className='project' onClick={onOpen}>
+        <li className={`project ${isEven ? 'project_reversed' : ''}`} onClick={onOpen}>
             <img className='project__image' src={project.imageUrl} alt={project.name} />
             <div className='project__container'>
                 <h1 className='project__name'>{project.name}</h1>
