@@ -1,6 +1,6 @@
 import newsApiOBJ from '../../utils/newsApi';
 import usersApiOBJ from '../../utils/usersApi';
-import findMonth from '../../constants/constants';
+import { findMonth } from '../../constants/constants';
 import * as React from 'react'
 import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
 import Header from '../header/Header';
@@ -17,6 +17,7 @@ import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import SavedArticles from '../savedArticles/SavedArticles';
 import SearchBar from '../searchBar/SearchBar';
 import NotFound from '../notFound/NotFound';
+import Calendar from '../calendar/Calendar';
 
 function App() {
   // eslint-disable-next-line
@@ -267,7 +268,7 @@ function App() {
   const homeClick = () => {
     history.push("/");
     setIsHomePage(true);
-    if (window.innerWidth < 520) {
+    if (window.innerWidth <= 520) {
       scroll();
     }
   };
@@ -386,6 +387,7 @@ function App() {
           <AboutTheAuthor />
         </Route>
       </Switch>
+      <Calendar />
       <Footer homeClick={homeClick} />
     </CurrentUserContext.Provider>
   );

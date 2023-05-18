@@ -23,12 +23,15 @@ export default function Header(props) {
 	};
 
 	React.useEffect(() => {
+		window.addEventListener('resize', checkWindowDimensions);
+		window.removeEventListener('resize', checkWindowDimensions);
+
 		checkWindowDimensions();
 	}, [isHomePage]);
 
 	React.useEffect(() => {
 		if (window.innerWidth < 520 && isLoggedIn === true) {
-			if(!isFirstRender){
+			if (!isFirstRender) {
 				toggleNavMenu();
 			}
 			setIsFirstRender(false);
@@ -41,10 +44,10 @@ export default function Header(props) {
 	});
 
 	const toggleNavMenu = () => {
-		if(isNavMenuOpen){
+		if (isNavMenuOpen) {
 			setIsNavMenuOpen(false);
 			scroll();
-		}else{
+		} else {
 			setIsNavMenuOpen(true);
 			noScroll();
 		}
