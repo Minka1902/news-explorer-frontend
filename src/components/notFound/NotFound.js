@@ -8,4 +8,4 @@ export default function NotFound() {
 			<h3 className='not-found__subtitle'>Sorry, but nothing matched your search terms.</h3>
 		</div>
   	);
-}
+};

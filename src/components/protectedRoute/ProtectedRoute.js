@@ -7,6 +7,6 @@ function ProtectedRoute({children, loggedIn, ...props}) {
       {loggedIn ? children : <Redirect to="/"/> }
     </Route>
   );
-}
+};
 
 export default ProtectedRoute;

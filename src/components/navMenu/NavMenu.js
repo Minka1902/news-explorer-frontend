@@ -21,4 +21,5 @@ export default function NavMenu(props) {
 			<div className={`overlay${isOpen?' overlay_opened':''}`}></div>
 		</>
 	);
-  }
+  };
+  

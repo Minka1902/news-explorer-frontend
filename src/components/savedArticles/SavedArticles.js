@@ -30,4 +30,4 @@ export default function SavedArticles(props) {
 			</ul>
 		</section>
 	);
-}
+};

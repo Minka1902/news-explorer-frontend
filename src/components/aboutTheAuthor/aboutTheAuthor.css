@@ -69,11 +69,11 @@
 	}
 
 	.about-the-author__text{
-		width: 288px !important;
 		margin: 0 !important;
 	}
 
 	.about-the-author__container{
+		width: 100%;
 		margin: 0 auto !important;
 		justify-content: center !important;
 		align-items: center !important;

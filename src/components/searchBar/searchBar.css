@@ -86,10 +86,10 @@
 
 @media screen and (max-width: 703.5px) {
 	.search-bar__title {
-		width: 285px !important;
+		width: 85%;
 		font-size: 36px !important;
 		line-height: 40px !important;
-		margin: 30px auto 16px auto !important;
+		margin: 30px auto 16px auto ;
 	}
 
 	.search-bar__subtitle {
@@ -104,14 +104,17 @@
 	}
 	
 	.search-bar__input{
+		width: 85%;
 		color: #B6BCBF !important;
 		padding: 17px 16px !important;
+		margin: auto 7.5%;
 		margin-bottom: 16px !important;
 	}
 
 	.search-bar__button{
+		width: 85% !important;
 		height: 56px !important;
-		width: 100% !important;
+		margin: auto 7.5%;
 		position: static !important;
 	}
 }

@@ -162,4 +162,4 @@ export default function SignUpPopup(props) {
       <p className={`popup__error-massage${isUsernameCorrect ? '' : '_visible'}`}>Name incorrect.</p>
     </PopupWithForm>
   );
-}
+};

@@ -91,8 +91,8 @@ export default function Header(props) {
 	}
 
 	return (
-		<div className={`h-sb__container${theme ? ' h-sb__container_no-background' : ''}`}>
-			<header className={`header${theme ? ' header_theme_dark' : ''}${isNavMenuOpen ? ' header_darker' : ''}`}>
+		<div className={`h-sb__container${theme ? ' h-sb__container_no-background' : ''}`} >
+			<header id='page-header' className={`header${theme ? ' header_theme_dark' : ''}${isNavMenuOpen ? ' header_darker' : ''}`}>
 				<img className={`header__logo ${theme ? 'header__logo_theme_dark' : ''}${isNavMenuOpen ? '_not' : ''}`} src={determineLogoSrc()} alt="News explorer logo" />
 				{isNavBar ?
 					<>
@@ -113,4 +113,4 @@ export default function Header(props) {
 			{children}
 		</div>
 	);
-}
+};

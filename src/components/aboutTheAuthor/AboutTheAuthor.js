@@ -8,7 +8,7 @@ export default function AboutTheAuthor() {
 			<div className="about-the-author__container">
 				<h2 className="about-the-author__title">About the author</h2>
 				<p className="about-the-author__text">
-					I'm <span className='about-the-author__text_bold'>Michael Scharff</span>, a 23 years old Israeli. After completing my IDF service as a platoon sergant
+					I'm <span className='about-the-author__text_bold'>Michael Scharff</span>, a 23 years old Israeli. After completing my IDF service as a platoon sergeant
 					in 2021, I decided to become a full stack developer and completed a 10 months bootcamp at Practicum-100.
 				</p>
 				<p className="about-the-author__text">
@@ -20,9 +20,9 @@ export default function AboutTheAuthor() {
 				</p>
 				<p className="about-the-author__text">
 					<br></br>
-					You can call me on <span className='about-the-author__text_bold'>+972-585241224</span> or email to <a className='about-the-author__text' href = "mailto: minka.scharff@gmail.com">minka.scharff@gmail.com</a>
+					You can call me on <a className='about-the-author__text' href='tel:+972585241224'><span className='about-the-author__text_bold'>+972-585241224</span></a> or email to <a className='about-the-author__text' href="mailto: minka.scharff@gmail.com">minka.scharff@gmail.com</a>
 				</p>
 			</div>
 		</div>
 	);
-}
+};

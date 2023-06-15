@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export default function Project(props) {
-    const { project, openProject, setImageDiscription, setImageAlt, setImageSrc, isEven } = props;
+    const { project, openProject, setImageDescription, setImageAlt, setImageSrc, isEven } = props;
 
     const onProjectClick = () => {
         window.open(project.projectUrl, '_blank', 'noopener,noreferrer');
@@ -9,7 +9,7 @@ export default function Project(props) {
 
     const onOpen = () => {
         setImageSrc(project.imageUrl);
-        setImageDiscription(project.description);
+        setImageDescription(project.description);
         setImageAlt(project.name);
         openProject();
     }
@@ -23,4 +23,4 @@ export default function Project(props) {
             </div>
         </li>
     );
-}
+};

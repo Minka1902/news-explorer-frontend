@@ -112,4 +112,4 @@ export default function Article(props) {
 			</div>
 		</li>
 	);
-}
+};

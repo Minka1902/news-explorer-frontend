@@ -79,7 +79,7 @@
 @media screen and (max-width: 703.5px) {
 	.project {
 		flex-direction: column;
-		width: 300px;
+		width: 100%;
 	}
 
 	.project_reversed {

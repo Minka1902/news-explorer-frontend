@@ -17,7 +17,6 @@ import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import SavedArticles from '../savedArticles/SavedArticles';
 import SearchBar from '../searchBar/SearchBar';
 import NotFound from '../notFound/NotFound';
-import Calendar from '../calendar/Calendar';
 
 function App() {
   // eslint-disable-next-line
@@ -37,7 +36,7 @@ function App() {
   const [isProjectPopupOpen, setIsProjectPopupOpen] = React.useState();
   const [imageSrc, setImageSrc] = React.useState();
   const [imageAlt, setImageAlt] = React.useState();
-  const [imageDiscription, setImageDiscription] = React.useState();
+  const [imageDescription, setImageDescription] = React.useState();
   const [isPreloader, setIsPreloader] = React.useState(true);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [q, setQ] = React.useState('news');
@@ -196,7 +195,7 @@ function App() {
     }
   }
 
-  // * Handling the serch form submit
+  // * Handling the search form submit
   const handleSearch = (qInput = q) => {
     if (qInput && (qInput.length > 2)) {
       setIsPreloader(true);
@@ -294,8 +293,7 @@ function App() {
         });
     }
   };
-
-  // * running the 'isAutoLogin' function in the beggining
+  // * running the 'isAutoLogin' function in the beginning
   React.useEffect(() => {
     isAutoLogin();            // eslint-disable-next-line
   }, []);
@@ -323,7 +321,6 @@ function App() {
             gettingSavedArticles={gettingSavedArticles}
           />
         </ProtectedRoute>
-
         <Route path="/">
           <Header
             isLoggedIn={loggedIn}
@@ -375,22 +372,21 @@ function App() {
             isOpen={isProjectPopupOpen}
             onClose={closeAllPopups}
             imageSrc={imageSrc}
-            imageDiscription={imageDiscription}
+            imageDescription={imageDescription}
             imageAlt={imageAlt}
           />
           <Projects
             openProject={handleProjectClick}
-            setImageDiscription={setImageDiscription}
+            setImageDescription={setImageDescription}
             setImageAlt={setImageAlt}
             setImageSrc={setImageSrc}
           />
           <AboutTheAuthor />
         </Route>
       </Switch>
-      <Calendar />
       <Footer homeClick={homeClick} />
     </CurrentUserContext.Provider>
   );
-}
+};
 
 export default withRouter(App);

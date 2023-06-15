@@ -198,12 +198,12 @@
 
 @media screen and (max-width: 703.5px) {
     .article {
-        width: 288px;
+        width: 100%;
 		height: 440px;
     }
 
 	.article__title{
-		width: 275px !important;
+		width: 100% !important;
 		font-size: 22px !important;
 		line-height: 24px !important;
 		height: 48px !important;

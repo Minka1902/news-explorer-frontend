@@ -1,4 +1,4 @@
-const Preloader = ({ text, backgroundColor }) => {
+export default function Preloader({ text, backgroundColor }) {
   return (
     <section className="preloader_container" style={{ backgroundColor: backgroundColor }}>
       <div className="preloader__circle"></div>
@@ -6,5 +6,3 @@ const Preloader = ({ text, backgroundColor }) => {
     </section>
   );
 };
-
-export default Preloader;

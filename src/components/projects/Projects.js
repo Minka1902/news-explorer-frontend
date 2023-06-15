@@ -3,10 +3,10 @@ import Project from './Project';
 import projects from '../../constants/projects';
 
 export default function Projects(props) {
-	const { openProject, setImageDiscription, setImageAlt, setImageSrc } = props;
+	const { openProject, setImageDescription, setImageAlt, setImageSrc } = props;
 
 	return (
-		<section className='projects'>
+		<section id='projects' className='projects'>
 			<h1 className='projects__title'>Other Projects</h1>
 			<ul className='projects__list'>
 				{projects.map((project, index) => {
@@ -14,7 +14,7 @@ export default function Projects(props) {
 						isEven={(index + 1) % 2 === 0 ? true : false}
 						project={project}
 						openProject={openProject}
-						setImageDiscription={setImageDiscription}
+						setImageDescription={setImageDescription}
 						setImageAlt={setImageAlt}
 						setImageSrc={setImageSrc}
 					/>;
@@ -22,4 +22,4 @@ export default function Projects(props) {
 			</ul>
 		</section>
 	);
-}
+};

@@ -120,4 +120,4 @@ export default function LoginPopup(props) {
       <p className={`popup__error-massage${isFound ? '' : '_visible'}`}>User not found</p>
     </PopupWithForm>
   );
-}
+};

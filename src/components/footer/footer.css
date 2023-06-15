@@ -96,7 +96,8 @@
 	}
 
 	.footer__text{
-		width: 288px;
+		width: 100%;
+		text-align: center;
 		margin: auto !important;
 		margin-top: 162px !important;
 		margin-bottom: -162px !important;
