@@ -11,13 +11,13 @@ export default function SignUpPopup(props) {
   const [isPasswordCorrect, setIsPasswordCorrect] = React.useState(true);
   const [shouldAddSSign, setShouldAddSSign] = React.useState(false);
   const [passwordErrorText, setPasswordErrorText] = React.useState('Password incorrect');
-  const [isUsernameCorrect, setisUsernameCorrect] = React.useState(true);
+  const [isUsernameCorrect, setIsUsernameCorrect] = React.useState(true);
 
-  // ! Reseting the popup when closing
+  // ! Resetting the popup when closing
   React.useEffect(() => {
     setIsEmailCorrect(true);
     setIsPasswordCorrect(true);
-    setisUsernameCorrect(true);
+    setIsUsernameCorrect(true);
     setEmail('');
     setPassword('');
     setUsername('');
@@ -77,12 +77,12 @@ export default function SignUpPopup(props) {
   const checkUsernameValid = () => {
     const usernameRegExp = /^[a-zA-Z0-9 ]{2,40}$/;
     if (usernameRegExp.test(username)) {
-      setisUsernameCorrect(true);
+      setIsUsernameCorrect(true);
     } else {
       if (username === '') {
-        setisUsernameCorrect(true);
+        setIsUsernameCorrect(true);
       } else {
-        setisUsernameCorrect(false);
+        setIsUsernameCorrect(false);
       }
     }
   };

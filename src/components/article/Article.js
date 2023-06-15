@@ -51,7 +51,7 @@ export default function Article(props) {
 					}
 					const jwt = localStorage.getItem('jwt');
 					if (jwt && idToDelete !== '') {
-						usersApiOBJ 			// * unsaving the article
+						usersApiOBJ 			// * removing the save of the article
 							.unsaveArticle(idToDelete)
 							.then((deletedArticle) => {
 								if (deletedArticle) {

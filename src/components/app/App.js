@@ -169,7 +169,7 @@ function App() {
         console.log(`Error type: ${err.message}`)
       })
       .finally(() => {
-        closeAllPopups();
+        closeAllPopups({ isProject: false });
         setIsLoginPopupOpen(true);
       })
   };

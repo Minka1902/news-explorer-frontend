@@ -20,7 +20,7 @@ export default function LoginPopup(props) {
     }
   };
 
-  // ! Reseting the popup when closing
+  // ! Resetting the popup when closing
   React.useEffect(() => {
     setIsEmailCorrect(true);
     setIsPasswordCorrect(true);
