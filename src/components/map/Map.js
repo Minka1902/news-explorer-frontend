@@ -1,24 +1,42 @@
 import 'regenerator-runtime';
 import 'leaflet/dist/leaflet.css';
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
-import * as L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, LayersControl } from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvents, LayersControl, useMap } from "react-leaflet";
 import React from 'react';
 import { maps } from '../../constants/mapOptions';
+import Pointer from '../../images/pointer.svg';
 
-export default function Map({ address }) {
+function SetViewOnClick() {
+  const map = useMap();
+  map.setView([31, 35], map.getZoom());
+
+  return null;
+};
+
+export default function Map() {
   const { BaseLayer } = LayersControl;
-  const [position, setPosition] = React.useState(null)
+  const [position, setPosition] = React.useState([31, 35]);
+  const setPositionCoord = (coords) => setPosition(coords);
 
-  function Locate() {
+  function Locate(setPosition) {
     const map = useMapEvents({});
-    map.locate({ setView: true });
+    map.locate({ setView: true, zoom: 18 })
+      .on('locationfound', function (e) {
+        if (e) {
+          setPosition(e.latlng);
+          return map.removeEventListener('locationfound');
+        }
+      })
+      .on('locationerror', function (e) {
+        console.log(e);
+        alert("Location access has been denied.");
+      });
+    map.setZoom(5);
   };
 
   return (
     <div id='map'>
       <MapContainer
-        center={position}
+        center={[31, 35]}
         zoom={18}
         minZoom={3}
         maxZoom={18}
@@ -26,17 +44,9 @@ export default function Map({ address }) {
         doubleClickZoom={true}
         dragging={true}
       >
-        <Locate />
-
-        {position ? <Marker
-          position={position}
-          icon={new L.Icon({ iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -35] })}
-        >
-          <Popup>
-            {address ? address : `We dont have any information about this location.`}
-          </Popup>
-        </Marker> : <></>}
-
+        <img src={Pointer} alt='Map pointer' className='app__map-pointer' />
+        <Locate setPosition={setPositionCoord} />
+        <SetViewOnClick coords={position} />
         <LayersControl>
           {maps.map((map, index) => {
             if (map.valid) {

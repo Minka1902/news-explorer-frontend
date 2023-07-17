@@ -19,6 +19,7 @@ import SavedArticles from '../savedArticles/SavedArticles';
 import SearchBar from '../searchBar/SearchBar';
 import NotFound from '../notFound/NotFound';
 import Map from '../map/Map';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, LayersControl, useMap } from "react-leaflet";
 
 function App() {
   // eslint-disable-next-line
@@ -42,6 +43,7 @@ function App() {
   const [q, setQ] = React.useState('news');
   const [isResults, setIsResults] = React.useState(true);
   const [isUserFound, setIsUserFound] = React.useState(true);
+  const [position, setPosition] = React.useState([]);
 
   // ???????????????????????????????????????????????????
   // !!!!!!!!!!!!!     SCROLL handling     !!!!!!!!!!!!!
@@ -77,6 +79,22 @@ function App() {
     } else {
       scroll();
     }
+  };
+
+  function Locate() {
+    const map = useMapEvents({});
+    map.locate({ setView: true })
+      .on('locationfound', function (e) {
+        if (e) {
+          setPosition(e.latlng)
+          return map.removeEventListener('locationfound');
+        }
+      })
+      .on('locationerror', function (e) {
+        console.log(e);
+        alert("Location access has been denied.");
+      });
+    map.setZoom(5);
   };
 
   // ???????????????????????????????????????????????????
@@ -361,7 +379,10 @@ function App() {
                 <h1 className='section__title'>{currentProject ? currentProject.name : ''}</h1>
                 <p className='section__description'>{currentProject ? currentProject.description : ''}</p>
               </div>
-              <Map />
+
+              <Map coords={position} >
+                <Locate />
+              </Map>
             </section>
           </Route>
         </Switch>
