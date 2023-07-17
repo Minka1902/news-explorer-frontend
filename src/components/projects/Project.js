@@ -1,18 +1,14 @@
 import * as React from 'react';
+import CurrentProjectContext from '../../contexts/CurrentProjectContext';
 
 export default function Project(props) {
-    const { project, openProject, setImageDescription, setImageAlt, setImageSrc, isEven } = props;
-
-    const onProjectClick = () => {
-        window.open(project.projectUrl, '_blank', 'noopener,noreferrer');
-    };
+    const { project, openProject, isEven } = props;
+    const { setCurrentProject } = React.useContext(CurrentProjectContext);
 
     const onOpen = () => {
-        setImageSrc(project.imageUrl);
-        setImageDescription(project.description);
-        setImageAlt(project.name);
+        setCurrentProject(project);
         openProject();
-    }
+    };
 
     return (
         <li className={`project ${isEven ? 'project_reversed' : ''}`} onClick={onOpen}>

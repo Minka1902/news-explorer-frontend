@@ -1,9 +1,11 @@
-section footer header div h1 h2 h3 h4 h5 h6 p a img span button li ul input form{
+section footer header div h1 h2 h3 h4 h5 h6 p a img span button li ul input form {
     margin: 0;
 }
 
 .body {
     background-color: black;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
 .text-hiding {
@@ -18,28 +20,69 @@ section footer header div h1 h2 h3 h4 h5 h6 p a img span button li ul input form
     margin: 0 auto;
 }
 
-.link{
-	text-decoration: none;
-	color: #A9A9A9;
-	font-family: 'Inter', Arial, sans-serif;
+.link {
+    text-decoration: none;
+    color: #A9A9A9;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
-
-@media screen and (max-width: 703.5px) {
-}
-
-@media screen and (max-width: 704px) and (max-width: 1149.5px) {
-}
-
-.no-scroll{
+.no-scroll {
     overflow: hidden;
     position: relative;
 }
 
-.app{
+.app {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
+
+.section__title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    text-decoration: underline;
+}
+
+.section__content {
+    width: clamp(180px, 100%, 500px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+#project {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.section__description {
+    width: clamp(180px, 100%, 400px);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.4em;
+    margin: 0;
+}
+
+@media screen and (max-width: 703.5px) {
+    #project {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section__title {
+        text-align: center;
+    }
+
+    .section__description {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 704px) and (max-width: 1149.5px) {}

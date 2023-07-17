@@ -44,3 +44,6 @@
 
 /* ! popup */
 @import url("./components/popup/popup.css");
+
+/* ! map */
+@import url('./components/map/map.css');

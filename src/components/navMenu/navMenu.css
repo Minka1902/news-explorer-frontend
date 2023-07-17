@@ -9,7 +9,7 @@
 	align-items: center;
 	margin-top: 56px;
 	z-index: 3;
-	border-radius: 10px;
+	border-radius: 0 0 15px 15px;
 }
 
 .nav-menu_opened{

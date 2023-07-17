@@ -3,7 +3,7 @@ import Project from './Project';
 import projects from '../../constants/projects';
 
 export default function Projects(props) {
-	const { openProject, setImageDescription, setImageAlt, setImageSrc } = props;
+	const { openProject } = props;
 
 	return (
 		<section id='projects' className='projects'>
@@ -14,9 +14,6 @@ export default function Projects(props) {
 						isEven={(index + 1) % 2 === 0 ? true : false}
 						project={project}
 						openProject={openProject}
-						setImageDescription={setImageDescription}
-						setImageAlt={setImageAlt}
-						setImageSrc={setImageSrc}
 					/>;
 				})}
 			</ul>
